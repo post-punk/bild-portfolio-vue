@@ -31,7 +31,7 @@
           type="button"
           class="action-btn col-auto"
           id="send-button"
-          onclick="sendMessage()"
+          v-on:click="sendMessage()"
         >SEND MESSAGE</button>
       </div>
       <div class="col-sm-4 col-12">
@@ -67,7 +67,16 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    sendMessage() {
+      alert("Thank you for participation!");
+      document.getElementById("exampleFormControlTextarea1").style.display =
+        "none";
+      document.getElementById("send-button").style.display = "none";
+    }
+  }
+};
 </script>
 
 <style>
