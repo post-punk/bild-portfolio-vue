@@ -1,34 +1,27 @@
 <template>
-  <div id="app">
-    <app-header/>
-    <router-view/>
-    <app-footer/>
+  <div>
+    <callout-top :calloutTitle="calloutTitle"></callout-top>
+    <Map/>
+    <Forms/>
   </div>
 </template>
 
 <script>
-import "../src/css/fonts.css";
-import "../src/css/style.css";
-import "../src/css/media-queries.css";
-
-import Header from "./components/header.vue";
-import Footer from "./components/footer.vue";
-import CalloutTop from "./components/CalloutTop.vue";
-import BootstrapVue from "bootstrap-vue";
+import Map from "./Map.vue";
+import Forms from "./Forms";
+import CalloutTop from '../CalloutTop.vue'
 
 export default {
-  name: "App",
- 
+  name: "Contact",
   data() {
     return {
-     
+      calloutTitle: "Got a question?"
     };
   },
   components: {
-    
-    appHeader: Header,
     CalloutTop,
-    appFooter: Footer,
+    Map,
+    Forms
 
   }
 };

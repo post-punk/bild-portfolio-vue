@@ -3,7 +3,7 @@
     <div class="container-fluid d-flex align-items-center callout-btm">
       <div class="container">
         <div class="callout-btm row justify-content-between">
-          <h3 id="are-you-ready" class="col-6">ARE YOU READY TO BE BLOWN AWAY?</h3>
+          <h4 id="are-you-ready" class="col-6">ARE YOU READY TO BE BLOWN AWAY?</h4>
           <button type="button" class="action-btn col-" id="click-here">
             <a href="work.html">
               CLICK HERE TO FIND
@@ -17,10 +17,10 @@
     <div class="container-fluid">
       <div class="container">
         <div class="row justify-content-between footer-wrapper">
-          <div class="col-">
+          <div class="col-12 col-sm-6">
             <p id="footer-copyright">COPYRIGHT 2013 DISPLAY. ALL RIGHTS RESERVED.</p>
           </div>
-          <div class="col-">
+          <div class="col-12 col-sm-6 text-right">
             <p id="footer-nav">
               <a href="index.html">HOME</a> /
               <a href="about.html">ABOUT</a> /
@@ -36,10 +36,12 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "Footer"
+};
 </script>
 
-<style>
+<style scoped>
 .footer {
   background-color: #efefef;
   display: block;
@@ -71,11 +73,20 @@ export default {};
 #click-here {
   background-color: #2ecc71;
   border: none;
-  margin-bottom: 1em;
-  padding: 1em;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 #click-here a {
   font-family: "Novecento sans wide Light";
   color: white;
+}
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+h4 {
+  color: white;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 </style>

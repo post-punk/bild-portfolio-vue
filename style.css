@@ -226,6 +226,10 @@ h3 {
     border: none;
     background-color: #efefef;
     
+    
+}
+.tablinks:focus {
+    outline: none;
 }
 .tablinks p {
     padding-top: 2em;

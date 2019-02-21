@@ -8,33 +8,36 @@
           nam
           sequi enim ludantium quas dignissimos consequuntur.
         </p>
-        <input
-          type="email"
-          class="form-control forme"
-          id="exampleFormControlInput1"
-          placeholder="Name"
-        >
-        <input
-          type="email"
-          class="form-control forme"
-          id="exampleFormControlInput1"
-          placeholder="Email Address"
-        >
-        <input
-          type="email"
-          class="form-control forme"
-          id="exampleFormControlInput1"
-          placeholder="Subject"
-        >
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" maxlength="500"></textarea>
-        <button
-          type="button"
-          class="action-btn col-auto"
-          id="send-button"
-          v-on:click="sendMessage()"
-        >SEND MESSAGE</button>
+        <form action="" v-if="showForm">
+          <input
+            type="text"
+            class="form-control forme"
+            id="exampleFormControlInput1"
+            placeholder="Name"
+          >
+          <input
+            type="email"
+            class="form-control forme"
+            id="exampleFormControlInput1"
+            placeholder="Email Address"
+            required
+          >
+          <input
+            type="email"
+            class="form-control forme"
+            id="exampleFormControlInput1"
+            placeholder="Subject"
+          >
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" maxlength="500"></textarea>
+          <button
+            type="submit"
+            class="action-btn col-auto"
+            id="send-button"
+            v-on:click="sendMessage()"
+          >SEND MESSAGE</button>
+        </form>
       </div>
-      <div class="col-sm-4 col-12">
+      <div class="info-group col-sm-4 col-12">
         <h4>CONTACT INFO</h4>
         <p>Lorem ipsum dolor sit amet, consectetur
           <br>adipiscing elit velit justo.
@@ -68,12 +71,16 @@
 
 <script>
 export default {
+  name: 'Forms',
+  data() {
+    return {
+      showForm: true
+    }
+  },
   methods: {
     sendMessage() {
       alert("Thank you for participation!");
-      document.getElementById("exampleFormControlTextarea1").style.display =
-        "none";
-      document.getElementById("send-button").style.display = "none";
+      this.showForm = false;
     }
   }
 };
@@ -95,12 +102,12 @@ h4 {
   color: #737373;
   margin-top: 2em;
 }
-p {
+.form-group p, .info-group p {
   margin-top: 2em;
   margin-bottom: 1em;
 }
 #e-mail {
-  color: #2ecc71 !important;
+  color: #2ecc71;
 }
 #send-button {
   margin-top: 1em;
@@ -110,5 +117,9 @@ p {
   padding: 1em;
   border: none;
   color: white;
+}
+.form-control {
+  border: 2px solid #737373;
+  border-radius: 0;
 }
 </style>

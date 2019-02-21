@@ -1,9 +1,7 @@
 <template>
   <div>
     <div class="header container">
-      <!-- <div class=""> -->
       <div class="logo row justify-content-between">
-        <!-- <div class="display col-auto"> -->
         <img
           src="../assets/display.svg"
           class="Display-logo col-auto align-items-center"
@@ -151,17 +149,27 @@
       </div>
       <hr>
       <div class="nav row">
-            <h6><a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" id="nav-home" href="index.html">HOME</a></h6>
-            <h6><a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href="about.html">ABOUT</a></h6>
-            <h6><a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href="work.html">WORK</a></h6>
-            <h6><a  class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href="contact.html">CONTACT</a></h6>
-        </div>
+        <h6>
+          <a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" id="nav-home" href="index.html">HOME</a>
+        </h6>
+        <h6>
+          <a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href="about.html">ABOUT</a>
+        </h6>
+        <h6>
+          <a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href="work.html">WORK</a>
+        </h6>
+        <h6>
+          <a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href="contact.html">CONTACT</a>
+        </h6>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  name: "Header"
+};
 </script>
 
 <style>
@@ -197,8 +205,8 @@ export default {};
   align-items: center;
 }
 .nav a {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 .nav h6 {
   color: #737373;
@@ -227,6 +235,6 @@ a svg:hover #dribbble {
   fill: #ea4c89;
 }
 hr {
-    margin: 0;
+  margin: 0;
 }
 </style>
