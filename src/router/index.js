@@ -1,7 +1,7 @@
 
 import Contact from '../components/contact/Contact.vue'
 import About from '../components/about/About.vue'
-
+import Work from '../components/work/Work.vue'
 
 
 
@@ -19,11 +19,11 @@ export const routes = [
       component: About
     },
 
-    // { 
-    //   path: '/Work',
-    //   name: 'Work',
-    //   component: Work
-    //  },
+    { 
+      path: '/work',
+      name: 'Work',
+      component: Work
+     },
 
     {
       path: '/contact',

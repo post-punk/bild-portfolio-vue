@@ -12,6 +12,7 @@
   "dependencies": {
     "bootstrap-vue": "^2.0.0-rc.13",
     "vue": "^2.5.2",
+    "vue-http-server": "0.0.1",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

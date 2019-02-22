@@ -1,32 +1,32 @@
 <template>
   <div>
     <callout-top :calloutTitle="calloutTitle"></callout-top>
-    <AboutText/>
-    <Tabs/>
+    <work-nav></work-nav>
+    <work-items/>  
   </div>
 </template>
 
 <script>
-import AboutText from "./AboutText.vue";
-import Tabs from "./Tabs.vue";
+import WorkNav from "./WorkNav.vue";
+import WorkItems from "./WorkItems";
 import CalloutTop from '../CalloutTop.vue'
 
 export default {
-  name: "About",
+  name: "Work",
   data() {
     return {
-      calloutTitle: "ABOUT MY BUSINESS"
+      calloutTitle: "CHECK OUT WHAT I CAN DO"
     };
   },
-  
   components: {
     CalloutTop,
-    AboutText,
-    Tabs
-    
+    WorkNav,
+    WorkItems
+
   }
 };
 </script>
 
 <style>
+
 </style>

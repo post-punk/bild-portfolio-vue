@@ -15,7 +15,7 @@ export default {
   name: "Contact",
   data() {
     return {
-      calloutTitle: "Got a question?"
+      calloutTitle: "GOT A QUESTION OR INQUIRY?"
     };
   },
   components: {
