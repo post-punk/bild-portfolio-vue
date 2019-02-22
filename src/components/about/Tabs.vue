@@ -82,6 +82,6 @@ export default {
 .tab-text {
   display: block;
   padding-top: 2em;
-  padding-bottom: 2em;
+  height: 300px;
 }
 </style>
