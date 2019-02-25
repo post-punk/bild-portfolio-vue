@@ -14,10 +14,10 @@
       </div>
       <div class="col-sm-1 col-12">
         <div class="work-nav-icons">
-          <svg onclick="toggleGrid()" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+          <svg v-on:click="activeClass = 'grid'" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
   <path id="grid-view" data-name="grid view" class="cls-1" d="M1129,329h6.03v5.929H1129V329Zm8.95,0H1144v6.012h-6.05V329Zm-8.95,8.9h6.01V344H1129v-6.1Zm8.97,0H1144V344h-6.03v-6.1Z" transform="translate(-1129 -329)"/>
 </svg>
-          <svg id="list-view" data-name="list view" xmlns="http://www.w3.org/2000/svg" width="15" height="15.031" viewBox="0 0 15 15.031">
+          <svg v-on:click="activeClass = 'list'" id="list-view" data-name="list view" xmlns="http://www.w3.org/2000/svg" width="15" height="15.031" viewBox="0 0 15 15.031">
   
   <rect id="_1" data-name="1" class="cls-1" y="12.031" width="15" height="3"/>
   <rect id="_2" data-name="2" class="cls-1" y="6" width="15" height="3.031"/>

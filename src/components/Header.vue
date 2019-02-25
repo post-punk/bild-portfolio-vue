@@ -158,10 +158,10 @@
         </div>
         <hr>
         <div class="nav row">
-            <h6><a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" id="nav-home" href="index.html">HOME</a></h6>
-            <h6><a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href="about.html">ABOUT</a></h6>
-            <h6><a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href="work.html">WORK</a></h6>
-            <h6><a  class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href="contact.html">CONTACT</a></h6>
+            <h6><a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href=""><router-link to="/">HOME</router-link></a></h6>
+            <h6><a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href=""><router-link to="/about">ABOUT</router-link></a></h6>
+            <h6><a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href=""><router-link to="/work">WORK</router-link></a></h6>
+            <h6><a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href=""><router-link to="/contact">CONTACT</router-link></a></h6>
         </div>
 
 

@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row portfolio-grid">
+        <div v-bind:class="{ active: isActive }" class="row portfolio-grid">
             <div class="cell grid-img web col-12 col-sm-6 col-lg-4 col-xl-4">
                 <img class="img-fluid" src="../../assets/work-grid-images/grid-img1.png" />
             </div>

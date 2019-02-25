@@ -56,5 +56,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.col-md-7 {
+  padding-top: 1em;
+}
 </style>

@@ -63,9 +63,6 @@ export default {
   border: none;
   background-color: #efefef;
 }
-.tablinks p {
-  padding-top: 2em;
-}
 .highlight {
   background-color: #ccc;
 }
