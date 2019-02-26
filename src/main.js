@@ -5,10 +5,12 @@ import App from './App'
 import VueRouter from "vue-router";
 import { routes } from "./router/index.js";
 import BootstrapVue from 'bootstrap-vue';
+import VModal from 'vue-js-modal'
+
 
 Vue.use(BootstrapVue)
 Vue.use(VueRouter);
-
+Vue.use(VModal)
 
 Vue.config.productionTip = false
 

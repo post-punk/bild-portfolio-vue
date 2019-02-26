@@ -47,7 +47,7 @@ body {
 
 
 .popup-youtube:hover {
-    opacity: 0.5;
+    opacity: 0.75;
   filter: alpha(opacity=50); /* For IE8 and earlier */
 }
 

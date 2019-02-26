@@ -22,11 +22,11 @@
           </div>
           <div class="col-12 col-sm-6 text-right">
             <p id="footer-nav">
-              <a href="index.html">HOME</a> /
-              <a href="about.html">ABOUT</a> /
-              <a href="work.html">WORK</a>
+              <a href=""><router-link to="/">HOME</router-link></a> /
+              <a href=""><router-link to="/about">ABOUT</router-link></a> /
+              <a href=""><router-link to="/work">WORK</router-link></a>
               /
-              <a href="contact.html">CONTACT</a>
+              <a href=""><router-link to="/contact">CONTACT</router-link></a>
             </p>
           </div>
         </div>

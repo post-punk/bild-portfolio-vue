@@ -1,14 +1,80 @@
 <template>
   <div>
     <callout-top :calloutTitle="calloutTitle"></callout-top>
-    <work-nav></work-nav>
-    <work-items/>
+    <div class="container">
+    <div class="row work-nav justify-content-between">
+      <div class="work-nav-text col-sm-7 col-12">
+        <h6 id="all" onclick="removeItems('all')">ALL</h6>
+        <h6 id="slash">/</h6>
+        <h6 id="print" onclick="removeItems('print')">PRINT</h6>
+        <h6 id="slash">/</h6>
+        <h6 id="photography" onclick="removeItems('photo')">PHOTOGRAPHY</h6>
+        <h6 id="slash">/</h6>
+        <h6 id="web" onclick="removeItems('web')">WEB</h6>
+        <h6 id="slash">/</h6>
+        <h6 id="apps" onclick="removeItems('app')">APPLICATIONS</h6>
+      </div>
+      <div class="col-sm-1 col-12">
+        <div class="work-nav-icons">
+          <svg v-on:click="activeClass = 'grid'" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+  <path id="grid-view" data-name="grid view" class="cls-1" d="M1129,329h6.03v5.929H1129V329Zm8.95,0H1144v6.012h-6.05V329Zm-8.95,8.9h6.01V344H1129v-6.1Zm8.97,0H1144V344h-6.03v-6.1Z" transform="translate(-1129 -329)"/>
+</svg>
+          <svg v-on:click="activeClass = 'list'" id="list-view" data-name="list view" xmlns="http://www.w3.org/2000/svg" width="15" height="15.031" viewBox="0 0 15 15.031">
+  
+  <rect id="_1" data-name="1" class="cls-1" y="12.031" width="15" height="3"/>
+  <rect id="_2" data-name="2" class="cls-1" y="6" width="15" height="3.031"/>
+  <rect id="_3" data-name="3" class="cls-1" width="15" height="3.031"/>
+</svg>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="container">
+        <div v-bind:class="{ active: isActive }" class="row portfolio-grid">
+            <div class="cell grid-img web col-12 col-sm-6 col-lg-4 col-xl-4">
+                <img class="img-fluid" src="../../assets/work-grid-images/grid-img1.png" />
+            </div>
+
+            <div class="cell grid-img web col-12 col-sm-6 col-lg-4 col-xl-4">
+                <img class="img-fluid" src="../../assets/work-grid-images/grid-img2.png" />
+            </div>
+
+            <div class="cell grid-img photo col-12 col-sm-6 col-lg-4 col-xl-4">
+                <img class="img-fluid" src="../../assets/work-grid-images/grid-img3.png" />
+            </div>
+
+            <div class="cell grid-img print col-12 col-sm-6 col-lg-4 col-xl-4">
+                <img class="img-fluid" src="../../assets/work-grid-images/grid-img4.png" />
+            </div>
+
+            <div class="cell grid-img web col-12 col-sm-6 col-lg-4 col-xl-4">
+                <img class="img-fluid" src="../../assets/work-grid-images/grid-img5.png" />
+            </div>
+
+            <div class="cell grid-img app col-12 col-sm-6 col-lg-4 col-xl-4">
+                <img class="img-fluid" src="../../assets/work-grid-images/grid-img6.png" />
+            </div>
+
+            <div class="cell grid-img photo col-12 col-sm-6 col-lg-4 col-xl-4">
+                <img class="img-fluid" src="../../assets/work-grid-images/grid-img7.png" />
+            </div>
+
+            <div class="cell grid-img print col-12 col-sm-6 col-lg-4 col-xl-4">
+                <img class="img-fluid" src="../../assets/work-grid-images/grid-img8.png" />
+            </div>
+
+            <div class="cell grid-img web col-12 col-sm-6 col-lg-4 col-xl-4">
+                <img class="img-fluid" src="../../assets/work-grid-images/grid-img9.png" />
+            </div>
+        </div>
+    </div>
   </div>
 </template>
 
 <script>
-import WorkNav from "./WorkNav.vue";
-import WorkItems from "./WorkItems";
+// import WorkNav from "./WorkNav.vue";
+// import WorkItems from "./WorkItems";
 import CalloutTop from "../CalloutTop.vue";
 
 export default {
@@ -20,13 +86,34 @@ export default {
   },
   components: {
     CalloutTop,
-    WorkNav,
-    WorkItems
+    // WorkNav,
+    // WorkItems
   }
 };
 </script>
 
 <style>
+
+.work-nav-icons svg:hover {
+    cursor: pointer;
+}
+#grid-view {
+    fill: #737373;
+    pointer-events: fill;
+}
+#grid-view:hover  {
+  fill: #2ecc71;
+  pointer-events: fill;
+}
+#list-view {
+    fill: #737373;
+}
+#list-view:hover {
+    fill: #2ecc71;
+}
+.work-nav-text {
+    color: #737373;
+}
 .work-nav-text {
   display: flex;
   padding-bottom: 2em;
@@ -92,15 +179,27 @@ export default {
 .grid-img img:hover {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  -webkit-transform: translateZ(0) scale(1.05); /* Safari and Chrome */
-  -moz-transform: scale(1.05); /* Firefox */
-  -ms-transform: scale(1.05); /* IE 9 */
-  -o-transform: translatZ(0) scale(1.05); /* Opera */
-  transform: translatZ(0) scale(1.05);
+  -webkit-transform: translateZ(0) scale(1.02); /* Safari and Chrome */
+  -moz-transform: scale(1.02); /* Firefox */
+  -ms-transform: scale(1.02); /* IE 9 */
+  -o-transform: translatZ(0) scale(1.02); /* Opera */
+  transform: translatZ(0) scale(1.02);
+  opacity: 0.8;
 }
 #slash {
   margin-left: 1em;
   margin-right: 1em;
   color: inherit !important;
+}
+
+.grid-img img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+.portfolio-grid {
+    padding-bottom: 2em;
 }
 </style>
