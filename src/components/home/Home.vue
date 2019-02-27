@@ -4,21 +4,21 @@
     <PopUp/>
     <GetToVideo/>
     <featured/>
-    <carousel/>
+    <!-- <carousel/> -->
   </div>
 </template>
 
 <script>
 import Banner from './Banner.vue'
 import GetToVideo from './GetToVideo.vue'
-// import PopUp from './PopUp.vue'
+import Featured from './Featured.vue'
 
 export default {
     name: 'Home',
     components: {
         Banner,
         GetToVideo,
-        // PopUp
+        Featured
   }
 };
 </script>
