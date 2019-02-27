@@ -5,9 +5,9 @@
         <div class="callout-btm row justify-content-between">
           <h4 id="are-you-ready" class="col-6">ARE YOU READY TO BE BLOWN AWAY?</h4>
           <button type="button" class="action-btn col-" id="click-here">
-            <a href="work.html">
+            <a href=""><router-link to="/work">
               CLICK HERE TO FIND
-              OUT
+              OUT</router-link>
             </a>
           </button>
         </div>
