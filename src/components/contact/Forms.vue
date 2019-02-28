@@ -9,7 +9,17 @@
           sequi enim ludantium quas dignissimos consequuntur.
         </p>
         <form action v-if="showForm">
-          <input type="text" class="form-control forme" id="name" v-model="name" placeholder="Name">
+          <div class="input" :class="{invalid: $v.name.$error}">
+            <input
+              type="text"
+              class="form-control forme"
+              id="name"
+              v-model="name"
+              placeholder="Name"
+              @blur="$v.name.$touch()"
+            >
+            <p v-if="!$v.name.required">This field is required</p>
+          </div>
           <div class="input" :class="{invalid: $v.email.$error}">
             <input
               type="email"
@@ -24,13 +34,16 @@
             <!-- <p v-if="!$v.email.required && $dirty">This field must not be empty.</p> -->
           </div>
           <!-- <div>{{ $v }}</div> -->
-          <input
-            type="email"
-            class="form-control forme"
-            id="subject"
-            v-model="subject"
-            placeholder="Subject"
-          >
+          <div class="input" :class="{invalid: $v.name.$error}">
+            <input
+              type="email"
+              class="form-control forme"
+              id="subject"
+              v-model="subject"
+              placeholder="Subject"
+            >
+            <p v-if="!$v.subject.required">This field is required</p>
+          </div>
           <div class="input" :class="{invalid: $v.textarea.$error}">
             <textarea
               class="form-control"
@@ -38,13 +51,9 @@
               name="textarea"
               v-model="textarea"
               rows="10"
-              maxlength="50"
-              @blur="$v.textarea.$touch()"
-            >
-            
-            
-            
-            </textarea>
+              maxlength="500"
+              @input="$v.textarea.$touch()"
+            ></textarea>
             <p v-if="$v.textarea.$error">Please limit the message to 500 characters max.</p>
           </div>
           <button
@@ -107,12 +116,18 @@ export default {
     }
   },
   validations: {
+    name: {
+      required
+    },
     email: {
       required,
       email
     },
     textarea: {
-      maxLength: maxLength(15)
+      maxLength: maxLength(10)
+    },
+    subject: {
+      required
     }
   }
 };
