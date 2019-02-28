@@ -19,7 +19,6 @@
               @blur="$v.email.$touch()"
               placeholder="Email Address"
               v-model="email"
-              
             >
             <p v-if="!$v.email.email">Please provide a valid email address.</p>
             <!-- <p v-if="!$v.email.required && $dirty">This field must not be empty.</p> -->
@@ -32,10 +31,22 @@
             v-model="subject"
             placeholder="Subject"
           >
-          <textarea class="form-control" id="textarea" name="textarea" v-model="textarea" rows="10" 
-          :class="{invalid: $v.textarea.$error}"
-          @blur="$v.textarea.$touch()"
-          ></textarea>
+          <div class="input" :class="{invalid: $v.textarea.$error}">
+            <textarea
+              class="form-control"
+              id="textarea"
+              name="textarea"
+              v-model="textarea"
+              rows="10"
+              maxlength="50"
+              @blur="$v.textarea.$touch()"
+            >
+            
+            
+            
+            </textarea>
+            <p v-if="$v.textarea.$error">Please limit the message to 500 characters max.</p>
+          </div>
           <button
             type="submit"
             class="action-btn col-auto"
@@ -83,10 +94,10 @@ export default {
   data() {
     return {
       showForm: true,
-      email: '',
-      name: '',
-      subject: '',
-      textarea: ''
+      email: "",
+      name: "",
+      subject: "",
+      textarea: ""
     };
   },
   methods: {
@@ -98,7 +109,7 @@ export default {
   validations: {
     email: {
       required,
-      email,
+      email
     },
     textarea: {
       maxLength: maxLength(15)
