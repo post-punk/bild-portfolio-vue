@@ -6,8 +6,9 @@ import VueRouter from "vue-router";
 import { routes } from "./router/index.js";
 import BootstrapVue from 'bootstrap-vue';
 import VModal from 'vue-js-modal'
+import Vuelidate from 'vuelidate'
 
-
+Vue.use(Vuelidate)
 Vue.use(BootstrapVue)
 Vue.use(VueRouter);
 Vue.use(VModal)

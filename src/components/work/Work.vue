@@ -161,10 +161,12 @@ export default {
   align-items: center;
 }
 .portfolioList {
-  display: block;
+  display: grid;
+  /* grid-template-columns: 1fr 1fr; */
   margin-bottom: 2em;
   padding-bottom: 2em;
 }
+
 
 #list-view {
   margin-left: 1em;

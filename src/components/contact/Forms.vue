@@ -8,27 +8,34 @@
           nam
           sequi enim ludantium quas dignissimos consequuntur.
         </p>
-        <form action="" v-if="showForm">
-          <input
-            type="text"
-            class="form-control forme"
-            id="exampleFormControlInput1"
-            placeholder="Name"
-          >
+        <form action v-if="showForm">
+          <input type="text" class="form-control forme" id="name" v-model="name" placeholder="Name">
+          <div class="input" :class="{invalid: $v.email.$error}">
+            <input
+              type="email"
+              name="email"
+              class="form-control forme"
+              id="email"
+              @blur="$v.email.$touch()"
+              placeholder="Email Address"
+              v-model="email"
+              
+            >
+            <p v-if="!$v.email.email">Please provide a valid email address.</p>
+            <!-- <p v-if="!$v.email.required && $dirty">This field must not be empty.</p> -->
+          </div>
+          <!-- <div>{{ $v }}</div> -->
           <input
             type="email"
             class="form-control forme"
-            id="exampleFormControlInput1"
-            placeholder="Email Address"
-            required
-          >
-          <input
-            type="email"
-            class="form-control forme"
-            id="exampleFormControlInput1"
+            id="subject"
+            v-model="subject"
             placeholder="Subject"
           >
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" maxlength="500"></textarea>
+          <textarea class="form-control" id="textarea" name="textarea" v-model="textarea" rows="10" 
+          :class="{invalid: $v.textarea.$error}"
+          @blur="$v.textarea.$touch()"
+          ></textarea>
           <button
             type="submit"
             class="action-btn col-auto"
@@ -70,17 +77,31 @@
 </template>
 
 <script>
+import { required, email, maxLength } from "vuelidate/lib/validators";
 export default {
-  name: 'Forms',
+  name: "Forms",
   data() {
     return {
-      showForm: true
-    }
+      showForm: true,
+      email: '',
+      name: '',
+      subject: '',
+      textarea: ''
+    };
   },
   methods: {
     sendMessage() {
       alert("Thank you for participation!");
       this.showForm = false;
+    }
+  },
+  validations: {
+    email: {
+      required,
+      email,
+    },
+    textarea: {
+      maxLength: maxLength(15)
     }
   }
 };
@@ -102,7 +123,8 @@ h4 {
   color: #737373;
   margin-top: 2em;
 }
-.form-group p, .info-group p {
+.form-group p,
+.info-group p {
   margin-top: 2em;
   margin-bottom: 1em;
 }
@@ -118,8 +140,23 @@ h4 {
   border: none;
   color: white;
 }
+
+.form-control:focus,
+.form-control:active,
 .form-control {
+  box-shadow: none;
   border: 2px solid #737373;
   border-radius: 0;
+}
+.input.invalid .form-control {
+  border: 3px solid LIGHTCORAL;
+  /* background-color: rgb(238, 238, 238); */
+}
+
+.form-control.invalid label {
+  color: LIGHTCORAL;
+}
+form p {
+  /* color: indianred; */
 }
 </style>

@@ -4,7 +4,7 @@
         <!-- <div class=""> -->
         <div class="logo row justify-content-between ">
             <!-- <div class="display col-auto"> -->
-            <img src="../assets/display.svg" class="Display-logo col-auto align-items-center" alt="Display logo">
+            <router-link to="/"><img src="../assets/display.svg" class="Display-logo col-auto align-items-center" alt="Display logo"></router-link>
             <!-- </div> -->
 
             <a class="nav-link dropdown-toggle navbar-expand-sm" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"

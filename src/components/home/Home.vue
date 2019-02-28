@@ -1,7 +1,6 @@
 <template>
   <div>
     <banner/>
-    <PopUp/>
     <GetToVideo/>
     <featured/>
     <!-- <carousel/> -->
