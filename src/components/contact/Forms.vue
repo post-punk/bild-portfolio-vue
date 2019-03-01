@@ -18,7 +18,7 @@
               placeholder="Name"
               @blur="$v.name.$touch()"
             >
-            <p v-if="!$v.name.required">This field is required</p>
+            <p v-if="!$v.name.required && $v.name.$dirty">This field is required</p>
           </div>
           <div class="input" :class="{invalid: $v.email.$error}">
             <input
@@ -31,18 +31,17 @@
               v-model="email"
             >
             <p v-if="!$v.email.email">Please provide a valid email address.</p>
-            <!-- <p v-if="!$v.email.required && $dirty">This field must not be empty.</p> -->
+            <p v-if="!$v.email.required && $v.email.$dirty">This field must not be empty.</p>
           </div>
           <!-- <div>{{ $v }}</div> -->
-          <div class="input" :class="{invalid: $v.name.$error}">
+          <div class="input">
             <input
               type="email"
+              name="subject"
               class="form-control forme"
               id="subject"
-              v-model="subject"
               placeholder="Subject"
             >
-            <p v-if="!$v.subject.required">This field is required</p>
           </div>
           <div class="input" :class="{invalid: $v.textarea.$error}">
             <textarea
@@ -51,17 +50,40 @@
               name="textarea"
               v-model="textarea"
               rows="10"
-              maxlength="500"
+              maxlength="11"
+              placeholder="(for development purposes: more than 3 & less than 10 characters)"
               @input="$v.textarea.$touch()"
             ></textarea>
             <p v-if="$v.textarea.$error">Please limit the message to 500 characters max.</p>
           </div>
-          <button
-            type="submit"
-            class="action-btn col-auto"
-            id="send-button"
-            v-on:click="sendMessage()"
-          >SEND MESSAGE</button>
+          <div class="container">
+            <div class="row justify-content-between">
+              <button
+                type="submit"
+                :disabled="$v.$invalid && !recaptchachecked"
+                class="action-btn col-md-3 col-sm-4 col-6"
+                id="send-button"
+                v-on:click="sendMessage()"
+              >SEND MESSAGE</button>
+             
+              <div class="form-group">
+                <!-- <div
+                  class="g-recaptcha"
+                  data-sitekey="6LfKURIUAAAAAO50vlwWZkyK_G2ywqE52NU7YO0S"
+                  data-callback="verify()"
+                  data-expired-callback="expiredRecaptchaCallback"
+                ></div> -->
+                <vue-recaptcha sitekey="6LfKURIUAAAAAO50vlwWZkyK_G2ywqE52NU7YO0S" @verify="verify"></vue-recaptcha>
+                <input
+                  class="form-control d-none"
+                  data-recaptcha="true"
+                  required
+                  data-error="Please complete the Captcha"
+                >
+                <div class="help-block with-errors"></div>
+              </div>
+            </div>
+          </div>
         </form>
       </div>
       <div class="info-group col-sm-4 col-12">
@@ -97,7 +119,14 @@
 </template>
 
 <script>
-import { required, email, maxLength } from "vuelidate/lib/validators";
+import {
+  required,
+  email,
+  maxLength,
+  minLength
+} from "vuelidate/lib/validators";
+import VueRecaptcha from 'vue-recaptcha';
+ 
 export default {
   name: "Forms",
   data() {
@@ -105,16 +134,22 @@ export default {
       showForm: true,
       email: "",
       name: "",
-      subject: "",
-      textarea: ""
+      textarea: "",
+      recaptchachecked: false
     };
   },
   methods: {
     sendMessage() {
       alert("Thank you for participation!");
       this.showForm = false;
-    }
+    },
+    verify() {
+    this.recaptchachecked = true;
+    console.log('nesto')
+    },
+   
   },
+
   validations: {
     name: {
       required
@@ -124,25 +159,27 @@ export default {
       email
     },
     textarea: {
-      maxLength: maxLength(10)
-    },
-    subject: {
+      maxLength: maxLength(10),
+      minLength: minLength(3),
       required
     }
+  },
+  components: {
+    VueRecaptcha
   }
-};
+}
 </script>
 
-<style>
+<style scoped>
 input,
 textarea {
   margin-top: 1em;
+  margin-bottom: 1em;
 }
 .forme {
   width: 65%;
 }
 #send-button {
-  margin-top: 1em;
   margin-bottom: 2.5em;
 }
 h4 {
@@ -157,14 +194,18 @@ h4 {
 #e-mail {
   color: #2ecc71;
 }
-#send-button {
-  margin-top: 1em;
+button {
+  /* margin-top: 1em; */
   margin-bottom: 2.5em;
   font-family: "Novecento sans wide Light";
   background-color: #2ecc71;
   padding: 1em;
   border: none;
   color: white;
+  margin-top: 0px;
+}
+button:disabled {
+  background-color: #cccccc !important;
 }
 
 .form-control:focus,
@@ -185,4 +226,5 @@ h4 {
 form p {
   /* color: indianred; */
 }
+
 </style>

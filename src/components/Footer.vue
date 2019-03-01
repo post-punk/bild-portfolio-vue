@@ -57,6 +57,7 @@ export default {
   position: absolute;
   bottom: 0;
   width: 100%;
+
 }
 .footer-wrapper {
   height: 63px;
@@ -64,9 +65,6 @@ export default {
   align-items: center;
 }
 
-#footer-nav a {
-  color: inherit;
-}
 .callout-btm {
   background-color: #322f2f;
   display: flex;
@@ -93,5 +91,11 @@ h4 {
   color: white;
   margin-top: 0;
   margin-bottom: 0;
+}
+#footer-nav {
+  color: #aeadad;
+}
+#footer-copyright {
+  color: #aeadad;
 }
 </style>
