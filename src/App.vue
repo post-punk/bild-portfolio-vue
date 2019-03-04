@@ -15,6 +15,7 @@ import Header from "./components/header.vue";
 import Footer from "./components/footer.vue";
 import CalloutTop from "./components/CalloutTop.vue";
 import BootstrapVue from "bootstrap-vue";
+import Slick from 'vue-slick';
 
 export default {
   name: "App",

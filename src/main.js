@@ -7,11 +7,13 @@ import { routes } from "./router/index.js";
 import BootstrapVue from 'bootstrap-vue';
 import VModal from 'vue-js-modal'
 import Vuelidate from 'vuelidate'
+import Slick from 'vue-slick';
 
 Vue.use(Vuelidate)
 Vue.use(BootstrapVue)
 Vue.use(VueRouter);
 Vue.use(VModal)
+Vue.use(Slick)
 
 Vue.config.productionTip = false
 

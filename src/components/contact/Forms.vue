@@ -18,7 +18,7 @@
               placeholder="Name"
               @blur="$v.name.$touch()"
             >
-            <p v-if="!$v.name.required && $v.name.$dirty">This field is required</p>
+            <p class="warning" v-if="!$v.name.required && $v.name.$dirty">This field is required</p>
           </div>
           <div class="input" :class="{invalid: $v.email.$error}">
             <input
@@ -30,10 +30,9 @@
               placeholder="Email Address"
               v-model="email"
             >
-            <p v-if="!$v.email.email">Please provide a valid email address.</p>
-            <p v-if="!$v.email.required && $v.email.$dirty">This field must not be empty.</p>
+            <p class="warning" v-if="!$v.email.email">Please provide a valid email address.</p>
+            <p class="warning"  v-if="!$v.email.required && $v.email.$dirty">This field must not be empty.</p>
           </div>
-          <!-- <div>{{ $v }}</div> -->
           <div class="input">
             <input
               type="email"
@@ -50,17 +49,17 @@
               name="textarea"
               v-model="textarea"
               rows="10"
-              maxlength="11"
-              placeholder="(for development purposes: more than 3 & less than 10 characters)"
+              maxlength="500"
+              placeholder="(for development purposes: more than 2 & less than 10 characters)"
               @input="$v.textarea.$touch()"
             ></textarea>
-            <p v-if="$v.textarea.$error">Please limit the message to 500 characters max.</p>
+            <p class="warning"  v-if="$v.textarea.$error">Please limit the message to 500 characters max.</p>
           </div>
           <div class="container">
             <div class="row justify-content-between">
               <button
                 type="submit"
-                :disabled="$v.$invalid && !recaptchachecked"
+                :disabled="$v.$invalid || !recaptchachecked"
                 class="action-btn col-md-3 col-sm-4 col-6"
                 id="send-button"
                 v-on:click="sendMessage()"
@@ -131,6 +130,7 @@ export default {
   name: "Forms",
   data() {
     return {
+      // recaptchaEnabled: process.env.NODE_ENV,
       showForm: true,
       email: "",
       name: "",
@@ -186,10 +186,14 @@ h4 {
   color: #737373;
   margin-top: 2em;
 }
-.form-group p,
+
 .info-group p {
   margin-top: 2em;
   margin-bottom: 1em;
+}
+.warning {
+  margin-top: -1em;
+  margin-bottom: 2em;
 }
 #e-mail {
   color: #2ecc71;
