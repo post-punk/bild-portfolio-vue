@@ -4,15 +4,27 @@
     <div class="container">
       <div class="row work-nav justify-content-between">
         <div class="work-nav-text col-sm-7 col-12">
-          <h6 id="all" @click="allCategories()" :class="{isActive: value == 'all'}" >ALL</h6>
+          <h6 id="all" @click="categoryFilter('all')" :class="{isActive: value == 'all'}">ALL</h6>
           <h6 id="slash">/</h6>
-          <h6 id="print" @click="categoryFilter('print')" :class="{isActive: value == 'print'}">PRINT</h6>
+          <h6
+            id="print"
+            @click="categoryFilter('print')"
+            :class="{isActive: value == 'print'}"
+          >PRINT</h6>
           <h6 id="slash">/</h6>
-          <h6 id="photography" @click="categoryFilter('photo')" :class="{isActive: value == 'photo'}">PHOTOGRAPHY</h6>
+          <h6
+            id="photography"
+            @click="categoryFilter('photo')"
+            :class="{isActive: value == 'photo'}"
+          >PHOTOGRAPHY</h6>
           <h6 id="slash">/</h6>
           <h6 id="web" @click="categoryFilter('web')" :class="{isActive: value == 'web'}">WEB</h6>
           <h6 id="slash">/</h6>
-          <h6 id="apps" @click="categoryFilter('app')" :class="{isActive: value == 'app'}">APPLICATIONS</h6>
+          <h6
+            id="apps"
+            @click="categoryFilter('app')"
+            :class="{isActive: value == 'app'}"
+          >APPLICATIONS</h6>
         </div>
         <div class="col-sm-1 col-12">
           <div class="work-nav-icons">
@@ -49,13 +61,18 @@
       </div>
       <div class="container grid-container" v-if="filter">
         <div class="row">
-          <div
+          <!-- <div
             class="grid-img web col-12 col-sm-6 col-lg-4 col-xl-4"
             v-for="(project, index) in filter"
             :key="index"
-          >
+          >-->
+          <div class="col-4" v-for="(project, index) in filter" :key="index">
             <img :src="project.url">
           </div>
+          <div class="col-8" v-for="(project, index) in filter" :key="index"><p>{{ project.text }}</p></div>
+
+          <!-- <p class="imageText"></p> -->
+          <!-- </div> -->
         </div>
       </div>
     </div>
@@ -140,7 +157,7 @@ export default {
             "Sed eu blandit est. Duis tincidunt eleifend eleifend. Integer hendrerit tempor risus eget vestibulum. Etiam placerat ex in ligula hendrerit ornare. Vestibulum scelerisque neque eget posuere volutpat. Nam dictum, dui at imperdiet mattis, enim arcu mattis dui, ac suscipit nisi sapien in sem. Cras hendrerit quis odio eget fringilla. Sed vitae nibh eu dolor efficitur pulvinar at ac dui. Nam fermentum orci ut condimentum dapibus. Nam pulvinar nisi in nulla imperdiet, ac molestie eros fermentum. Aenean vel ultricies nibh, sollicitudin mollis urna. Vivamus ultricies risus lorem, nec faucibus nisi facilisis et. Sed imperdiet aliquet sapien sed luctus. Morbi imperdiet porttitor libero, et ornare turpis. Curabitur eu porta arcu, iaculis dignissim arcu."
         }
       ],
-      value: 'all'
+      value: "all"
     };
   },
   created() {
@@ -163,16 +180,19 @@ export default {
     //   this.filter = this.projects.filter(
     //     project => project.category === filter
     //   );
-      // this.filter = value;//
+    // this.filter = value;//
     // },
-    allCategories() {
-      this.filter = this.projects;
-      this.value = val; 
-},
+    // allCategories() {
+      // this.filter = this.projects;
+      // this.value = val;
+    // },
     categoryFilter(val) {
-      this.filter = this.projects.filter(
-        project => project.category == val
-      ) 
+      if (val === 'all') {
+        return this.filter = this.projects;
+      }
+      this.filter = this.projects.filter(function(project) {
+        return project.category == val;
+      });
       this.value = val;
     }
   }
@@ -304,7 +324,6 @@ export default {
   padding-bottom: 1em; */
 }
 .grid-img img:hover {
-
   opacity: 0.8;
 }
 #slash {
@@ -314,5 +333,9 @@ export default {
 }
 .isActive {
   color: #2ecc71;
+}
+.imageText {
+  display: flex;
+  float: right;
 }
 </style>
