@@ -31,7 +31,10 @@
               v-model="email"
             >
             <p class="warning" v-if="!$v.email.email">Please provide a valid email address.</p>
-            <p class="warning"  v-if="!$v.email.required && $v.email.$dirty">This field must not be empty.</p>
+            <p
+              class="warning"
+              v-if="!$v.email.required && $v.email.$dirty"
+            >This field must not be empty.</p>
           </div>
           <div class="input">
             <input
@@ -53,7 +56,10 @@
               placeholder="(for development purposes: more than 2 & less than 10 characters)"
               @input="$v.textarea.$touch()"
             ></textarea>
-            <p class="warning"  v-if="$v.textarea.$error">Please limit the message to 500 characters max.</p>
+            <p
+              class="warning"
+              v-if="$v.textarea.$error"
+            >Please limit the message to 500 characters max.</p>
           </div>
           <div class="container">
             <div class="row justify-content-between">
@@ -64,14 +70,14 @@
                 id="send-button"
                 v-on:click="sendMessage()"
               >SEND MESSAGE</button>
-             
+
               <div class="form-group">
                 <!-- <div
                   class="g-recaptcha"
                   data-sitekey="6LfKURIUAAAAAO50vlwWZkyK_G2ywqE52NU7YO0S"
                   data-callback="verify()"
                   data-expired-callback="expiredRecaptchaCallback"
-                ></div> -->
+                ></div>-->
                 <vue-recaptcha sitekey="6LfKURIUAAAAAO50vlwWZkyK_G2ywqE52NU7YO0S" @verify="verify"></vue-recaptcha>
                 <input
                   class="form-control d-none"
@@ -124,8 +130,8 @@ import {
   maxLength,
   minLength
 } from "vuelidate/lib/validators";
-import VueRecaptcha from 'vue-recaptcha';
- 
+import VueRecaptcha from "vue-recaptcha";
+
 export default {
   name: "Forms",
   data() {
@@ -144,10 +150,9 @@ export default {
       this.showForm = false;
     },
     verify() {
-    this.recaptchachecked = true;
-    console.log('nesto')
-    },
-   
+      this.recaptchachecked = true;
+      console.log("nesto");
+    }
   },
 
   validations: {
@@ -167,7 +172,7 @@ export default {
   components: {
     VueRecaptcha
   }
-}
+};
 </script>
 
 <style scoped>
@@ -230,5 +235,4 @@ button:disabled {
 form p {
   /* color: indianred; */
 }
-
 </style>

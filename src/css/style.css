@@ -460,6 +460,9 @@ hr {
 .dropdown-menu {
     min-width:inherit !important;
 }
+.isActive {
+    color: #2ecc71;
+  }
 
 
 
