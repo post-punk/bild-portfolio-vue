@@ -66,10 +66,12 @@
             v-for="(project, index) in filter"
             :key="index"
           >-->
-          <div class="col-4" v-for="(project, index) in filter" :key="index">
+          <div class="grid-img col-4" v-for="(project, index) in filter" :key="index">
             <img :src="project.url">
           </div>
-          <div class="col-8" v-for="(project, index) in filter" :key="index"><p>{{ project.text }}</p></div>
+          <div class="col-8" v-for="(project, index) in filter" :key="index">
+            <p>{{ project.text }}</p>
+          </div>
 
           <!-- <p class="imageText"></p> -->
           <!-- </div> -->
@@ -183,12 +185,12 @@ export default {
     // this.filter = value;//
     // },
     // allCategories() {
-      // this.filter = this.projects;
-      // this.value = val;
+    // this.filter = this.projects;
+    // this.value = val;
     // },
     categoryFilter(val) {
-      if (val === 'all') {
-        return this.filter = this.projects;
+      if (val === "all") {
+        return (this.filter = this.projects);
       }
       this.filter = this.projects.filter(function(project) {
         return project.category == val;
