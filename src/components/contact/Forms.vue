@@ -175,6 +175,7 @@ export default {
 </script>
 
 <style scoped>
+
 input,
 textarea {
   margin-top: 1em;
@@ -198,6 +199,7 @@ h4 {
 .warning {
   margin-top: -1em;
   margin-bottom: 2em;
+  color: indianred;
 }
 #e-mail {
   color: #2ecc71;

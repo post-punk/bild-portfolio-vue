@@ -62,7 +62,7 @@
 
       <!-- grid-view markup -->
       <div class="container" v-show="gridView">
-        <div class="row grid-container">
+        <div class="row no-gutters grid-container">
           <!-- <div
             class="grid-img web col-12 col-sm-6 col-lg-4 col-xl-4"
             v-for="(project, index) in filter"
@@ -78,7 +78,7 @@
 
       <!-- list-view markup  -->
       <div class="container" v-show="listView">
-        <div class="row grid-container">
+        <div class="row no-gutters grid-container">
           <!-- <div
             class="grid-img web col-12 col-sm-6 col-lg-4 col-xl-4"
             v-for="(project, index) in filter"
@@ -296,6 +296,7 @@ export default {
 .grid-container {
   max-width: 990px;
   padding-bottom: 2em;
+  margin: auto;
 }
 .portfolioList {
   display: grid;
@@ -385,5 +386,11 @@ export default {
 }
 p {
   padding: 1em;
+}
+.col-8 {
+  position: relative;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
 }
 </style>
