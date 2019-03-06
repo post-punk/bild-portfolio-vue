@@ -52,7 +52,6 @@
               name="textarea"
               v-model="textarea"
               rows="10"
-              maxlength="500"
               placeholder="(for development purposes: more than 2 & less than 10 characters)"
               @input="$v.textarea.$touch()"
             ></textarea>

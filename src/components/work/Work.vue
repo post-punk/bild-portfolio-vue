@@ -4,26 +4,26 @@
     <div class="container">
       <div class="row work-nav justify-content-between">
         <div class="work-nav-text col-sm-7 col-12">
-          <h6 id="all" @click="categoryFilter('all')" :class="{isActive: value == 'all'}">ALL</h6>
+          <h6 id="all" @click="categoryFilter('all')" :class="{isActive: activeTab == 'all'}">ALL</h6>
           <h6 id="slash">/</h6>
           <h6
             id="print"
             @click="categoryFilter('print')"
-            :class="{isActive: value == 'print'}"
+            :class="{isActive: activeTab == 'print'}"
           >PRINT</h6>
           <h6 id="slash">/</h6>
           <h6
             id="photography"
             @click="categoryFilter('photo')"
-            :class="{isActive: value == 'photo'}"
+            :class="{isActive: activeTab == 'photo'}"
           >PHOTOGRAPHY</h6>
           <h6 id="slash">/</h6>
-          <h6 id="web" @click="categoryFilter('web')" :class="{isActive: value == 'web'}">WEB</h6>
+          <h6 id="web" @click="categoryFilter('web')" :class="{isActive: activeTab == 'web'}">WEB</h6>
           <h6 id="slash">/</h6>
           <h6
             id="apps"
             @click="categoryFilter('app')"
-            :class="{isActive: value == 'app'}"
+            :class="{isActive: activeTab == 'app'}"
           >APPLICATIONS</h6>
         </div>
         <div class="col-sm-1 col-12">
@@ -59,22 +59,42 @@
           </div>
         </div>
       </div>
-      <div class="container grid-container" v-if="filter">
-        <div class="row">
+
+      <!-- grid-view markup -->
+      <div class="container" v-show="gridView">
+        <div class="row grid-container">
           <!-- <div
             class="grid-img web col-12 col-sm-6 col-lg-4 col-xl-4"
             v-for="(project, index) in filter"
             :key="index"
           >-->
-          <div class="grid-img col-4" v-for="(project, index) in filter" :key="index">
-            <img :src="project.url">
-          </div>
-          <div class="col-8" v-for="(project, index) in filter" :key="index">
-            <p>{{ project.text }}</p>
+            <div class="grid-cell" v-for="(project, index) in filteredArr" :key="index">
+              <img :src="project.url">
+            </div>
+
+          
+        </div>
+      </div>
+
+      <!-- list-view markup  -->
+      <div class="container" v-show="listView">
+        <div class="row grid-container">
+          <!-- <div
+            class="grid-img web col-12 col-sm-6 col-lg-4 col-xl-4"
+            v-for="(project, index) in filter"
+            :key="index"
+          >-->
+          <div class="col-4">
+            <div class="grid-cell" v-for="(project, index) in filteredArr" :key="index">
+              <img :src="project.url">
+            </div>
           </div>
 
-          <!-- <p class="imageText"></p> -->
-          <!-- </div> -->
+          <div class="col-8">
+            <div class="grid-cell" v-for="(project, index) in filteredArr" :key="index">
+              <p>{{ project.text }}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -91,9 +111,9 @@ export default {
       calloutTitle: "CHECK OUT WHAT I CAN DO",
       //activeClass: "portfolioGrid"
 
-      // gridView: true,
-      // listView: false,
-      filter: [],
+      gridView: true,
+      listView: false,
+      filteredArr: [],
       projects: [
         {
           name: "img1",
@@ -159,11 +179,26 @@ export default {
             "Sed eu blandit est. Duis tincidunt eleifend eleifend. Integer hendrerit tempor risus eget vestibulum. Etiam placerat ex in ligula hendrerit ornare. Vestibulum scelerisque neque eget posuere volutpat. Nam dictum, dui at imperdiet mattis, enim arcu mattis dui, ac suscipit nisi sapien in sem. Cras hendrerit quis odio eget fringilla. Sed vitae nibh eu dolor efficitur pulvinar at ac dui. Nam fermentum orci ut condimentum dapibus. Nam pulvinar nisi in nulla imperdiet, ac molestie eros fermentum. Aenean vel ultricies nibh, sollicitudin mollis urna. Vivamus ultricies risus lorem, nec faucibus nisi facilisis et. Sed imperdiet aliquet sapien sed luctus. Morbi imperdiet porttitor libero, et ornare turpis. Curabitur eu porta arcu, iaculis dignissim arcu."
         }
       ],
-      value: "all"
+      activeTab: "all"
     };
   },
-  created() {
-    this.filter = this.projects;
+
+  // computed: {
+  //   // a computed getter
+  //   filteredArr: function () {
+  //     // `this` points to the vm instance
+
+  //     const result = [];
+
+  //     result = this.projects.filter((item) => {
+  //       return item.category === this.value || true;
+  //     });
+  //     return result;
+  //   }
+  // },
+
+  mounted() {
+    this.filteredArr = this.projects;
   },
 
   components: {
@@ -189,13 +224,14 @@ export default {
     // this.value = val;
     // },
     categoryFilter(val) {
+      this.activeTab = val;
       if (val === "all") {
-        return (this.filter = this.projects);
+        return (this.filteredArr = this.projects);
       }
-      this.filter = this.projects.filter(function(project) {
+      this.filteredArr = this.projects.filter(function(project) {
         return project.category == val;
       });
-      this.value = val;
+      this.activeTab = val;
     }
   }
 };
@@ -267,8 +303,8 @@ export default {
   /* grid-template-columns: 1fr 1fr; */
   margin-right: -15px;
   margin-left: -15px;
-  margin-bottom: 2em;
-  padding-bottom: 2em;
+  /* margin-bottom: 2em; */
+  /* padding-bottom: 2em; */
 }
 .portfolioList img {
   overflow: hidden;
@@ -310,7 +346,7 @@ export default {
   grid-area: "b";
 }
 
-.grid-img img {
+.grid-container img {
   -webkit-transition: all 0.3s ease; /* Safari and Chrome */
   -moz-transition: all 0.3s ease; /* Firefox */
   -o-transition: all 0.3s ease; /* IE 9 */
@@ -325,8 +361,8 @@ export default {
   /* padding-top: 1em;
   padding-bottom: 1em; */
 }
-.grid-img img:hover {
-  opacity: 0.8;
+.grid-container img:hover {
+  opacity: 0.75;
 }
 #slash {
   margin-left: 1em;
@@ -339,5 +375,15 @@ export default {
 .imageText {
   display: flex;
   float: right;
+}
+.list {
+  display: block;
+}
+.grid-cell {
+  height: 250px;
+  padding-bottom: 1em;
+}
+p {
+  padding: 1em;
 }
 </style>

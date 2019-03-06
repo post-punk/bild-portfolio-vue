@@ -4,7 +4,7 @@
       <div class="col- col-md-5">
         <img class="img-fluid" id="dude" src="../../assets/dude.svg">
       </div>
-      <div class="col- col-md-7">
+      <div class="col- col-md-7 ">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat lacus, vel congue
           mauris. Fusce velit justo, faucibus eu sagittis ac, gravida quis tortor. Suspendisse non urna mi,
@@ -59,5 +59,9 @@ export default {
 <style scoped>
 .col-md-7 {
   padding-top: 1em;
+}
+.col-md-7 p {
+  margin-top: 2em;
+  margin-bottom: 1em;
 }
 </style>
