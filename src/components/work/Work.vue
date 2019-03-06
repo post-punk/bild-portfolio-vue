@@ -381,7 +381,7 @@ export default {
 }
 .grid-cell {
   height: 250px;
-  padding-bottom: 1em;
+  padding: 1em;
 }
 p {
   padding: 1em;
