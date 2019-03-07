@@ -63,35 +63,23 @@
       <!-- grid-view markup -->
       <div class="container" v-show="gridView">
         <div class="row no-gutters grid-container">
-          <!-- <div
-            class="grid-img web col-12 col-sm-6 col-lg-4 col-xl-4"
-            v-for="(project, index) in filter"
-            :key="index"
-          >-->
-            <div class="grid-cell" v-for="(project, index) in filteredArr" :key="index">
-              <img :src="project.url">
-            </div>
-
-          
+          <div class="grid-cell" v-for="(project, index) in filteredArr" :key="index">
+            <img :src="project.url">
+          </div>
         </div>
       </div>
 
       <!-- list-view markup  -->
       <div class="container" v-show="listView">
-        <div class="row no-gutters grid-container">
-          <!-- <div
-            class="grid-img web col-12 col-sm-6 col-lg-4 col-xl-4"
-            v-for="(project, index) in filter"
-            :key="index"
-          >-->
-          <div class="col-4">
-            <div class="grid-cell" v-for="(project, index) in filteredArr" :key="index">
-              <img :src="project.url">
+        <div class="row no-gutters grid-container" v-for="(project, index) in filteredArr" :key="index">
+          <div class="col-lg-4 col-">
+            <div class="grid-cell" >
+              <img class="float-left" :src="project.url">
             </div>
           </div>
 
-          <div class="col-8">
-            <div class="grid-cell" v-for="(project, index) in filteredArr" :key="index">
+          <div class="col-lg-7 col- ">
+            <div class="grid-cell d-flex align-items-center">
               <p>{{ project.text }}</p>
             </div>
           </div>
@@ -295,7 +283,6 @@ export default {
 }
 .grid-container {
   max-width: 990px;
-  padding-bottom: 2em;
   margin: auto;
 }
 .portfolioList {
@@ -385,7 +372,7 @@ export default {
   padding: 1em;
 }
 p {
-  padding: 1em;
+  /* padding: 1em; */
 }
 .col-8 {
   position: relative;
@@ -393,4 +380,5 @@ p {
   padding-left: 0;
   padding-right: 0;
 }
+
 </style>
