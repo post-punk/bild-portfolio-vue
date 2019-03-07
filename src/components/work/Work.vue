@@ -61,7 +61,7 @@
       </div>
 
       <!-- grid-view markup -->
-      <div class="container" v-show="gridView">
+      <div class="container content-wrapper" v-show="gridView">
         <div class="row no-gutters grid-container">
           <div class="grid-cell" v-for="(project, index) in filteredArr" :key="index">
             <img :src="project.url">
@@ -70,7 +70,7 @@
       </div>
 
       <!-- list-view markup  -->
-      <div class="container" v-show="listView">
+      <div class="container content-wrapper" v-show="listView">
         <div class="row no-gutters grid-container" v-for="(project, index) in filteredArr" :key="index">
           <div class="col-lg-4 col-">
             <div class="grid-cell" >
@@ -380,5 +380,7 @@ p {
   padding-left: 0;
   padding-right: 0;
 }
-
+.content-wrapper {
+  padding-bottom: 2em;
+}
 </style>

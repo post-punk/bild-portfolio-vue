@@ -48,6 +48,10 @@ body {
   font-size: 0.85rem;
   line-height: 1.571;
   overflow-x: hidden;
+  width: 100vw;
+  /* overflow-y: overlay; */
+  /* ili
+   /* overflow-y: scroll; */
   margin-bottom: 203px;
 }
 h1,
