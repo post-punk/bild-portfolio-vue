@@ -18,11 +18,11 @@
             :class="{isActive: activeTab == 'photo'}"
           >PHOTOGRAPHY</h6>
           <h6 id="slash">/</h6>
-          <h6 id="web" @click="categoryFilter('web')" :class="{isActive: activeTab == 'web'}">WEB</h6>
+          <h6 id="web" @click="activeFilter = 'web'" :class="{isActive: activeTab == 'web'}">WEB</h6>
           <h6 id="slash">/</h6>
           <h6
             id="apps"
-            @click="categoryFilter('app')"
+            @click="activeFilter = 'app'"
             :class="{isActive: activeTab == 'app'}"
           >APPLICATIONS</h6>
         </div>
@@ -170,18 +170,18 @@ export default {
         }
       ],
       activeTab: "all",
-      activeFilter: ''
+      activeFilter: ""
     };
   },
 
   computed: {
     // a computed getter
-    drugiNacin: function () {
+    drugiNacin: function() {
       // `this` points to the vm instance
 
-      let result = [];
 
-      result = this.projects.filter((item) => {
+
+      const result = this.projects.filter(item => {
         return item.category === this.activeFilter;
       });
       return result;
