@@ -8,13 +8,13 @@
           <h6 id="slash">/</h6>
           <h6
             id="print"
-            @click="categoryFilter('print')"
+            @click="activeFilter = 'print'"
             :class="{isActive: activeTab == 'print'}"
           >PRINT</h6>
           <h6 id="slash">/</h6>
           <h6
             id="photography"
-            @click="categoryFilter('photo')"
+            @click="activeFilter = 'photo'"
             :class="{isActive: activeTab == 'photo'}"
           >PHOTOGRAPHY</h6>
           <h6 id="slash">/</h6>
@@ -63,7 +63,7 @@
       <!-- grid-view markup -->
       <div class="container content-wrapper" v-show="gridView">
         <div class="row no-gutters grid-container">
-          <div class="grid-cell" v-for="(project, index) in filteredArr" :key="index">
+          <div class="grid-cell" v-for="(project, index) in drugiNacin" :key="index">
             <img :src="project.url">
           </div>
         </div>
@@ -71,14 +71,18 @@
 
       <!-- list-view markup  -->
       <div class="container content-wrapper" v-show="listView">
-        <div class="row no-gutters grid-container" v-for="(project, index) in filteredArr" :key="index">
+        <div
+          class="row no-gutters grid-container"
+          v-for="(project, index) in filteredArr"
+          :key="index"
+        >
           <div class="col-lg-4 col-">
-            <div class="grid-cell" >
+            <div class="grid-cell">
               <img class="float-left" :src="project.url">
             </div>
           </div>
 
-          <div class="col-lg-7 col- ">
+          <div class="col-lg-7 col-">
             <div class="grid-cell d-flex align-items-center">
               <p>{{ project.text }}</p>
             </div>
@@ -97,8 +101,6 @@ export default {
   data() {
     return {
       calloutTitle: "CHECK OUT WHAT I CAN DO",
-      //activeClass: "portfolioGrid"
-
       gridView: true,
       listView: false,
       filteredArr: [],
@@ -167,23 +169,24 @@ export default {
             "Sed eu blandit est. Duis tincidunt eleifend eleifend. Integer hendrerit tempor risus eget vestibulum. Etiam placerat ex in ligula hendrerit ornare. Vestibulum scelerisque neque eget posuere volutpat. Nam dictum, dui at imperdiet mattis, enim arcu mattis dui, ac suscipit nisi sapien in sem. Cras hendrerit quis odio eget fringilla. Sed vitae nibh eu dolor efficitur pulvinar at ac dui. Nam fermentum orci ut condimentum dapibus. Nam pulvinar nisi in nulla imperdiet, ac molestie eros fermentum. Aenean vel ultricies nibh, sollicitudin mollis urna. Vivamus ultricies risus lorem, nec faucibus nisi facilisis et. Sed imperdiet aliquet sapien sed luctus. Morbi imperdiet porttitor libero, et ornare turpis. Curabitur eu porta arcu, iaculis dignissim arcu."
         }
       ],
-      activeTab: "all"
+      activeTab: "all",
+      activeFilter: ''
     };
   },
 
-  // computed: {
-  //   // a computed getter
-  //   filteredArr: function () {
-  //     // `this` points to the vm instance
+  computed: {
+    // a computed getter
+    drugiNacin: function () {
+      // `this` points to the vm instance
 
-  //     const result = [];
+      let result = [];
 
-  //     result = this.projects.filter((item) => {
-  //       return item.category === this.value || true;
-  //     });
-  //     return result;
-  //   }
-  // },
+      result = this.projects.filter((item) => {
+        return item.category === this.activeFilter;
+      });
+      return result;
+    }
+  },
 
   mounted() {
     this.filteredArr = this.projects;
@@ -341,13 +344,9 @@ export default {
   -ms-transition: all 0.3s ease; /* Opera */
   transition: all 0.3s ease;
   position: relative;
-  /* width: 100%; */
-  /* height: 220px; */
   object-fit: none;
   height: 220px;
   width: 300px;
-  /* padding-top: 1em;
-  padding-bottom: 1em; */
 }
 .grid-container img:hover {
   opacity: 0.75;

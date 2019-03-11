@@ -3,28 +3,45 @@
     <div class="container-fluid" id="tab-background">
       <div class="container">
         <div class="row">
-          <button class="tablinks active col-3" @click="currentTab = 0" :class="{highlight:currentTab == 0}" id="defaultOpen">
+          <button
+            class="tablinks active col-3"
+            @click="currentTab = 0"
+            :class="{highlight:currentTab == 0}"
+            id="defaultOpen"
+          >
             <div class="tab-links">
               <img src="../../assets/websites.svg">
               <br>
               <p>WEBSITES</p>
             </div>
           </button>
-          <button class="tablinks col-3" @click="currentTab = 1" :class="{highlight:currentTab == 1}">
+          <button
+            class="tablinks col-3"
+            @click="currentTab = 1"
+            :class="{highlight:currentTab == 1}"
+          >
             <div class="tab-links">
               <img src="../../assets/photo.svg">
               <br>
               <p>PHOTOGRAPHY</p>
             </div>
           </button>
-          <button class="tablinks col-3" @click="currentTab = 2" :class="{highlight:currentTab == 2}">
+          <button
+            class="tablinks col-3"
+            @click="currentTab = 2"
+            :class="{highlight:currentTab == 2}"
+          >
             <div class="tab-links">
               <img src="../../assets/seo.svg">
               <br>
               <p>SEO</p>
             </div>
           </button>
-          <button class="tablinks col-3" @click="currentTab = 3" :class="{highlight:currentTab == 3}">
+          <button
+            class="tablinks col-3"
+            @click="currentTab = 3"
+            :class="{highlight:currentTab == 3}"
+          >
             <div class="tab-links">
               <img src="../../assets/apps.svg">
               <br>
@@ -34,15 +51,15 @@
         </div>
       </div>
     </div>
-    
-    <span class="tab-text container">{{ tabText[currentTab] }}
+
+    <span class="tab-text container">
+      {{ tabText[currentTab] }}
       <ul>
         <li>{{ tabText[currentTab].slice(-41) }}</li>
         <li>{{ tabText[currentTab].slice(-60) }}</li>
         <li>{{ tabText[currentTab].slice(-50) }}</li>
       </ul>
     </span>
-    
   </div>
 </template>
 
@@ -88,7 +105,7 @@ export default {
   height: 300px;
 }
 li {
-    list-style-image: url('../../assets/bullet.svg');
+  list-style-image: url("../../assets/bullet.svg");
 }
 .tab-text li {
   padding-top: 1em;
