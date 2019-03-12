@@ -178,7 +178,7 @@ export default {
     // a computed getter
     drugiNacin: function() {
       // `this` points to the vm instance
-
+    
 
 
       const result = this.projects.filter(item => {

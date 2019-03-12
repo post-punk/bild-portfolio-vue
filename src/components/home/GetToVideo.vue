@@ -9,7 +9,6 @@
             alt="video player image"
           >
           <modal name="hello-world">
-            
             <button
               @click="hide()"
               type="button"
@@ -20,7 +19,7 @@
             </button>
             <iframe
               src="https://www.youtube.com/embed/tqvh8mz2Q9s?rel=0&modestbranding=1&autohide=1&mute=0&showinfo=0&controls=0&autoplay=1"
-              width="600px"
+              width="500px"
               height="300px"
               frameborder="0"
               allowfullscreen
@@ -90,7 +89,6 @@ export default {
  * these styles.
  */
 
-
 img:hover {
   opacity: 0.8;
   cursor: pointer;
@@ -98,14 +96,15 @@ img:hover {
 button {
   float: right;
 }
-.v--modal {
-  background: transparent !important;
-  box-shadow: 0 0 0 0 !important;
-  overflow: visible !important;
-  height: 330px;
-  width: 600px
-}
+
 button {
-  color: black;
-  font-size: 3em}
+  color: white;
+  opacity: 1 !important;
+  font-size: 3em;
+  padding-right: 1.9em;
+}
+button:focus {
+  outline: none;
+}
+
 </style>

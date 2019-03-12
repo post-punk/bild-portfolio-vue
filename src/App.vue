@@ -69,5 +69,10 @@ h6,
   font-weight: normal;
   text-decoration: none;
 }
+.v--modal-overlay .v--modal-box {
+  overflow: visible;
+  background-color: transparent;
+  box-shadow: 0 0 0 0;
+}
 
 </style>

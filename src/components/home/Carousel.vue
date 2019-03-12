@@ -93,6 +93,7 @@ export default {
         autoplay: false,
         autoplaySpeed: 2000,
         asNavFor: ".slick-paragraph",
+        initialSlide: 0
       },
       slickOptions2: {
         slidesToShow: 1,
