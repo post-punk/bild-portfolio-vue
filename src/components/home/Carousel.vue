@@ -1,14 +1,24 @@
 <template>
   <div>
     <slick class="slick-images" id="slick1" ref="slick" :options="slickOptions">
+      <img src="../../assets/carousel/project-jezik.jpg">
+      <img src="../../assets/carousel/project-social-media.jpg">
       <img src="../../assets/carousel/project-boy-and-girl.jpg">
       <img src="../../assets/carousel/project-buttons.jpg">
       <img src="../../assets/carousel/project-jes.jpg">
       <img src="../../assets/carousel/project-jezik.jpg">
       <img src="../../assets/carousel/project-social-media.jpg">
+      <img src="../../assets/carousel/project-jes.jpg">
     </slick>
     <div class="carousel-btm-wrapper d-flex justify-content-center">
-      <svg @click="prev()" class="arrow slick-arrow slick-prev col-1 align-middle" xmlns="http://www.w3.org/2000/svg" width="21" height="31" viewBox="0 0 21 31">
+      <svg
+        @click="prev()"
+        class="arrow slick-arrow slick-prev col-1 align-middle"
+        xmlns="http://www.w3.org/2000/svg"
+        width="21"
+        height="31"
+        viewBox="0 0 21 31"
+      >
         <path
           id="_"
           data-name="&lt;"
@@ -59,7 +69,14 @@
           </p>
         </div>
       </slick>
-      <svg @click="next()" class="arrow col-1 slick-next slick-arrow align-middle" xmlns="http://www.w3.org/2000/svg" width="21" height="31" viewBox="0 0 21 31">
+      <svg
+        @click="next()"
+        class="arrow col-1 slick-next slick-arrow align-middle"
+        xmlns="http://www.w3.org/2000/svg"
+        width="21"
+        height="31"
+        viewBox="0 0 21 31"
+      >
         <path
           id="_"
           data-name="&gt;"
@@ -84,16 +101,16 @@ export default {
         //options can be used from the plugin documentation
         dots: false,
         infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 1,
+        slidesToShow: 5,
+        slidesToScroll: 6,
         centerMode: true,
         focusOnSelect: true,
         arrows: false,
         variableWidth: true,
-        autoplay: false,
-        autoplaySpeed: 2000,
+        autoplay: true,
+        autoplaySpeed: 1000,
         asNavFor: ".slick-paragraph",
-        initialSlide: 0
+        // initialSlide: 1
       },
       slickOptions2: {
         slidesToShow: 1,
@@ -106,6 +123,8 @@ export default {
       }
     };
   },
+
+
   // All slick methods can be used too, example here
   methods: {
     next() {

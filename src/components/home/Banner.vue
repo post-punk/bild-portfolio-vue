@@ -20,9 +20,8 @@
       </p>
       <div class="portfolio">
         <!-- <form action="work"> -->
-          <button href="work" id="banner-button">
-            <a href="work">BROWSE PORTFOLIO</a>
-          </button>
+          <router-link to="/work" tag="button">
+            BROWSE PORTFOLIO</router-link>
         <!-- </form> -->
       </div>
     </div>
@@ -179,6 +178,7 @@ max-width: 50%; */
   background-color: #2ecc71;
   padding: 1em;
   border: none;
+  cursor: pointer;
 }
 h4 {
   color: #dadada;

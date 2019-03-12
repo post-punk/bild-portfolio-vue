@@ -4,26 +4,26 @@
     <div class="container">
       <div class="row work-nav justify-content-between">
         <div class="work-nav-text col-sm-7 col-12">
-          <h6 id="all" @click="categoryFilter('all')" :class="{isActive: activeTab == 'all'}">ALL</h6>
+          <h6 id="all" @click="activeFilter = 'all'" :class="{isActive: activeFilter == 'all'}">ALL</h6>
           <h6 id="slash">/</h6>
           <h6
             id="print"
             @click="activeFilter = 'print'"
-            :class="{isActive: activeTab == 'print'}"
+            :class="{isActive: activeFilter == 'print'}"
           >PRINT</h6>
           <h6 id="slash">/</h6>
           <h6
             id="photography"
             @click="activeFilter = 'photo'"
-            :class="{isActive: activeTab == 'photo'}"
+            :class="{isActive: activeFilter == 'photo'}"
           >PHOTOGRAPHY</h6>
           <h6 id="slash">/</h6>
-          <h6 id="web" @click="activeFilter = 'web'" :class="{isActive: activeTab == 'web'}">WEB</h6>
+          <h6 id="web" @click="activeFilter = 'web'" :class="{isActive: activeFilter == 'web'}">WEB</h6>
           <h6 id="slash">/</h6>
           <h6
             id="apps"
             @click="activeFilter = 'app'"
-            :class="{isActive: activeTab == 'app'}"
+            :class="{isActive: activeFilter == 'app'}"
           >APPLICATIONS</h6>
         </div>
         <div class="col-sm-1 col-12">
@@ -73,7 +73,7 @@
       <div class="container content-wrapper" v-show="listView">
         <div
           class="row no-gutters grid-container"
-          v-for="(project, index) in filteredArr"
+          v-for="(project, index) in drugiNacin"
           :key="index"
         >
           <div class="col-lg-4 col-">
@@ -103,7 +103,7 @@ export default {
       calloutTitle: "CHECK OUT WHAT I CAN DO",
       gridView: true,
       listView: false,
-      filteredArr: [],
+      // filteredArr: [],
       projects: [
         {
           name: "img1",
@@ -169,18 +169,17 @@ export default {
             "Sed eu blandit est. Duis tincidunt eleifend eleifend. Integer hendrerit tempor risus eget vestibulum. Etiam placerat ex in ligula hendrerit ornare. Vestibulum scelerisque neque eget posuere volutpat. Nam dictum, dui at imperdiet mattis, enim arcu mattis dui, ac suscipit nisi sapien in sem. Cras hendrerit quis odio eget fringilla. Sed vitae nibh eu dolor efficitur pulvinar at ac dui. Nam fermentum orci ut condimentum dapibus. Nam pulvinar nisi in nulla imperdiet, ac molestie eros fermentum. Aenean vel ultricies nibh, sollicitudin mollis urna. Vivamus ultricies risus lorem, nec faucibus nisi facilisis et. Sed imperdiet aliquet sapien sed luctus. Morbi imperdiet porttitor libero, et ornare turpis. Curabitur eu porta arcu, iaculis dignissim arcu."
         }
       ],
-      activeTab: "all",
-      activeFilter: ""
+      activeFilter: "all"
     };
   },
 
   computed: {
     // a computed getter
     drugiNacin: function() {
+      if (this.activeFilter == 'all') {
+        return this.projects
+      }
       // `this` points to the vm instance
-    
-
-
       const result = this.projects.filter(item => {
         return item.category === this.activeFilter;
       });
@@ -188,9 +187,6 @@ export default {
     }
   },
 
-  mounted() {
-    this.filteredArr = this.projects;
-  },
 
   components: {
     CalloutTop

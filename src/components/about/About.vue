@@ -29,5 +29,11 @@ export default {
 </script>
 
 <style>
-
+#dude {
+    margin-top: 2em;
+ } 
+ h3 {
+    margin-top: 2em;
+    margin-bottom: 1em;
+} 
 </style>

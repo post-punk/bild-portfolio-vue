@@ -54,11 +54,7 @@
 
     <span class="tab-text container">
       {{ tabText[currentTab] }}
-      <ul>
-        <li>{{ tabText[currentTab].slice(-41) }}</li>
-        <li>{{ tabText[currentTab].slice(-60) }}</li>
-        <li>{{ tabText[currentTab].slice(-50) }}</li>
-      </ul>
+     W
     </span>
   </div>
 </template>
@@ -102,7 +98,7 @@ export default {
 .tab-text {
   display: block;
   padding-top: 2em;
-  height: 300px;
+  height: 200px;
 }
 li {
   list-style-image: url("../../assets/bullet.svg");

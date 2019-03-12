@@ -78,6 +78,7 @@ export default {
   border: none;
   margin-top: 0;
   margin-bottom: 0;
+  padding: 1em;
 }
 #click-here a {
   font-family: "Novecento sans wide Light";

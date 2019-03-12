@@ -8,7 +8,7 @@
 
 <script>
 import "../src/css/fonts.css";
-import "../src/css/style.css";
+// import "../src/css/style.css";
 import "../src/css/media-queries.css";
 
 import Header from "./components/header.vue";
@@ -54,6 +54,15 @@ body {
    /* overflow-y: scroll; */
   margin-bottom: 203px;
 }
+a, a:hover, p {
+  color: inherit;
+  text-decoration: none;
+}
+p, ul, li {
+    font-family: Arial !important;
+    color: #737373;
+}
+button,
 h1,
 h2,
 h3,
