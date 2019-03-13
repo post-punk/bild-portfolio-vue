@@ -16,6 +16,7 @@ import Footer from "./components/footer.vue";
 import CalloutTop from "./components/CalloutTop.vue";
 import BootstrapVue from "bootstrap-vue";
 import Slick from 'vue-slick';
+import { store } from './store/store.js'
 
 export default {
   name: "App",

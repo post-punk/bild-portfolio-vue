@@ -8,14 +8,18 @@ import BootstrapVue from 'bootstrap-vue';
 import VModal from 'vue-js-modal'
 import Vuelidate from 'vuelidate'
 import Slick from 'vue-slick';
+import { store } from './store/store.js';
+import Vuex from 'vuex'
 
 Vue.use(Vuelidate)
 Vue.use(BootstrapVue)
 Vue.use(VueRouter);
 Vue.use(VModal)
 Vue.use(Slick)
+Vue.use(Vuex)
 
 Vue.config.productionTip = false
+
 
 
 const router = new VueRouter({
@@ -23,11 +27,11 @@ const router = new VueRouter({
   routes
 });
 
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

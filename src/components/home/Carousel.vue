@@ -108,7 +108,7 @@ export default {
         arrows: false,
         variableWidth: true,
         autoplay: true,
-        autoplaySpeed: 1000,
+        autoplaySpeed: 2000,
         asNavFor: ".slick-paragraph",
         // initialSlide: 1
       },
