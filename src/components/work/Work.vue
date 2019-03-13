@@ -123,7 +123,7 @@ export default {
     //   return result;
     // },
 
-    projectItems: function() {
+    projectItems() {
       switch (this.activeFilter) {
         case "all": return this.$store.getters.allItems;
         case "web": return this.$store.getters.webItems;

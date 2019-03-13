@@ -73,7 +73,7 @@ export const store = new Vuex.Store({
             }
         ],
     },
-    
+    //namjerno kombinujem
     getters: {
         allItems: state =>  {
             return state.projects;
@@ -85,7 +85,8 @@ export const store = new Vuex.Store({
             return state.projects.filter(project => project.category == 'app');
         },
         printItems: state => {
-            return state.projects.filter(project => project.category == 'print');
+            return state.projects.filter(function (project) {
+                return project.category == 'print'});
         },
         photoItems: state => {
             return state.projects.filter(project => project.category == 'photo')
