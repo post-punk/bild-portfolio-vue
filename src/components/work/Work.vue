@@ -125,20 +125,11 @@ export default {
 
     projectItems: function() {
       switch (this.activeFilter) {
-        case "all":
-          return this.$store.getters.allItems;
-          break;
-        case "web":
-          return this.$store.getters.webItems;
-          break;
-        case "app":
-          return this.$store.getters.appItems;
-          break;
-        case "photo":
-          return this.$store.getters.photoItems;
-          break;
-        case "print":
-          return this.$store.getters.printItems;
+        case "all": return this.$store.getters.allItems;
+        case "web": return this.$store.getters.webItems;
+        case "app": return this.$store.getters.appItems;
+        case "photo": return this.$store.getters.photoItems;
+        case "print": return this.$store.getters.printItems;
       }
     }
 
@@ -181,7 +172,7 @@ export default {
     // this.filter = this.projects;
     // this.value = val;
     // },
-    
+
 
     // categoryFilter(val) {
     //   this.activeTab = val;
