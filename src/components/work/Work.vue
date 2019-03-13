@@ -122,6 +122,7 @@ export default {
     //   });
     //   return result;
     // },
+
     projectItems: function() {
       switch (this.activeFilter) {
         case "all":
@@ -169,6 +170,7 @@ export default {
       this.listView = false;
       this.gridView = true;
     },
+
     // categoryFilter(filter) {
     //   this.filter = this.projects.filter(
     //     project => project.category === filter
@@ -179,16 +181,18 @@ export default {
     // this.filter = this.projects;
     // this.value = val;
     // },
-    categoryFilter(val) {
-      this.activeTab = val;
-      if (val === "all") {
-        return (this.filteredArr = this.projects);
-      }
-      this.filteredArr = this.projects.filter(function(project) {
-        return project.category == val;
-      });
-      this.activeTab = val;
-    }
+    
+
+    // categoryFilter(val) {
+    //   this.activeTab = val;
+    //   if (val === "all") {
+    //     return (this.filteredArr = this.projects);
+    //   }
+    //   this.filteredArr = this.projects.filter(function(project) {
+    //     return project.category == val;
+    //   });
+    //   this.activeTab = val;
+    // }
   }
 };
 </script>
