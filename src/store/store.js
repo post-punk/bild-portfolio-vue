@@ -7,6 +7,28 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
 
     state: {
+        navMain: [
+            {
+                path: '/',
+                name: 'HOME'
+            },
+
+            {
+                path: '/about',
+                name: 'ABOUT'
+            },
+
+            {
+                path: '/work',
+                name: 'WORK'
+            },
+
+            {
+                path: '/contact',
+                name: 'CONTACT'
+            }
+        ],
+        
         projects: [
             {
                 name: "img1",
@@ -73,9 +95,10 @@ export const store = new Vuex.Store({
             }
         ],
     },
+
     //namjerno kombinujem
     getters: {
-        allItems: state =>  {
+        allItems: state => {
             return state.projects;
         },
         webItems(state) {
@@ -86,7 +109,8 @@ export const store = new Vuex.Store({
         },
         printItems: state => {
             return state.projects.filter(function (project) {
-                return project.category == 'print'});
+                return project.category == 'print'
+            });
         },
         photoItems: state => {
             return state.projects.filter(project => project.category == 'photo')

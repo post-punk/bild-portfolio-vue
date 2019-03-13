@@ -158,10 +158,10 @@
         </div>
         <hr>
         <div class="nav row">
-            <h6><a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href=""><router-link :to="{ name: 'Home' }">HOME</router-link></a></h6>
-            <h6><a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href=""><router-link :to="{ name: 'About' }">ABOUT</router-link></a></h6>
+            <h6 v-for="(navText, index) in navMain" :key="index"><a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href=""><router-link :to="navText.path">{{navText.name}}</router-link></a></h6>
+            <!-- <h6><a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href=""><router-link :to="{ name: 'About' }">ABOUT</router-link></a></h6>
             <h6><a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href=""><router-link :to="{ name: 'Work' }">WORK</router-link></a></h6>
-            <h6><a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href=""><router-link :to="{ name: 'Contact' }">CONTACT</router-link></a></h6>
+            <h6><a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href=""><router-link :to="{ name: 'Contact' }">CONTACT</router-link></a></h6> -->
         </div>
 
 
@@ -172,8 +172,23 @@
 </template>
 
 <script>
+
+
 export default {
-  name: "Header"
+  name: "Header",
+  data() {
+      return {
+          menu : this.$store.state.navMain
+      }
+  },
+  mounted(){
+      console.log(this.menu)
+  },
+  computed: {
+      navMain: function() {
+          return this.$store.state.navMain;
+      }
+  }
 };
 </script>
 
