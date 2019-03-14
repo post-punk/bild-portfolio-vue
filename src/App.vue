@@ -85,4 +85,8 @@ h6,
   box-shadow: 0 0 0 0;
 }
 
+/* higher selectivity override */
+.router-link-exact-active.router-link-exact-active {
+    color: #2ecc71;
+}
 </style>

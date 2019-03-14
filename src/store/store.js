@@ -94,6 +94,42 @@ export const store = new Vuex.Store({
                     "Sed eu blandit est. Duis tincidunt eleifend eleifend. Integer hendrerit tempor risus eget vestibulum. Etiam placerat ex in ligula hendrerit ornare. Vestibulum scelerisque neque eget posuere volutpat. Nam dictum, dui at imperdiet mattis, enim arcu mattis dui, ac suscipit nisi sapien in sem. Cras hendrerit quis odio eget fringilla. Sed vitae nibh eu dolor efficitur pulvinar at ac dui. Nam fermentum orci ut condimentum dapibus. Nam pulvinar nisi in nulla imperdiet, ac molestie eros fermentum. Aenean vel ultricies nibh, sollicitudin mollis urna. Vivamus ultricies risus lorem, nec faucibus nisi facilisis et. Sed imperdiet aliquet sapien sed luctus. Morbi imperdiet porttitor libero, et ornare turpis. Curabitur eu porta arcu, iaculis dignissim arcu."
             }
         ],
+        aboutText: [
+            {
+                image: '../../assets/dude.svg'
+            }
+        ],
+        tabText: [
+            {
+              description:
+                "Vel omnis nulla at, nam doming deleniti ei. Pri ne error primis. Sed accumsan fabellas ut, cum ei tacimates reprehendunt. Tantas laoreet instructior nec an, eu vix augue vulputate consectetuer. Duis pertinax salutandi an has. Vivendo facilisi constituam ea vim.",
+              details1: "No accusamus voluptatibus.",
+              details2: "Sale dicta et per.",
+              details3: "Dictas probatus mea eu."
+            },
+            {
+              description:
+                "Et pro posse exerci. Alterum suscipit ad mea, id tota decore contentiones nam. Ne sea iriure albucius percipitur, cu clita utamur has. Eos an tibique partiendo.",
+              details1: "Te expetendis salutatus vim.",
+              details2: "No aeque viderer signiferumque eum.",
+              details3: "Id docendi minimum electram."
+            },
+            {
+              description:
+                "Sit id mentitum iudicabit consectetuer, modus nonumes constituam quo an. At explicari conclusionemque est. Choro saepe appellantur cu sea. Dolorem euripidis laboramus ad sea, facer graeci ei sed, et eam malis nullam altera.",
+              details1: "Pri ei nihil debitis.",
+              details2: "Propriae expetendis no quo.",
+              details3: "Impedit epicuri te sea."
+            },
+            {
+              description:
+                "Cum errem necessitatibus ex, at decore accommodare consequuntur has. Qui ea nulla fabellas. Ad dolore suscipit vix. Voluptua intellegat sententiae te his. Eum ad agam augue scriptorem, ex causae dissentias nam.",
+              details1: "Eum quod verear nusquam no.",
+              details2: "Ex pri elitr nostrud.",
+              details3: "Id inermis concludaturque qui."
+            }
+          ]
+
     },
 
     //namjerno kombinujem

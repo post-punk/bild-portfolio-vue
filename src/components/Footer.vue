@@ -13,7 +13,6 @@
         </div>
       </div>
     </div>
-
     <div class="container-fluid">
       <div class="container">
         <div class="row justify-content-between footer-wrapper">
@@ -22,12 +21,7 @@
           </div>
           <div class="col-12 col-sm-6 text-right">
             <p id="footer-nav">
-              
               <a v-for="(navText, index) in navMain" :key="index" href=""><router-link :to="navText.path">{{navText.name}}</router-link></a>
-              <!-- <a href=""><router-link to="/about">ABOUT</router-link></a> /
-              <a href=""><router-link to="/work">WORK</router-link></a>
-              /
-              <a href=""><router-link to="/contact">CONTACT</router-link></a> -->
             </p>
           </div>
         </div>
@@ -41,7 +35,7 @@ export default {
   name: "Footer",
   data() {
     return {
-      menu: []
+
     };
   },
   computed: {

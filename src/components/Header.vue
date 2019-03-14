@@ -1,12 +1,8 @@
 <template>
   <div>
     <div class="header container">
-        <!-- <div class=""> -->
         <div class="logo row justify-content-between ">
-            <!-- <div class="display col-auto"> -->
             <router-link to="/"><img src="../assets/display.svg" class="Display-logo col-auto align-items-center" alt="Display logo"></router-link>
-            <!-- </div> -->
-
             <a class="nav-link dropdown-toggle navbar-expand-sm" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 Share this!
@@ -158,16 +154,9 @@
         </div>
         <hr>
         <div class="nav row">
-            <h6 v-for="(navText, index) in navMain" :key="index"><a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href=""><router-link :to="navText.path">{{navText.name}}</router-link></a></h6>
-            <!-- <h6><a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href=""><router-link :to="{ name: 'About' }">ABOUT</router-link></a></h6>
-            <h6><a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href=""><router-link :to="{ name: 'Work' }">WORK</router-link></a></h6>
-            <h6><a class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3" href=""><router-link :to="{ name: 'Contact' }">CONTACT</router-link></a></h6> -->
+            <h6 v-for="(navText, index) in navMain" :key="index" class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3"><router-link :to="navText.path">{{navText.name}}</router-link></h6>
         </div>
-
-
-
     </div>
-
   </div>
 </template>
 
@@ -178,14 +167,11 @@ export default {
   name: "Header",
   data() {
       return {
-          menu : this.$store.state.navMain
+        //   menu : this.$store.state.navMain
       }
   },
-  mounted(){
-      console.log(this.menu)
-  },
   computed: {
-      navMain: function() {
+      navMain() {
           return this.$store.state.navMain;
       }
   }
@@ -233,9 +219,6 @@ export default {
   font-family: "novecento sans wide light";
   padding-top: 0.5em;
 }
-.nav h6:hover {
-  color: #2ecc71;
-}
 a svg:hover #twitter {
   fill: #38a1f3;
   transition: all ease 0.3s;
@@ -263,4 +246,5 @@ a svg:hover #dribbble {
 hr {
   margin: 0;
 }
+
 </style>

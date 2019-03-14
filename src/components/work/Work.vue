@@ -162,18 +162,6 @@ export default {
       this.gridView = true;
     },
 
-    // categoryFilter(filter) {
-    //   this.filter = this.projects.filter(
-    //     project => project.category === filter
-    //   );
-    // this.filter = value;//
-    // },
-    // allCategories() {
-    // this.filter = this.projects;
-    // this.value = val;
-    // },
-
-
     // categoryFilter(val) {
     //   this.activeTab = val;
     //   if (val === "all") {
@@ -189,9 +177,7 @@ export default {
 </script>
 
 <style scoped>
-* {
-  /* outline: 1px solid teal; */
-}
+
 .work-nav-icons svg:hover {
   cursor: pointer;
 }
@@ -217,14 +203,6 @@ export default {
   padding-bottom: 2em;
   padding-top: 3em;
 }
-.work-nav-text h6:hover {
-  color: #2ecc71;
-}
-
-.work-nav-text h6:active {
-  color: #2ecc71;
-}
-
 .grid-img {
   width: 100%;
   height: 220px;
@@ -251,11 +229,9 @@ export default {
 .portfolioList {
   display: grid;
   grid-template-areas: "a b";
-  /* grid-template-columns: 1fr 1fr; */
   margin-right: -15px;
   margin-left: -15px;
-  /* margin-bottom: 2em; */
-  /* padding-bottom: 2em; */
+
 }
 .portfolioList img {
   overflow: hidden;
