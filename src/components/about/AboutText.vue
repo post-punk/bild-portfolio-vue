@@ -2,58 +2,51 @@
   <div class="container">
     <div class="row">
       <div class="col- col-md-5">
-        <img class="img-fluid" id="dude" src="../../assets/dude.svg">
+        <img class="img-fluid float-left" id="dude" :src="aboutText[0].image">
       </div>
-      <div class="col- col-md-7 ">
+      <div class="col- col-md-7 " v-for="(item, index) in aboutText" :key="index">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat lacus, vel congue
-          mauris. Fusce velit justo, faucibus eu sagittis ac, gravida quis tortor. Suspendisse non urna mi,
-          quis tincidunt eros. Nullam tellus turpis, fringilla sit amet congue ut, luctus a nulla. Donec sit
-          amet sapien neque, id ullamcorper diam. Nulla facilisi. Pellentesque pellentesque arcu a elit congue
-          lacinia.
+          {{ aboutText[0].paragraphs[0] }}
         </p>
         <br>
         <p>
-          Nullam tellus turpis, fringilla sit amet congue ut, luctus a nulla. Donec sit amet sapien neque, id
-          ullamcorper diam. Nulla facilisi. Pellentesque pellentesque arcu a elit congue lacinia. Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat lacus, vel congue mauris. Fusce
-          velit justo, faucibus eu sagittis ac, gravida quis tortor. Suspendisse non urna mi, quis tincidunt
-          eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+           {{ aboutText[0].paragraphs[1] }}
         </p>
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-6 col-">
-        <h3>MISSION STATEMENT</h3>
+      <div class="col-sm-6 col-" v-for="(item, index) in aboutText" :key="index">
+        <h3>{{ aboutText[0].headers[0] }}</h3>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat lacus, vel congue
-          mauris. Fusce velit justo, faucibus eu sagittis ac, gravida quis tortor. Suspendisse non urna mi,
-          quis tincidunt eros. Nullam tellus turpis, fringilla sit amet congue ut, luctus a nulla. Donec sit
-          amet sapien neque, id ullamcorper diam. Nulla facilisi. Pellentesque pellentesque arcu a elit congue
-          lacinia.
+          {{ aboutText[0].paragraphs[2] }}
         </p>
       </div>
       <div class="col-sm-6 col-">
-        <h3>FUN FACTS</h3>
+        <h3>{{ aboutText[0].headers[1] }}</h3>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat lacus, vel congue
-          mauris. Fusce velit justo, faucibus eu sagittis ac, gravida quis tortor. Suspendisse non urna mi,
-          quis tincidunt eros. Nullam tellus turpis, fringilla sit amet congue ut, luctus a nulla. Donec sit
-          amet sapien neque, id ullamcorper diam. Nulla facilisi. Pellentesque pellentesque arcu a elit congue
-          lacinia.
+          {{ aboutText[0].paragraphs[3] }}
         </p>
       </div>
       <div class="col-12">
-        <h3>SERVICES</h3>
+        <h3>{{ aboutText[0].headers[2] }}</h3>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+// import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
+
 export default {
-  name: "AboutText"
+  name: "AboutText",
+  computed: {
+    aboutText() {
+      return this.$store.getters.aboutText
+    }
+  }
 };
+
 </script>
 
 <style scoped>

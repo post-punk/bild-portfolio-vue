@@ -71,6 +71,9 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
+
 export default {
   name: "Tabs",
   data() {
@@ -81,7 +84,7 @@ export default {
   },
   computed: { 
     tabText() {
-    return this.$store.state.tabText;
+    return this.$store.getters.tabText;
      }
   }
 };
