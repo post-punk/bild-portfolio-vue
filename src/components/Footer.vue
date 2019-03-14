@@ -23,8 +23,7 @@
           <div class="col-12 col-sm-6 text-right">
             <p id="footer-nav">
               
-              <a  v-for="(navText, index) in navMain" :key="index" href=""><router-link :to="navText.path">{{navText.name}}</router-link></a> /
-              
+              <a v-for="(navText, index) in navMain" :key="index" href=""><router-link :to="navText.path">{{navText.name}}</router-link></a>
               <!-- <a href=""><router-link to="/about">ABOUT</router-link></a> /
               <a href=""><router-link to="/work">WORK</router-link></a>
               /
@@ -105,5 +104,11 @@ h4 {
 }
 #footer-copyright {
   color: #aeadad;
+}
+#footer-nav a:after {
+  content: '/'
+}
+#footer-nav a:last-child:after {
+  content: ''
 }
 </style>
