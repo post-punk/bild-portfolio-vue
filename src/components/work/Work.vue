@@ -4,9 +4,9 @@
     <div class="container">
       <div class="row work-nav justify-content-between">
         <div class="work-nav-text col-sm-7 col-12">
-          <nav id="all" @click="activeFilter = 'all'" :class="{isActive: activeFilter == 'all'}">ALL</nav>
+          <h6 id="all" @click="activeFilter = 'all'" :class="{isActive: activeFilter == 'all'}">ALL</h6>
           <h6 id="slash">/</h6>
-          <!-- <h6
+          <h6
             id="print"
             @click="activeFilter = 'print'"
             :class="{isActive: activeFilter == 'print'}"
@@ -27,7 +27,7 @@
           >APPLICATIONS</h6>
         </div>
         <div class="col-sm-1 col-12">
-          <div class="work-nav-icons"> -->
+          <div class="work-nav-icons">
             <svg
               v-on:click="gridView1()"
               xmlns="http://www.w3.org/2000/svg"
