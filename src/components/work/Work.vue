@@ -4,27 +4,15 @@
     <div class="container">
       <div class="row work-nav justify-content-between">
         <div class="work-nav-text col-sm-7 col-12">
-          <h6 id="all" @click="activeFilter = 'all'" :class="{isActive: activeFilter == 'all'}">ALL</h6>
-          <h6 id="slash">/</h6>
-          <h6
-            id="print"
-            @click="activeFilter = 'print'"
-            :class="{isActive: activeFilter == 'print'}"
-          >PRINT</h6>
-          <h6 id="slash">/</h6>
-          <h6
-            id="photography"
-            @click="activeFilter = 'photo'"
-            :class="{isActive: activeFilter == 'photo'}"
-          >PHOTOGRAPHY</h6>
-          <h6 id="slash">/</h6>
-          <h6 id="web" @click="activeFilter = 'web'" :class="{isActive: activeFilter == 'web'}">WEB</h6>
-          <h6 id="slash">/</h6>
-          <h6
-            id="apps"
-            @click="activeFilter = 'app'"
-            :class="{isActive: activeFilter == 'app'}"
-          >APPLICATIONS</h6>
+          <h6 @click="activeFilter = 'all'" :class="{isActive: activeFilter == 'all'}">ALL</h6>
+          <h6 class="slash">/</h6>
+          <h6 @click="activeFilter = 'print'" :class="{isActive: activeFilter == 'print'}">PRINT</h6>
+          <h6 class="slash">/</h6>
+          <h6 @click="activeFilter = 'photo'" :class="{isActive: activeFilter == 'photo'}">PHOTOGRAPHY</h6>
+          <h6 class="slash">/</h6>
+          <h6 @click="activeFilter = 'web'" :class="{isActive: activeFilter == 'web'}">WEB</h6>
+          <h6 class="slash">/</h6>
+          <h6 @click="activeFilter = 'app'" :class="{isActive: activeFilter == 'app'}">APPLICATIONS</h6>
         </div>
         <div class="col-sm-1 col-12">
           <div class="work-nav-icons">
@@ -74,8 +62,7 @@
         <div
           class="row no-gutters grid-container"
           v-for="(project, index) in projectItems"
-          :key="index"
-        >
+          :key="index">
           <div class="col-lg-4 col-">
             <div class="grid-cell">
               <img class="float-left" :src="project.url">
@@ -177,7 +164,9 @@ export default {
 </script>
 
 <style scoped>
-
+h6 {
+  cursor: pointer;
+}
 .work-nav-icons svg:hover {
   cursor: pointer;
 }
@@ -287,10 +276,11 @@ export default {
 .grid-container img:hover {
   opacity: 0.75;
 }
-#slash {
+.slash {
   margin-left: 1em;
   margin-right: 1em;
   color: inherit !important;
+  cursor: initial;
 }
 .isActive {
   color: #2ecc71;

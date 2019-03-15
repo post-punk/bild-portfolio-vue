@@ -141,12 +141,8 @@ export const store = new Vuex.Store({
         icons: [{
             
         }],
-        
-
-
 
     },
-
     //namjerno kombinujem
     getters: {
         allItems: state => {
