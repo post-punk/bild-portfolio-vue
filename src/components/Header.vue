@@ -2,11 +2,11 @@
   <div>
     <div class="header container">
         <div class="logo row justify-content-between ">
-            <router-link to="/"><img src="../assets/display.svg" class="Display-logo col-auto align-items-center" alt="Display logo"></router-link>
-            <a class="nav-link dropdown-toggle navbar-expand-sm" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Share this!
-            </a>
+            <router-link to="/">
+                <!-- <img src="../assets/display.svg" class="Display-logo col-auto align-items-center" alt="Display logo"> -->
+                <Logo class="Display-logo col-auto align-items-center" alt="Display logo"/>
+            </router-link>
+           
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="http://www.twitter.com" target="_blank"><svg xmlns="http://www.w3.org/2000/svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink" width="34" height="34" viewBox="0 0 34 34">
@@ -161,9 +161,11 @@
 </template>
 
 <script>
-
+import Logo from "./Logo.vue";
 
 export default {
+
+
   name: "Header",
   data() {
       return {
@@ -174,6 +176,9 @@ export default {
       navMain() {
           return this.$store.state.navMain;
       }
+  },
+  components: {
+      Logo
   }
 };
 </script>

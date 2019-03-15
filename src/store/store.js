@@ -28,7 +28,6 @@ export const store = new Vuex.Store({
                 name: 'CONTACT'
             }
         ],
-
         projects: [
             {
                 name: "img1",
@@ -106,32 +105,8 @@ export const store = new Vuex.Store({
                     'MISSION STATEMENT', 'FUN FACTS', 'SERVICES'
                 ]
             }
-        ]
-
-
-
-    },
-
-    //namjerno kombinujem
-    getters: {
-        allItems: state => {
-            return state.projects;
-        },
-        webItems(state) {
-            return state.projects.filter(project => project.category == 'web');
-        },
-        appItems(state) {
-            return state.projects.filter(project => project.category == 'app');
-        },
-        printItems: state => {
-            return state.projects.filter(function (project) {
-                return project.category == 'print'
-            });
-        },
-        photoItems: state => {
-            return state.projects.filter(project => project.category == 'photo')
-        },
-        tabText: state => [
+        ],
+        tabText: [
             {
                 description:
                     "Vel omnis nulla at, nam doming deleniti ei. Pri ne error primis. Sed accumsan fabellas ut, cum ei tacimates reprehendunt. Tantas laoreet instructior nec an, eu vix augue vulputate consectetuer. Duis pertinax salutandi an has. Vivendo facilisi constituam ea vim.",
@@ -162,13 +137,47 @@ export const store = new Vuex.Store({
             },
 
         ],
+        logo: { image: 'https://i.imgur.com/g7ypgKk.png' },
+        icons: [{
+            
+        }],
+        
+
+
+
+    },
+
+    //namjerno kombinujem
+    getters: {
+        allItems: state => {
+            return state.projects;
+        },
+        webItems(state) {
+            return state.projects.filter(project => project.category == 'web');
+        },
+        appItems(state) {
+            return state.projects.filter(project => project.category == 'app');
+        },
+        printItems: state => {
+            return state.projects.filter(function (project) {
+                return project.category == 'print'
+            });
+        },
+        photoItems: state => {
+            return state.projects.filter(project => project.category == 'photo')
+        },
+        tabText: state => {
+            return state.tabText;
+        },
         aboutText: state => {
             return state.aboutText;
+        },
+        logo: state => {
+            return state.logo;
         }
 
     },
     mutations: {
-
     },
     actions: {
 
