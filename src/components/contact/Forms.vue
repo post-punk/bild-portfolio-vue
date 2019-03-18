@@ -2,12 +2,8 @@
   <div class="container forms">
     <div class="row justify-content-between">
       <div class="col-sm-7 col-12 form-group">
-        <h4>CONTACT FORM</h4>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis quis obcaecati voluptatum harum
-          nam
-          sequi enim ludantium quas dignissimos consequuntur.
-        </p>
+        <h4>{{ contactInfo.headers[0] }}</h4>
+        <p>{{ contactInfo.paragraphs[0] }}</p>
         <form action v-if="showForm">
           <div class="input" :class="{invalid: $v.name.$error}">
             <input
@@ -86,32 +82,11 @@
         </form>
       </div>
       <div class="info-group col-sm-4 col-12">
-        <h4>CONTACT INFO</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur
-          <br>adipiscing elit velit justo.
-        </p>
-        <p>
-          <strong>email:</strong>
-          <a href="mailto:info@display.com" target="_blank" id="e-mail">info@display.com</a>
-          <br>
-          <strong>phone:</strong> 1.306.222.4545
-        </p>
-        <p>222 2nd Ave South
-          <br>Saskabush, SK S7M 1T6
-        </p>
-        <h4 id="hours">STORE HOURS</h4>
-        <div class="row">
-          <p class="col-6">Monday - Thursday
-            <br>Friday
-            <br>Saturday
-            <br>Sunday & Holidays
-          </p>
-          <p class="col-6">8 am - 5 pm
-            <br>8 am - 6 pm
-            <br>9 am - 5 pm
-            <br>Closed
-          </p>
-        </div>
+        <h4>{{contactInfo.headers[1]}}</h4>
+        <p v-html="contactInfo.paragraphs[1]"></p>
+        
+        <h4 id="hours">{{contactInfo.headers[2]}}</h4>
+        <div class="row" v-html="contactInfo.paragraphs[2]"></div>
       </div>
     </div>
   </div>
@@ -145,7 +120,6 @@ export default {
     },
     verify() {
       this.recaptchachecked = true;
-      console.log("nesto");
     }
   },
 
@@ -165,6 +139,11 @@ export default {
   },
   components: {
     VueRecaptcha
+  },
+  computed: {
+    contactInfo() {
+      return this.$store.getters.contactInfo;
+    }
   }
 };
 </script>
@@ -230,5 +209,11 @@ button:disabled {
 }
 form p {
   /* color: indianred; */
+}
+.col-6 {
+  margin-top: 2em;
+}
+p {
+  margin-top: 2em;
 }
 </style>

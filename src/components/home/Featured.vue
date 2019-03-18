@@ -2,11 +2,8 @@
     <div class="container">
         <div class="col-xs-1" align="center">
             <div id="featured-text">
-                <h2>A COUPLE OF OUR FEATURED PROJECTS</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat lacus, vel congue
-                    mauris.
-                    Fusce velit<br></p>
-                <p>justo, faucibus eu sagittis ac, gravida quis tortor. Suspendisse non urna mi, quis tincidunt eros.
+                <h2>{{ featuredProject.header }}</h2>
+                <p v-html="featuredProject.paragraph">
                 </p>
             </div>
         </div>
@@ -15,8 +12,14 @@
 
 <script>
 export default {
-    name: 'Featured'
+    name: 'Featured',
+    computed: {
+        featuredProject() {
+          return this.$store.getters.featuredProject;
+        }
+    }
 }
+
 </script>
 
 <style>
@@ -28,5 +31,8 @@ export default {
 }
 #featured-text h2 {
     color: #737373;
+}
+h2 {
+    margin-bottom: 1em
 }
 </style>

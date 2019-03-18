@@ -1,15 +1,13 @@
 <template>
   <div>
-    <slick class="slick-images" id="slick1" ref="slick" :options="slickOptions">
-      <img src="../../assets/carousel/project-jezik.jpg">
-      <img src="../../assets/carousel/project-social-media.jpg">
-      <img src="../../assets/carousel/project-boy-and-girl.jpg">
-      <img src="../../assets/carousel/project-buttons.jpg">
-      <img src="../../assets/carousel/project-jes.jpg">
-      <img src="../../assets/carousel/project-jezik.jpg">
-      <img src="../../assets/carousel/project-social-media.jpg">
-      <img src="../../assets/carousel/project-jes.jpg">
-    </slick>
+    <Slick class="slick-images" id="slick1" ref="slick" :options="slickOptions">
+      <!-- <img :src="item.url"> -->
+      <img :src="carousel[0].url">
+      <img :src="carousel[1].url">
+      <img :src="carousel[2].url">
+      <img :src="carousel[3].url">
+      <img :src="carousel[4].url">
+    </Slick>
     <div class="carousel-btm-wrapper d-flex justify-content-center">
       <svg
         @click="prev()"
@@ -29,11 +27,11 @@
       </svg>
 
       <slick id="slick2" ref="slick2" class="slick-paragraph col-4" :options="slickOptions2">
+        
         <div class="carousel-text">
           <h4>DARK UI FREEBIE</h4>
           <p>
-            But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was
-            born
+            But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born
           </p>
         </div>
         <div class="carousel-text">
@@ -66,7 +64,7 @@
           <p>
             On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and
             demoralized
-          </p>
+          </p> 
         </div>
       </slick>
       <svg
@@ -101,13 +99,13 @@ export default {
         //options can be used from the plugin documentation
         dots: false,
         infinite: true,
-        slidesToShow: 5,
-        slidesToScroll: 6,
+        slidesToShow: 1,
+        slidesToScroll: 1,
         centerMode: true,
         focusOnSelect: true,
         arrows: false,
         variableWidth: true,
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 2000,
         asNavFor: ".slick-paragraph",
         // initialSlide: 1
@@ -136,6 +134,11 @@ export default {
     reInit() {
       // Helpful if you have to deal with v-for to update dynamic lists
       this.$refs.slick.reSlick();
+    }
+  },
+  computed: {
+    carousel() {
+      return this.$store.getters.carousel;
     }
   }
 };

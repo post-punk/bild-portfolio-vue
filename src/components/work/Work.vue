@@ -74,6 +74,7 @@
               <p>{{ project.text }}</p>
             </div>
           </div>
+
         </div>
       </div>
     </div>

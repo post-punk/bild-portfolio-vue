@@ -42,7 +42,7 @@ export default {
   name: "AboutText",
   computed: {
     aboutText() {
-      return this.$store.getters.aboutText
+      return this.$store.getters.aboutText;
     }
   }
 };
