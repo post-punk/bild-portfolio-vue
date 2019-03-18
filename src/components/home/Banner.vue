@@ -1,27 +1,24 @@
 <template>
   <div>
     <div class="green-background container-fluid">
-      <img class="bg img-fluid" src="../../assets/banner-background.svg">
+      <img class="bg img-fluid" :src="banner.background">
       
-      <img class="macbook fade-in" alt="macbook" src="../../assets/macbook.svg">
+      <img class="macbook fade-in" alt="macbook" :src="banner.mac">
       
-      <img class="ipad fade-in" alt="ipad" src="../../assets/ipad.svg">
+      <img class="ipad fade-in" alt="ipad" :src="banner.ipad">
       
-      <img class="iphone fade-in" alt="iphone" src="../../assets/iphone.svg">
+      <img class="iphone fade-in" alt="iphone" :src="banner.iphone">
       <br>
     </div>
 
     <div class="banner-paragraph row">
-      <p id="banner-text" class="col-12 wrap">
-        LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT.
-        PELLENTESQUE EU ERATIUY LACUS,
-        VEL CONGUE MAURIS. FUSCE
-        <br>VELITARIA JUSTO, FAUCIBUS EU.
+      <p id="banner-text" class="col-12 wrap" v-html="banner.portfolioText">
       </p>
       <div class="portfolio">
         <!-- <form action="work"> -->
           <router-link to="/work" tag="button">
-            BROWSE PORTFOLIO</router-link>
+          {{ banner.portfolioButton }}
+          </router-link>
         <!-- </form> -->
       </div>
     </div>
@@ -30,8 +27,14 @@
 
 <script>
 export default {
-  name: "Banner"
-};
+  name: "Banner",
+  computed: {
+    banner() {
+      return this.$store.getters.banner;
+    },
+    
+  }
+}
 </script>
 
 <style scoped>

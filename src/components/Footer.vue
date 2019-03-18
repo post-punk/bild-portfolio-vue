@@ -3,11 +3,11 @@
     <div class="container-fluid d-flex align-items-center callout-btm">
       <div class="container">
         <div class="callout-btm row justify-content-between">
-          <h4 id="are-you-ready" class="col-6">ARE YOU READY TO BE BLOWN AWAY?</h4>
+          <h4 id="are-you-ready" class="col-6">{{ footerText.callout }}</h4>
           <button type="button" class="action-btn col-" id="click-here">
             <a href=""><router-link to="/work">
-              CLICK HERE TO FIND
-              OUT</router-link>
+            {{ footerText.footerButton }}
+            </router-link>
             </a>
           </button>
         </div>
@@ -17,7 +17,7 @@
       <div class="container">
         <div class="row justify-content-between footer-wrapper">
           <div class="col-12 col-sm-6">
-            <p id="footer-copyright">COPYRIGHT 2013 DISPLAY. ALL RIGHTS RESERVED.</p>
+            <p id="footer-copyright">{{ footerText.copyright }}</p>
           </div>
           <div class="col-12 col-sm-6 text-right">
             <p id="footer-nav">
@@ -40,8 +40,14 @@ export default {
   },
   computed: {
       navMain: function() {
-          return this.$store.state.navMain;
-      }
+          return this.$store.getters.navMain;
+      },
+      footerText: function() {
+        return this.$store.getters.footerText
+      },
+      icons() {
+      return this.$store.getters.icons;
+    }
   }
 };
 </script>
@@ -100,9 +106,9 @@ h4 {
   color: #aeadad;
 }
 #footer-nav a:after {
-  content: '/'
+  content: '/ '
 }
 #footer-nav a:last-child:after {
-  content: ''
+  content: ' '
 }
 </style>

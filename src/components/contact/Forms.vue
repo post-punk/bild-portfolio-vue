@@ -71,12 +71,7 @@
               >SEND MESSAGE</button>
 
               <div class="form-group">
-                <!-- <div
-                  class="g-recaptcha"
-                  data-sitekey="6LfKURIUAAAAAO50vlwWZkyK_G2ywqE52NU7YO0S"
-                  data-callback="verify()"
-                  data-expired-callback="expiredRecaptchaCallback"
-                ></div>-->
+
                 <vue-recaptcha sitekey="6LfKURIUAAAAAO50vlwWZkyK_G2ywqE52NU7YO0S" @verify="verify"></vue-recaptcha>
                 <input
                   class="form-control d-none"

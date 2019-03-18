@@ -14,12 +14,7 @@
         padding-top: 1.5em;
         min-width: 100%;
      }
-     /* #click-here {
-         margin-bottom: 1em;
-         display: flex;
-         justify-content: center;
-        align-content: center;
-     } */
+
      h2, h4 {
          font-size: 1.5em;
      }
@@ -33,9 +28,9 @@
         width: 80%;
      }
      
-     .row .icons {
-        display: none;
-    }
+     /* .row .icons { */
+        /* display: none; */
+    /* } */
     
     .work-nav-text {
         display: block;

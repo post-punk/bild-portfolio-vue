@@ -100,6 +100,8 @@ export default {
   background-color: #ccc;
 }
 #tab-background {
+    background-color: #ccc;
+
   background-color: #efefef;
   margin-top: 1em;
 }

@@ -4,15 +4,15 @@
     <div class="container">
       <div class="row work-nav justify-content-between">
         <div class="work-nav-text col-sm-7 col-12">
-          <h6 @click="activeFilter = 'all'" :class="{isActive: activeFilter == 'all'}">ALL</h6>
-          <h6 class="slash">/</h6>
-          <h6 @click="activeFilter = 'print'" :class="{isActive: activeFilter == 'print'}">PRINT</h6>
-          <h6 class="slash">/</h6>
-          <h6 @click="activeFilter = 'photo'" :class="{isActive: activeFilter == 'photo'}">PHOTOGRAPHY</h6>
-          <h6 class="slash">/</h6>
-          <h6 @click="activeFilter = 'web'" :class="{isActive: activeFilter == 'web'}">WEB</h6>
-          <h6 class="slash">/</h6>
-          <h6 @click="activeFilter = 'app'" :class="{isActive: activeFilter == 'app'}">APPLICATIONS</h6>
+          <nav @click="activeFilter = 'all'" :class="{isActive: activeFilter == 'all'}">ALL</nav>
+          <!-- <nav class="slash">/</nav> -->
+          <nav @click="activeFilter = 'print'" :class="{isActive: activeFilter == 'print'}">PRINT</nav>
+          <!-- <h6 class="slash">/</h6> -->
+          <nav @click="activeFilter = 'photo'" :class="{isActive: activeFilter == 'photo'}">PHOTOGRAPHY</nav>
+          <!-- <h6 class="slash">/</h6> -->
+          <nav @click="activeFilter = 'web'" :class="{isActive: activeFilter == 'web'}">WEB</nav>
+          <!-- <h6 class="slash">/</h6> -->
+          <nav @click="activeFilter = 'app'" :class="{isActive: activeFilter == 'app'}">APPLICATIONS</nav>
         </div>
         <div class="col-sm-1 col-12">
           <div class="work-nav-icons">
@@ -164,8 +164,14 @@ export default {
 </script>
 
 <style scoped>
+nav {
+  font-size: 1.2em;
+  cursor: pointer;
+  
+}
 h6 {
   cursor: pointer;
+  
 }
 .work-nav-icons svg:hover {
   cursor: pointer;
@@ -307,5 +313,11 @@ p {
 }
 .content-wrapper {
   padding-bottom: 2em;
+}
+.work-nav-text nav:after {
+  content: '/'
+}
+.work-nav-text nav:last-child:after {
+  content: ' '
 }
 </style>
