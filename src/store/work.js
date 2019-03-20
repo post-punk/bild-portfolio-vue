@@ -1,4 +1,5 @@
 const state = {
+    // activeFilter: 'all',
     projects: [
         {
             name: "img1",
@@ -64,31 +65,47 @@ const state = {
                 "Sed eu blandit est. Duis tincidunt eleifend eleifend. Integer hendrerit tempor risus eget vestibulum. Etiam placerat ex in ligula hendrerit ornare. Vestibulum scelerisque neque eget posuere volutpat. Nam dictum, dui at imperdiet mattis, enim arcu mattis dui, ac suscipit nisi sapien in sem. Cras hendrerit quis odio eget fringilla. Sed vitae nibh eu dolor efficitur pulvinar at ac dui. Nam fermentum orci ut condimentum dapibus. Nam pulvinar nisi in nulla imperdiet, ac molestie eros fermentum. Aenean vel ultricies nibh, sollicitudin mollis urna. Vivamus ultricies risus lorem, nec faucibus nisi facilisis et. Sed imperdiet aliquet sapien sed luctus. Morbi imperdiet porttitor libero, et ornare turpis. Curabitur eu porta arcu, iaculis dignissim arcu."
         }
     ],
+ 
 }
 
 //namjerno kombinujem
 const getters = {
+    // hook: state => {
+    //     return state.activeFilter;
+    // },
     allItems: state => {
         return state.projects;
+    // },
+    // webItems(state) {
+    //     return state.projects.filter(project => project.category == 'web');
+    // },
+    // appItems(state) {
+    //     return state.projects.filter(project => project.category == 'app');
+    // },
+    // printItems: state => {
+    //     return state.projects.filter(function (project) {
+    //         return project.category == 'print'
+    //     });
+    // },
+    // photoItems: state => {
+    //     return state.projects.filter(project => project.category == 'photo')
+    // },
+    // filter: (state, payload) => {
+    //     if (payload == 'all') {
+    //         return state.projects;
+    //     }   
+    //     return state.projects.filter(project => state.projects.category == payload)
     },
-    webItems(state) {
-        return state.projects.filter(project => project.category == 'web');
-    },
-    appItems(state) {
-        return state.projects.filter(project => project.category == 'app');
-    },
-    printItems: state => {
-        return state.projects.filter(function (project) {
-            return project.category == 'print'
-        });
-    },
-    photoItems: state => {
-        return state.projects.filter(project => project.category == 'photo')
-    },
+    
 
 }
 const mutations = {
-
+    // filter: (state, payload) => {
+    //     if (payload == 'all') {
+    //         return state.projects;
+    //     }   
+    //     return state.projects.filter(project => state.projects.category == payload)
+    // }
 }
 const actions = {
 
@@ -96,6 +113,8 @@ const actions = {
 
 
 export default {
+    // namespaced: true,
+
     state,
     mutations,
     actions,

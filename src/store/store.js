@@ -11,11 +11,11 @@ import contact from './contact';
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-  modules: {
-    navigation,
-    home,
-    about,
-    work,
-    contact,
-  }
+    modules: {
+        navigation,
+        home,
+        about,
+        work,
+        contact,
+    }
 });

@@ -33,6 +33,6 @@ export default {
     color: #737373;
 }
 h2 {
-    margin-bottom: 1em
+    /* margin-bottom: 1em */
 }
 </style>

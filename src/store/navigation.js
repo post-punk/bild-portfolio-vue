@@ -71,7 +71,7 @@ const getters = {
     logo: state => {
         return state.logo;
     },
-    navMain: state => {
+    navMain(state) {
         return state.navMain
     },
     icons: state => {

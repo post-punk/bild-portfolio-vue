@@ -4,15 +4,15 @@
     <div class="container">
       <div class="row work-nav justify-content-between">
         <div class="work-nav-text col-sm-7 col-12">
-          <nav @click="activeFilter = 'all'" :class="{isActive: activeFilter == 'all'}">ALL</nav>
+          <nav @click="activeFilter = 'all'" :class="{isActive: activeFilter === 'all'}">ALL</nav>
           <!-- <nav class="slash">/</nav> -->
-          <nav @click="activeFilter = 'print'" :class="{isActive: activeFilter == 'print'}">PRINT</nav>
+          <nav @click="activeFilter = 'print'" :class="{isActive: activeFilter === 'print'}">PRINT</nav>
           <!-- <h6 class="slash">/</h6> -->
-          <nav @click="activeFilter = 'photo'" :class="{isActive: activeFilter == 'photo'}">PHOTOGRAPHY</nav>
+          <nav @click="activeFilter = 'photo'" :class="{isActive: activeFilter === 'photo'}">PHOTOGRAPHY</nav>
           <!-- <h6 class="slash">/</h6> -->
-          <nav @click="activeFilter = 'web'" :class="{isActive: activeFilter == 'web'}">WEB</nav>
+          <nav @click="activeFilter = 'web'" :class="{isActive: activeFilter === 'web'}">WEB</nav>
           <!-- <h6 class="slash">/</h6> -->
-          <nav @click="activeFilter = 'app'" :class="{isActive: activeFilter == 'app'}">APPLICATIONS</nav>
+          <nav @click="activeFilter = 'app'" :class="{isActive: activeFilter === 'app'}">APPLICATIONS</nav>
         </div>
         <div class="col-sm-1 col-12">
           <div class="work-nav-icons">
@@ -59,11 +59,9 @@
 
       <!-- list-view markup  -->
       <div class="container content-wrapper" v-show="listView">
-        <div
-          class="row no-gutters grid-container"
-          v-for="(project, index) in projectItems"
-          :key="index">
-          <div class="col-lg-4 col-">
+        <div class="row no-gutters grid-container" v-for="(project, index) in projectItems" :key="index">
+
+          <div class="col-lg-4 col-" v-if="">
             <div class="grid-cell">
               <img class="float-left" :src="project.url">
             </div>
@@ -91,13 +89,19 @@ export default {
   data() {
     return {
       calloutTitle: "CHECK OUT WHAT I CAN DO",
-      gridView: true,
+      
+      // activeView: 'grid',
+      // listView: false,
+      activeFilter: 'all',
       listView: false,
-      activeFilter: "all"
+      gridView: true
       // filteredArr: [],
     };
   },
-
+  // mounted() {
+  //     return this.$store.getters.hook;
+  //   }
+  
   computed: {
     // a computed getter
     // drugiNacin: function() {
@@ -111,15 +115,23 @@ export default {
     //   return result;
     // },
 
-    projectItems() {
-      switch (this.activeFilter) {
-        case "all": return this.$store.getters.allItems;
-        case "web": return this.$store.getters.webItems;
-        case "app": return this.$store.getters.appItems;
-        case "photo": return this.$store.getters.photoItems;
-        case "print": return this.$store.getters.printItems;
-      }
+  projectItems() {
+    if (this.activeFilter === "all") {
+      return this.$store.getters.allItems;
     }
+    return this.$store.getters.allItems.filter(project => project.category === this.activeFilter);
+  }
+
+
+    // projectItems() {
+    //   switch (this.activeFilter) {
+    //     case "all": return this.$store.getters['work/allItems'];
+    //     case "web": return this.$store.getters['work/webItems'];
+    //     case "app": return this.$store.getters['work/appItems'];;
+    //     case "photo": return this.$store.getters['work/photoItems'];;
+    //     case "print": return this.$store.getters['work/printItems'];
+    //   }
+    // }
 
     //   projectItems: function() {
     //     if (this.activeFilter == "all") {
@@ -149,6 +161,19 @@ export default {
       this.listView = false;
       this.gridView = true;
     },
+
+
+
+    activeView(val) {
+      this.activeView = val;
+      if (val === 'grid') {
+        return this.listView = false;
+        this.gridView = true;
+      } else if (val === 'list') {
+      return this.gridView = false;
+      this.listView = true;
+      }
+    }
 
     // categoryFilter(val) {
     //   this.activeTab = val;

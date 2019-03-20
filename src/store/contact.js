@@ -7,7 +7,7 @@ const state = {
             ],
             paragraphs: [
                 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis quis obcaecati voluptatum harum nam sequi enim ludantium quas dignissimos consequuntur.',
-                '<p>Lorem ipsum dolor sit amet, consectetur<br>adipiscing elit velit justo.</p><p><strong>email:</strong><a href="mailto:info@display.com" target="_blank" style="color: #2ecc71">info@display.com</a><br><strong>phone:</strong> 1.306.222.4545<p>222 2nd Ave South<br>Saskabush, SK S7M 1T6</p>',
+                '<p>Lorem ipsum dolor sit amet, consectetur<br>adipiscing elit velit justo.</p><p><strong>email:</strong> <a href="mailto:info@display.com" target="_blank" style="color: #2ecc71">info@display.com</a><br><strong>phone:</strong> 1.306.222.4545<p>222 2nd Ave South<br>Saskabush, SK S7M 1T6</p>',
                 '<p class="col-6">Monday - Thursday<br>Friday <br>Saturday <br>Sunday & Holidays</p><p class="col-6">8 am - 5 pm<br>8 am - 6 pm<br>9 am - 5 pm<br>Closed</p>',
 
             ],
@@ -15,7 +15,6 @@ const state = {
     
 }
 
-//namjerno kombinujem
 const getters = {
     contactInfo: state => {
         return state.contactInfo;

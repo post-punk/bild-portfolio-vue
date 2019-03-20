@@ -99,8 +99,8 @@ export default {
         //options can be used from the plugin documentation
         dots: false,
         infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
+        slidesToShow: 3,
+        slidesToScroll: 3,
         centerMode: true,
         focusOnSelect: true,
         arrows: false,
