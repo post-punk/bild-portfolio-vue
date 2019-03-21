@@ -8,16 +8,22 @@
           <!-- <nav class="slash">/</nav> -->
           <nav @click="activeFilter = 'print'" :class="{isActive: activeFilter === 'print'}">PRINT</nav>
           <!-- <h6 class="slash">/</h6> -->
-          <nav @click="activeFilter = 'photo'" :class="{isActive: activeFilter === 'photo'}">PHOTOGRAPHY</nav>
+          <nav
+            @click="activeFilter = 'photo'"
+            :class="{isActive: activeFilter === 'photo'}"
+          >PHOTOGRAPHY</nav>
           <!-- <h6 class="slash">/</h6> -->
           <nav @click="activeFilter = 'web'" :class="{isActive: activeFilter === 'web'}">WEB</nav>
           <!-- <h6 class="slash">/</h6> -->
-          <nav @click="activeFilter = 'app'" :class="{isActive: activeFilter === 'app'}">APPLICATIONS</nav>
+          <nav
+            @click="activeFilter = 'app'"
+            :class="{isActive: activeFilter === 'app'}"
+          >APPLICATIONS</nav>
         </div>
         <div class="col-sm-1 col-12">
           <div class="work-nav-icons">
             <svg
-              v-on:click="gridView1()"
+              v-on:click="activeView('grid')"
               xmlns="http://www.w3.org/2000/svg"
               width="15"
               height="15"
@@ -32,7 +38,7 @@
               ></path>
             </svg>
             <svg
-              v-on:click="listView1()"
+              v-on:click="activeView('list')"
               id="list-view"
               data-name="list view"
               xmlns="http://www.w3.org/2000/svg"
@@ -49,30 +55,36 @@
       </div>
 
       <!-- grid-view markup -->
-      <div class="container content-wrapper" v-show="gridView">
+      <!-- <div class="container content-wrapper" v-show="gridView">
         <div class="row no-gutters grid-container">
           <div class="grid-cell" v-for="(project, index) in projectItems" :key="index">
             <img :src="project.url">
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <!-- list-view markup  -->
-      <div class="container content-wrapper" v-show="listView">
-        <div class="row no-gutters grid-container" v-for="(project, index) in projectItems" :key="index">
 
-          <div class="col-lg-4 col-" v-if="">
-            <div class="grid-cell">
-              <img class="float-left" :src="project.url">
+    <!-- nije bas responsive aa -->
+      <div class="container content-wrapper" >
+        <div class="row no-gutters grid-container">
+          <div class="grid-cell" v-for="(project, index) in projectItems" :key="index">
+            <img class="float-left" :src="project.url">
+
+            <div v-if="view === 'list'" class="grid-cell d-flex align-items-center">
+              <p>{{ project.text }}</p>
             </div>
+
           </div>
 
-          <div class="col-lg-7 col-">
+
+
+
+          <!-- </div> -->
+          <!--<div class="col-lg-7 col-">
             <div class="grid-cell d-flex align-items-center">
               <p>{{ project.text }}</p>
             </div>
-          </div>
-
+          </div>-->
         </div>
       </div>
     </div>
@@ -89,19 +101,20 @@ export default {
   data() {
     return {
       calloutTitle: "CHECK OUT WHAT I CAN DO",
-      
+
       // activeView: 'grid',
       // listView: false,
-      activeFilter: 'all',
-      listView: false,
-      gridView: true
+      activeFilter: "all",
+      view: 'grid'
+      // listView: true,
+      // gridView: false
       // filteredArr: [],
     };
   },
   // mounted() {
   //     return this.$store.getters.hook;
   //   }
-  
+
   computed: {
     // a computed getter
     // drugiNacin: function() {
@@ -115,13 +128,14 @@ export default {
     //   return result;
     // },
 
-  projectItems() {
-    if (this.activeFilter === "all") {
-      return this.$store.getters.allItems;
+    projectItems() {
+      if (this.activeFilter === "all") {
+        return this.$store.getters.allItems;
+      }
+      return this.$store.getters.allItems.filter(
+        project => project.category === this.activeFilter
+      );
     }
-    return this.$store.getters.allItems.filter(project => project.category === this.activeFilter);
-  }
-
 
     // projectItems() {
     //   switch (this.activeFilter) {
@@ -153,26 +167,17 @@ export default {
     CalloutTop
   },
   methods: {
-    listView1() {
-      this.gridView = false;
-      this.listView = true;
-    },
-    gridView1() {
-      this.listView = false;
-      this.gridView = true;
-    },
-
-
+    // listView1() {
+    //   this.gridView = false;
+    //   this.listView = true;
+    // },
+    // gridView1() {
+    //   this.listView = false;
+    //   this.gridView = true;
+    // },
 
     activeView(val) {
-      this.activeView = val;
-      if (val === 'grid') {
-        return this.listView = false;
-        this.gridView = true;
-      } else if (val === 'list') {
-      return this.gridView = false;
-      this.listView = true;
-      }
+      this.view = val;
     }
 
     // categoryFilter(val) {
@@ -193,11 +198,9 @@ export default {
 nav {
   font-size: 1.2em;
   cursor: pointer;
-  
 }
 h6 {
   cursor: pointer;
-  
 }
 .work-nav-icons svg:hover {
   cursor: pointer;
@@ -252,7 +255,6 @@ h6 {
   grid-template-areas: "a b";
   margin-right: -15px;
   margin-left: -15px;
-
 }
 .portfolioList img {
   overflow: hidden;
@@ -341,9 +343,9 @@ p {
   padding-bottom: 2em;
 }
 .work-nav-text nav:after {
-  content: '/'
+  content: "/";
 }
 .work-nav-text nav:last-child:after {
-  content: ' '
+  content: " ";
 }
 </style>
