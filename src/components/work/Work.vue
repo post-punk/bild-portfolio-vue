@@ -54,17 +54,7 @@
         </div>
       </div>
 
-      <!-- grid-view markup -->
-      <!-- <div class="container content-wrapper" v-show="gridView">
-        <div class="row no-gutters grid-container">
-          <div class="grid-cell" v-for="(project, index) in projectItems" :key="index">
-            <img :src="project.url">
-          </div>
-        </div>
-      </div> -->
-
-
-    <!-- nije bas responsive aa -->
+    <!-- nije bas responsive -->
       <div class="container content-wrapper" >
         <div class="row no-gutters grid-container">
           <div class="grid-cell" v-for="(project, index) in projectItems" :key="index">
@@ -76,15 +66,6 @@
 
           </div>
 
-
-
-
-          <!-- </div> -->
-          <!--<div class="col-lg-7 col-">
-            <div class="grid-cell d-flex align-items-center">
-              <p>{{ project.text }}</p>
-            </div>
-          </div>-->
         </div>
       </div>
     </div>
@@ -101,34 +82,16 @@ export default {
   data() {
     return {
       calloutTitle: "CHECK OUT WHAT I CAN DO",
-
-      // activeView: 'grid',
-      // listView: false,
       activeFilter: "all",
       view: 'grid'
-      // listView: true,
-      // gridView: false
-      // filteredArr: [],
+     
     };
   },
-  // mounted() {
-  //     return this.$store.getters.hook;
-  //   }
-
+ 
   computed: {
-    // a computed getter
-    // drugiNacin: function() {
-    //   if (this.activeFilter == 'all') {
-    //     return this.projects
-    //   }
-    //   // `this` points to the vm instance
-    //   const result = this.projects.filter(item => {
-    //     return item.category == this.activeFilter;
-    //   });
-    //   return result;
-    // },
+   
 
-    projectItems() {
+    projectItems: function() {
       if (this.activeFilter === "all") {
         return this.$store.getters.allItems;
       }
@@ -147,49 +110,17 @@ export default {
     //   }
     // }
 
-    //   projectItems: function() {
-    //     if (this.activeFilter == "all") {
-    //       return this.$store.getters.allItems;
-    //     } else if (this.activeFilter == "web") {
-    //       return this.$store.getters.webItems;
-    //     } else if (this.activeFilter == 'app') {
-    //       return this.$store.getters.appItems;
-    //     } else if (this.activeFilter == 'photo') {
-    //       return this.$store.getters.photoItems;
-    //     } else if (this.activeFilter == 'print') {
-    //       return this.$store.getters.printItems;
-    //     }
-    //   }
-    // },
+    
   },
 
   components: {
     CalloutTop
   },
   methods: {
-    // listView1() {
-    //   this.gridView = false;
-    //   this.listView = true;
-    // },
-    // gridView1() {
-    //   this.listView = false;
-    //   this.gridView = true;
-    // },
-
     activeView(val) {
       this.view = val;
     }
-
-    // categoryFilter(val) {
-    //   this.activeTab = val;
-    //   if (val === "all") {
-    //     return (this.filteredArr = this.projects);
-    //   }
-    //   this.filteredArr = this.projects.filter(function(project) {
-    //     return project.category == val;
-    //   });
-    //   this.activeTab = val;
-    // }
+    
   }
 };
 </script>

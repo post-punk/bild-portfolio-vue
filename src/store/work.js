@@ -1,5 +1,4 @@
 const state = {
-    // activeFilter: 'all',
     projects: [
         {
             name: "img1",
@@ -68,33 +67,13 @@ const state = {
  
 }
 
-//namjerno kombinujem
 const getters = {
     // hook: state => {
     //     return state.activeFilter;
     // },
     allItems: state => {
         return state.projects;
-    // },
-    // webItems(state) {
-    //     return state.projects.filter(project => project.category == 'web');
-    // },
-    // appItems(state) {
-    //     return state.projects.filter(project => project.category == 'app');
-    // },
-    // printItems: state => {
-    //     return state.projects.filter(function (project) {
-    //         return project.category == 'print'
-    //     });
-    // },
-    // photoItems: state => {
-    //     return state.projects.filter(project => project.category == 'photo')
-    // },
-    // filter: (state, payload) => {
-    //     if (payload == 'all') {
-    //         return state.projects;
-    //     }   
-    //     return state.projects.filter(project => state.projects.category == payload)
+   
     },
     
 
