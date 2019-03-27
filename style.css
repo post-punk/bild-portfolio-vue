@@ -732,11 +732,10 @@ hr {
     
     .work-nav-text {
         display: block;
-        text-align: center;
+        /* text-align: center; */
     }
     @media only screen and (max-width: 576px) {
         .work-nav-icons {
-            display: none;
         }
     }
 

@@ -41,11 +41,11 @@
         display: block;
         text-align: center;
     }
-    @media only screen and (max-width: 576px) {
-        .work-nav-icons {
-            display: none;
-        }
-    }
+    /* @media only screen and (max-width: 576px) { */
+        /* .work-nav-icons { */
+            /* display: none; */
+        /* } */
+    /* } */
 
 
     

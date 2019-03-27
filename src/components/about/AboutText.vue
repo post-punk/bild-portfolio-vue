@@ -37,15 +37,30 @@
 <script>
 // import { mapActions } from "vuex";
 import { mapGetters } from "vuex";
+import db from '@/firebase/init'
+
 
 export default {
   name: "AboutText",
   computed: {
-    aboutText() {
+    aboutText: function() {
       return this.$store.getters.aboutText;
     }
-  }
-};
+  },
+  created() {
+    //fetch data from firestore
+    db.collection("about-text")
+      .get()
+      .then(snapshot => {
+        var aboutText = [];
+        snapshot.forEach(doc => {
+           aboutText.push(doc.data()) 
+        });
+        this.$store.commit('setAboutText', aboutText)
+      })
+  },
+  
+}
 
 </script>
 

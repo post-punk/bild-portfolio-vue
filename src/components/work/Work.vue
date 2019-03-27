@@ -4,21 +4,15 @@
     <div class="container">
       <div class="row work-nav justify-content-between">
         <div class="work-nav-text col-sm-7 col-12">
-          <nav @click="activeFilter = 'all'" :class="{isActive: activeFilter === 'all'}">ALL</nav>
-          <!-- <nav class="slash">/</nav> -->
-          <nav @click="activeFilter = 'print'" :class="{isActive: activeFilter === 'print'}">PRINT</nav>
-          <!-- <h6 class="slash">/</h6> -->
-          <nav
-            @click="activeFilter = 'photo'"
-            :class="{isActive: activeFilter === 'photo'}"
-          >PHOTOGRAPHY</nav>
-          <!-- <h6 class="slash">/</h6> -->
-          <nav @click="activeFilter = 'web'" :class="{isActive: activeFilter === 'web'}">WEB</nav>
-          <!-- <h6 class="slash">/</h6> -->
-          <nav
-            @click="activeFilter = 'app'"
-            :class="{isActive: activeFilter === 'app'}"
-          >APPLICATIONS</nav>
+          <nav @click="firestoreFilter('all')" :class="{isActive: selectedCategory === 'all'}">ALL</nav>
+          <nav class="slash">/</nav>
+          <nav @click="firestoreFilter('print')" :class="{isActive: selectedCategory === 'print'}">PRINT</nav>
+          <nav class="slash">/</nav>
+          <nav @click="firestoreFilter('photo')" :class="{isActive: selectedCategory === 'photo'}">PHOTOGRAPHY</nav>
+          <nav class="slash">/</nav>
+          <nav @click="firestoreFilter('web')" :class="{isActive: selectedCategory === 'web'}">WEB</nav>
+          <nav class="slash">/</nav>
+          <nav @click="firestoreFilter('app')" :class="{isActive: selectedCategory === 'app'}">APPLICATIONS</nav>
         </div>
         <div class="col-sm-1 col-12">
           <div class="work-nav-icons">
@@ -27,15 +21,13 @@
               xmlns="http://www.w3.org/2000/svg"
               width="15"
               height="15"
-              viewBox="0 0 15 15"
-            >
+              viewBox="0 0 15 15">
               <path
                 id="grid-view"
                 data-name="grid view"
                 class="cls-1"
                 d="M1129,329h6.03v5.929H1129V329Zm8.95,0H1144v6.012h-6.05V329Zm-8.95,8.9h6.01V344H1129v-6.1Zm8.97,0H1144V344h-6.03v-6.1Z"
-                transform="translate(-1129 -329)"
-              ></path>
+                transform="translate(-1129 -329)"></path>
             </svg>
             <svg
               v-on:click="activeView('list')"
@@ -44,8 +36,7 @@
               xmlns="http://www.w3.org/2000/svg"
               width="15"
               height="15.031"
-              viewBox="0 0 15 15.031"
-            >
+              viewBox="0 0 15 15.031">
               <rect id="_1" data-name="1" class="cls-1" y="12.031" width="15" height="3"></rect>
               <rect id="_2" data-name="2" class="cls-1" y="6" width="15" height="3.031"></rect>
               <rect id="_3" data-name="3" class="cls-1" width="15" height="3.031"></rect>
@@ -55,19 +46,27 @@
       </div>
 
     <!-- nije bas responsive -->
-      <div class="container content-wrapper" >
-        <div class="row no-gutters grid-container">
+      <div class="content-wrapper" >
+        <div class="row grid-container">
           <div class="grid-cell" v-for="(project, index) in projectItems" :key="index">
-            <img class="float-left" :src="project.url">
 
-            <div v-if="view === 'list'" class="grid-cell d-flex align-items-center">
+            <div class="float-left">
+              <img :src="project.url">
+            </div>
+
+            <div v-if="view === 'list'" class="align-items-center work-text col-md-8 col-12">
+              <h4>{{ project.header }}</h4>
               <p>{{ project.text }}</p>
             </div>
 
           </div>
 
         </div>
+        <div class="load-button-container">
+        <button class="load-more">Load more</button>
+        </div>
       </div>
+      
     </div>
   </div>
 </template>
@@ -76,28 +75,55 @@
 import { mapActions } from "vuex";
 import { mapGetters } from "vuex";
 import CalloutTop from "../CalloutTop.vue";
+import db from '@/firebase/init'
+
 
 export default {
+
+
   name: "Work",
   data() {
     return {
       calloutTitle: "CHECK OUT WHAT I CAN DO",
-      activeFilter: "all",
-      view: 'grid'
-     
+      selectedCategory: "all",
+      view: 'grid',
     };
   },
- 
+
+  created() {
+
+    this.$store.dispatch('displayAll');
+
+    },
+
+     //fetch data from firestore
+    // db.collection("work-items").get().then(snapshot => {
+    //     var projects = [];
+    //     snapshot.forEach(doc => {
+    //        projects.push(doc.data()) 
+    //     });
+    //     this.$store.commit('setProjects', projects)
+    //   });
+
+//     db.collection("about")
+//         .get()
+//         .then(snapshot => {
+//           var projects2 = []
+//         snapshot.forEach(doc => {
+//            projects2.push(doc.data()) 
+//         });
+//         console.log(projects2)
+//         })
+
   computed: {
    
-
     projectItems: function() {
-      if (this.activeFilter === "all") {
+      // if (this.activeFilter === "all") {
         return this.$store.getters.allItems;
-      }
-      return this.$store.getters.allItems.filter(
-        project => project.category === this.activeFilter
-      );
+      // }
+      // return this.$store.getters.allItems.filter(
+      //   project => this.activeFilter === project.category
+      // );
     }
 
     // projectItems() {
@@ -109,7 +135,6 @@ export default {
     //     case "print": return this.$store.getters['work/printItems'];
     //   }
     // }
-
     
   },
 
@@ -119,8 +144,32 @@ export default {
   methods: {
     activeView(val) {
       this.view = val;
-    }
+    },
     
+    firestoreFilter(val) {
+      //varijanta za 'all'
+      if (val === 'all') {
+        db.collection("work-items").orderBy("name").limit(3).get().then(snapshot => {
+        var projects = [];
+        snapshot.forEach(doc => {
+           projects.push(doc.data()) 
+        });
+        this.$store.commit('setProjects', projects);
+        this.selectedCategory = 'all';
+      });
+
+      } else {
+
+       db.collection("work-items").where("category", "==", val).get().then(snapshot => {
+        var projects = [];
+        snapshot.forEach(doc => {
+           projects.push(doc.data()) 
+        });
+        this.$store.commit('setProjects', projects);
+        this.selectedCategory = val;
+        });
+      }
+    }
   }
 };
 </script>
@@ -167,7 +216,7 @@ h6 {
   height: 220px;
 }
 .work-nav-icons {
-  display: flex;
+  display: inline-flex;
   justify-content: flex-end;
   align-content: center;
 }
@@ -258,7 +307,7 @@ h6 {
   display: block;
 }
 .grid-cell {
-  height: 250px;
+  /* height: 250px; */
   padding: 1em;
 }
 p {
@@ -272,11 +321,36 @@ p {
 }
 .content-wrapper {
   padding-bottom: 2em;
+  position: relative;
 }
-.work-nav-text nav:after {
+.load-more {
+  margin-top: 2em;
+  border: none;
+  background-color: #2ecc71;
+  color: white;
+  padding: 1em 1.5em;
+  outline: none;
+  cursor: pointer;
+}
+.load-more:active {
+   transform: translate(2px, 2px);
+}
+.load-button-container {
+  text-align: center;
+}
+/* .work-nav-text nav:after {
   content: "/";
 }
 .work-nav-text nav:last-child:after {
   content: " ";
+} */
+.work-text {
+  /* width: 600px; */
+  display: inline-block;
+  /* display: inline; */
 }
+.work-text h4, .work-text p {
+  /* padding-left: 2rem; */
+}
+
 </style>

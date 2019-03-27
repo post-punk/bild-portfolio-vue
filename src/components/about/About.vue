@@ -10,6 +10,7 @@
 import AboutText from "./AboutText.vue";
 import Tabs from "./Tabs.vue";
 import CalloutTop from '../CalloutTop.vue'
+import db from '@/firebase/init'
 
 export default {
   name: "About",
@@ -30,7 +31,7 @@ export default {
 
 <style>
 #dude {
-    margin-top: 2em;
+    margin-top: 3em;
  } 
  h3 {
     margin-top: 2em;

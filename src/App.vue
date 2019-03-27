@@ -89,5 +89,7 @@ nav,
 /* higher selectivity override */
 .router-link-exact-active.router-link-exact-active {
     color: #2ecc71;
+    outline: none;
 }
+
 </style>

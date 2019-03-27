@@ -26,7 +26,7 @@
         ></path>
       </svg>
 
-      <slick id="slick2" ref="slick2" class="slick-paragraph col-4" :options="slickOptions2">
+      <slick id="slick2" ref="slick2" class="slick-paragraph col-md-4 col-" :options="slickOptions2">
         
         <div class="carousel-text">
           <h4>DARK UI FREEBIE</h4>
@@ -157,7 +157,7 @@ svg {
   cursor: pointer;
 }
 .slider-img {
-  margin: 0px auto 44px auto;
+  margin: 0px auto 22px auto;
 }
 
 .slider-img {
@@ -190,5 +190,10 @@ svg {
 }
 .carousel-text {
   margin-bottom: 3em;
+}
+@media only screen and (max-width: 767px) {
+   .slick-arrow {
+  display: none;
+   }
 }
 </style>

@@ -14,7 +14,10 @@
               placeholder="Name"
               @blur="$v.name.$touch()"
             >
-            <p class="warning" v-if="!$v.name.required && $v.name.$dirty">This field is required</p>
+            <p
+              class="warning"
+              v-if="!this.$v.name.required && this.$v.name.$dirty"
+            >This field is required.</p>
           </div>
           <div class="input" :class="{invalid: $v.email.$error}">
             <input
@@ -30,16 +33,22 @@
             <p
               class="warning"
               v-if="!$v.email.required && $v.email.$dirty"
-            >This field must not be empty.</p>
+            >This field is required.</p>
           </div>
-          <div class="input">
+          <div class="input" :class="{invalid: $v.subject.$error}">
             <input
               type="email"
               name="subject"
               class="form-control forme"
               id="subject"
+              @blur="$v.subject.$touch()"
               placeholder="Subject"
+              v-model="subject"
             >
+            <p
+              class="warning"
+              v-if="!$v.subject.required && $v.subject.$dirty"
+            >This field is required.</p>
           </div>
           <div class="input" :class="{invalid: $v.textarea.$error}">
             <textarea
@@ -58,16 +67,9 @@
           </div>
           <div class="container">
             <div class="row justify-content-between">
-              <button
-                type="submit"
-                :disabled="$v.$invalid || !recaptchachecked"
-                class="action-btn col-md-3 col-sm-4 col-6"
-                id="send-button"
-                v-on:click="sendMessage()"
-              >SEND MESSAGE</button>
+              
 
-              <div class="form-group">
-
+              <div class="form-group col-">
                 <vue-recaptcha sitekey="6LfKURIUAAAAAO50vlwWZkyK_G2ywqE52NU7YO0S" @verify="verify"></vue-recaptcha>
                 <input
                   class="form-control d-none"
@@ -77,6 +79,15 @@
                 >
                 <div class="help-block with-errors"></div>
               </div>
+              <div id="send-button-container">
+                <button
+                  type="submit"
+                  :disabled="$v.$invalid || !recaptchachecked"
+                  class="action-btn"
+                  id="send-button"
+                  v-on:click="sendMessage()"
+                >SEND MESSAGE</button>
+            </div>
             </div>
           </div>
         </form>
@@ -84,7 +95,7 @@
       <div class="info-group col-sm-4 col-12">
         <h4>{{contactInfo.headers[1]}}</h4>
         <p v-html="contactInfo.paragraphs[1]"></p>
-        
+
         <h4 id="hours">{{contactInfo.headers[2]}}</h4>
         <div class="row" v-html="contactInfo.paragraphs[2]"></div>
       </div>
@@ -99,6 +110,7 @@ import {
   maxLength,
   minLength
 } from "vuelidate/lib/validators";
+import db from "@/firebase/init";
 import VueRecaptcha from "vue-recaptcha";
 
 export default {
@@ -109,10 +121,22 @@ export default {
       showForm: true,
       email: "",
       name: "",
+      subject: "",
       textarea: "",
-      recaptchachecked: false
+      recaptchachecked: false,
+      feedback: null
     };
   },
+  // created() {
+  //   // fetching
+  //   db.collection('contact-info').get().then(snapshot => {
+  //     var contactInfo = [];
+  //     snapshot.forEach(doc => {
+  //         contactInfo.push(doc.data()) 
+  //     });
+  //     this.$store.commit('setContactInfo', contactInfo)
+  //   })
+  // },
   methods: {
     sendMessage() {
       alert("Thank you for participation!");
@@ -130,6 +154,9 @@ export default {
     email: {
       required,
       email
+    },
+    subject: {
+      required
     },
     textarea: {
       maxLength: maxLength(10),
@@ -149,7 +176,6 @@ export default {
 </script>
 
 <style scoped>
-
 input,
 textarea {
   margin-top: 1em;
@@ -160,6 +186,9 @@ textarea {
 }
 #send-button {
   margin-bottom: 2.5em;
+  padding: 1em;
+  display: block;
+  position: relative;
 }
 h4 {
   color: #737373;
@@ -215,5 +244,8 @@ form p {
 }
 p {
   margin-top: 2em;
+}
+#send-button-container {
+  width: 100%
 }
 </style>

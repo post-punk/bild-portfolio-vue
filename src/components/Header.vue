@@ -113,15 +113,45 @@
       </div>
       <hr>
       <!-- <div class="container"> -->
-      <div class="nav row">
-        <nav
-          v-for="(navText, index) in navMain"
-          :key="index"
-          class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3"
-        >
-          <router-link :to="navText.path">{{navText.name}}</router-link>
-        </nav>
-      </div>
+
+<!--Navbar-->
+<nav class="navbar navbar-light light-blue lighten-4">
+
+  <!-- Navbar brand -->
+  <a class="navbar-brand" href="#"></a>
+
+  <!-- Collapse button -->
+  <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" id="hamburger" data-target="#navbarSupportedContent1"
+    aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"><span class="dark-blue-text">
+      <svg 
+        data-name="burger menu"
+        xmlns="http://www.w3.org/2000/svg"
+        width="15"
+        height="15"
+        viewBox="0 0 15 15">
+        <rect id="_1" data-name="1" class="cls-1" y="12" width="15" height="3.031"></rect>
+        <rect id="_2" data-name="2" class="cls-1" y="6" width="15" height="3.031"></rect>
+        <rect id="_3" data-name="3" class="cls-1" width="15" height="3.031"></rect>
+    </svg></span></button>
+
+  <!-- Collapsible content, DODAJ KLASU COLLAPSE -->
+  <div class="collapse navbar-collapse nav row" id="navbarSupportedContent1">
+        
+      <nav
+        v-for="(navText, index) in navMain"
+        :key="index"
+        class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3 ">
+        <router-link :to="navText.path">{{navText.name}}</router-link>
+      </nav>
+
+  </div>
+  
+  <!-- Collapsible content -->
+
+</nav>
+<!--/.Navbar-->
+
+      
       <!-- </div> -->
     </div>
   </div>
@@ -156,6 +186,10 @@ export default {
 </script>
 
 <style>
+
+rect {
+  fill: #8a8888;
+}
 nav {
   font-size: 1.3em;
   color: #737373
@@ -187,13 +221,17 @@ nav {
 }
 .nav {
   /* width: 940px; */
-  height: 71px;
+  /* height: 71px; */
   display: flex;
   align-items: center;
 }
+
 .nav a {
   color: inherit;
   text-decoration: none;
+  margin-top: 2em;
+  font-size: 18px;
+  padding: 0;
 }
 .nav h6 {
   color: #737373;
@@ -226,5 +264,43 @@ a svg:hover #dribbble {
 }
 hr {
   margin: 0;
+}
+.fa-1x {
+font-size: 1.5rem;
+}
+.navbar-toggler.toggler-example {
+cursor: pointer;
+}
+.dark-blue-text {
+color: #0A38F5;
+}
+.dark-pink-text {
+color: #AC003A;
+}
+.dark-amber-text {
+color: #ff6f00;
+}
+.dark-teal-text {
+color: #004d40;
+}
+button svg {
+  vertical-align: baseline;
+}
+.navbar {
+  padding: 1.1rem 1rem 1.2rem 0rem;
+}
+#navbarSupportedContent1 nav {
+padding: 0;
+}
+
+
+@media only screen and (min-width: 767px) {
+.navbar-toggler, svg .slick-arrow {
+  display: none
+}
+#navbarSupportedContent1 {
+  display: flex;
+}
+
 }
 </style>
