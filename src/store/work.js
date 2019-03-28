@@ -83,7 +83,7 @@ const getters = {
 }
 const mutations = {
    setProjects(state, payload) {
-    //    state.projects = payload
+//      state.projects = payload
     payload.forEach(project => {
         state.projects.push(project)
     })
@@ -94,35 +94,19 @@ const mutations = {
 }
 const actions = {
     displayAll ({commit}) {
-    //fetch data from firestore
-    db.collection("work-items").orderBy('name').limit(3).get().then(snapshot => {
+    //fetch from firestore
+    db.collection("work-items").orderBy('name').limit(2).get().then(snapshot => {
         var projects = [];
         var lastVisible = snapshot.docs[snapshot.docs.length-1];
         console.log(lastVisible)
         snapshot.forEach(doc => {
            projects.push(doc.data()) 
         });
-
       commit('setProjects', projects);
       commit('setLastVisible', lastVisible);
       });
     }
 }
-
-// DISPLAY ALL, SVE RADI
-// const actions = {
-//     displayAll ({commit}) {
-//     //fetch data from firestore
-//     db.collection("work-items").get().then(snapshot => {
-//         var projects = [];
-//         snapshot.forEach(doc => {
-//            projects.push(doc.data()) 
-//         });
-       
-//       commit('setProjects', projects);
-//       });
-//     }
-// }
 
 export default {
     // namespaced: true,

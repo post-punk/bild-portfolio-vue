@@ -80,7 +80,6 @@ import db from '@/firebase/init'
 
 export default {
 
-
   name: "Work",
   data() {
     return {
@@ -92,54 +91,16 @@ export default {
   },
 
   created() {
-
     this.$store.dispatch('displayAll');
-
     },
 
-     //fetch data from firestore
-    // db.collection("work-items").get().then(snapshot => {
-    //     var projects = [];
-    //     snapshot.forEach(doc => {
-    //        projects.push(doc.data()) 
-    //     });
-    //     this.$store.commit('setProjects', projects)
-    //   });
-
-//     db.collection("about")
-//         .get()
-//         .then(snapshot => {
-//           var projects2 = []
-//         snapshot.forEach(doc => {
-//            projects2.push(doc.data()) 
-//         });
-//         console.log(projects2)
-//         })
-
   computed: {
-   
     projectItems: function() {
-      // if (this.activeFilter === "all") {
         return this.$store.getters.allItems;
-      // }
-      // return this.$store.getters.allItems.filter(
-      //   project => this.activeFilter === project.category
-      // );
     },
     lastVisible() {
       return this.$store.getters.lastVisible;
     }
-    
-    // projectItems() {
-    //   switch (this.activeFilter) {
-    //     case "all": return this.$store.getters['work/allItems'];
-    //     case "web": return this.$store.getters['work/webItems'];
-    //     case "app": return this.$store.getters['work/appItems'];;
-    //     case "photo": return this.$store.getters['work/photoItems'];;
-    //     case "print": return this.$store.getters['work/printItems'];
-    //   }
-    // }
-    
   },
 
   components: {
@@ -149,10 +110,8 @@ export default {
     activeView(val) {
       this.view = val;
     },
-
     loadMore() {
-
-        db.collection("work-items").orderBy("name").startAfter(this.lastVisible).limit(3).get().then(snapshot => {
+        db.collection("work-items").orderBy("name").startAfter(this.lastVisible).limit(2).get().then(snapshot => {
         var projects = [];
         var lastVisible = snapshot.docs[snapshot.docs.length-1];
         snapshot.forEach(doc => {
@@ -164,9 +123,7 @@ export default {
         this.$store.commit('setProjects', projects);
         this.$store.commit('setLastVisible', lastVisible);
       });
-
     },
-    
     firestoreFilter(val) {
       //varijanta za 'all'
       if (val === 'all') {
@@ -178,9 +135,7 @@ export default {
         this.$store.commit('setProjects', projects);
         this.selectedCategory = 'all';
       });
-
       } else {
-
        db.collection("work-items").where("category", "==", val).get().then(snapshot => {
         var projects = [];
         snapshot.forEach(doc => {
