@@ -39,7 +39,7 @@
               </g>
             </svg>
           </a> -->
-          <div>
+          <div class="col-auto">
             <a href="http://www.twitter.com" target="_blank"><svg xmlns="http://www.w3.org/2000/svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink" width="34" height="34" viewBox="0 0 34 34">
                         <defs>

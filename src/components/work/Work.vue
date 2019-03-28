@@ -17,7 +17,7 @@
         <div class="col-sm-1 col-12">
           <div class="work-nav-icons">
             <svg
-              v-on:click="activeView('grid')"
+              v-on:click="activeView('grid')" :class="{ activeToggle: view == 'grid' }"
               xmlns="http://www.w3.org/2000/svg"
               width="15"
               height="15"
@@ -30,7 +30,7 @@
                 transform="translate(-1129 -329)"></path>
             </svg>
             <svg
-              v-on:click="activeView('list')"
+              v-on:click="activeView('list')"  :class="{ activeToggle: view == 'list' }"
               id="list-view"
               data-name="list view"
               xmlns="http://www.w3.org/2000/svg"
@@ -63,7 +63,7 @@
 
         </div>
         <div class="load-button-container">
-        <button class="load-more">Load more</button>
+          <button v-if="!noMoreProjects" class="load-more" @click="loadMore()">Load more</button>
         </div>
       </div>
       
@@ -87,6 +87,7 @@ export default {
       calloutTitle: "CHECK OUT WHAT I CAN DO",
       selectedCategory: "all",
       view: 'grid',
+      noMoreProjects: false,
     };
   },
 
@@ -124,8 +125,11 @@ export default {
       // return this.$store.getters.allItems.filter(
       //   project => this.activeFilter === project.category
       // );
+    },
+    lastVisible() {
+      return this.$store.getters.lastVisible;
     }
-
+    
     // projectItems() {
     //   switch (this.activeFilter) {
     //     case "all": return this.$store.getters['work/allItems'];
@@ -145,11 +149,28 @@ export default {
     activeView(val) {
       this.view = val;
     },
+
+    loadMore() {
+
+        db.collection("work-items").orderBy("name").startAfter(this.lastVisible).limit(3).get().then(snapshot => {
+        var projects = [];
+        var lastVisible = snapshot.docs[snapshot.docs.length-1];
+        snapshot.forEach(doc => {
+           projects.push(doc.data()) 
+        });
+        if (snapshot.docs.length == 0) {
+          this.noMoreProjects = true;
+        }
+        this.$store.commit('setProjects', projects);
+        this.$store.commit('setLastVisible', lastVisible);
+      });
+
+    },
     
     firestoreFilter(val) {
       //varijanta za 'all'
       if (val === 'all') {
-        db.collection("work-items").orderBy("name").limit(3).get().then(snapshot => {
+        db.collection("work-items").orderBy("name").get().then(snapshot => {
         var projects = [];
         snapshot.forEach(doc => {
            projects.push(doc.data()) 
@@ -189,16 +210,19 @@ h6 {
   fill: #737373;
   pointer-events: fill;
 }
-#grid-view:hover {
+/* #grid-view:hover {
   fill: #2ecc71;
   pointer-events: fill;
-}
-#list-view {
+} */
+/* #list-view {
   fill: #737373;
+} */
+.activeToggle {
+  fill: #2ecc71 !important;
 }
-#list-view:hover {
+/* #list-view:hover {
   fill: #2ecc71;
-}
+} */
 .work-nav-text {
   color: #737373;
 }
@@ -309,6 +333,8 @@ h6 {
 .grid-cell {
   /* height: 250px; */
   padding: 1em;
+}
+.grid-cell img {
 }
 p {
   /* padding: 1em; */

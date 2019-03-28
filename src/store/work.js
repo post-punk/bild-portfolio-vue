@@ -65,8 +65,9 @@ const state = {
     //         text:
     //             "Sed eu blandit est. Duis tincidunt eleifend eleifend. Integer hendrerit tempor risus eget vestibulum. Etiam placerat ex in ligula hendrerit ornare. Vestibulum scelerisque neque eget posuere volutpat. Nam dictum, dui at imperdiet mattis, enim arcu mattis dui, ac suscipit nisi sapien in sem. Cras hendrerit quis odio eget fringilla. Sed vitae nibh eu dolor efficitur pulvinar at ac dui. Nam fermentum orci ut condimentum dapibus. Nam pulvinar nisi in nulla imperdiet, ac molestie eros fermentum. Aenean vel ultricies nibh, sollicitudin mollis urna. Vivamus ultricies risus lorem, nec faucibus nisi facilisis et. Sed imperdiet aliquet sapien sed luctus. Morbi imperdiet porttitor libero, et ornare turpis. Curabitur eu porta arcu, iaculis dignissim arcu."
     //     }
+    
     ],
- 
+    lastVisible: null
 }
 
 const getters = {
@@ -75,25 +76,35 @@ const getters = {
         return state.projects;
    
     },
-    
+    lastVisible: state => {
+        return state.lastVisible;
+    }
 
 }
 const mutations = {
    setProjects(state, payload) {
-       state.projects = payload
+    //    state.projects = payload
+    payload.forEach(project => {
+        state.projects.push(project)
+    })
+   },
+   setLastVisible(state, payload) {
+       state.lastVisible = payload
    }
 }
 const actions = {
     displayAll ({commit}) {
     //fetch data from firestore
-    db.collection("work-items").orderBy("name").get().then(snapshot => {
+    db.collection("work-items").orderBy('name').limit(3).get().then(snapshot => {
         var projects = [];
-        var last = 
+        var lastVisible = snapshot.docs[snapshot.docs.length-1];
+        console.log(lastVisible)
         snapshot.forEach(doc => {
            projects.push(doc.data()) 
         });
-       
+
       commit('setProjects', projects);
+      commit('setLastVisible', lastVisible);
       });
     }
 }

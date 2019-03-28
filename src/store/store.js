@@ -6,7 +6,7 @@ import about from './about.js';
 import work from './work.js';
 import home from './home.js';
 import contact from './contact';
-import Firebase from 'Firebase'
+import Firebase from 'firebase'
 import db from '@/firebase/init'
 
 
