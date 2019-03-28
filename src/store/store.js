@@ -6,7 +6,9 @@ import about from './about.js';
 import work from './work.js';
 import home from './home.js';
 import contact from './contact';
-import Firebase from 'firebase'
+import blog from './blog';
+
+// import firebase from 'firebase'
 import db from '@/firebase/init'
 
 
@@ -19,5 +21,6 @@ export const store = new Vuex.Store({
         about,
         work,
         contact,
+        blog
     }
 });

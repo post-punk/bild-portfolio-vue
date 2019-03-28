@@ -91,5 +91,7 @@ nav,
     color: #2ecc71;
     outline: none;
 }
-
+nav {
+  margin-right: 2em;
+}
 </style>

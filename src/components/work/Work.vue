@@ -63,7 +63,7 @@
 
         </div>
         <div class="load-button-container">
-          <button v-if="!noMoreProjects" class="load-more" @click="loadMore()">Load more</button>
+          <button v-show="!noMoreProjects" class="load-more" @click="loadMore()">Load more</button>
         </div>
       </div>
       
@@ -111,7 +111,7 @@ export default {
       this.view = val;
     },
     loadMore() {
-        db.collection("work-items").orderBy("name").startAfter(this.lastVisible).limit(2).get().then(snapshot => {
+        db.collection("work-items").orderBy("name").startAfter(this.lastVisible).limit(3).get().then(snapshot => {
         var projects = [];
         var lastVisible = snapshot.docs[snapshot.docs.length-1];
         snapshot.forEach(doc => {

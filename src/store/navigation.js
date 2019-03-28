@@ -18,7 +18,13 @@ const state = {
         {
             path: '/contact',
             name: 'CONTACT'
+        },
+        
+        {
+            path: '/blog',
+            name: 'BLOG'
         }
+        
     ],
     logo: { image: 'https://i.imgur.com/g7ypgKk.png' },
     footerText: { 

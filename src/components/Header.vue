@@ -140,7 +140,7 @@
       <nav
         v-for="(navText, index) in navMain"
         :key="index"
-        class="col-xl-1 col-lg-1 col-md-2 col-sm-3 col-3 ">
+        class="">
         <router-link :to="navText.path">{{navText.name}}</router-link>
       </nav>
 

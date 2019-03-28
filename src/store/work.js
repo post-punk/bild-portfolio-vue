@@ -95,7 +95,7 @@ const mutations = {
 const actions = {
     displayAll ({commit}) {
     //fetch from firestore
-    db.collection("work-items").orderBy('name').limit(2).get().then(snapshot => {
+    db.collection("work-items").orderBy('name').limit(3).get().then(snapshot => {
         var projects = [];
         var lastVisible = snapshot.docs[snapshot.docs.length-1];
         console.log(lastVisible)
