@@ -4,7 +4,8 @@ import About from '../components/about/About.vue'
 import Work from '../components/work/Work.vue'
 import Home from '../components/home/Home.vue'
 import Blog from '../components/Blog.vue'
-
+import signup from '../components/auth/SignUp.vue'
+import login from '../components/auth/LogIn.vue'
 
 
 export const routes = [
@@ -35,6 +36,16 @@ export const routes = [
       path: '/blog',
       name: 'Blog',
       component: Blog
+    },
+    {
+      path: '/signup',
+      name: '/signup',
+      component: signup
+    },
+    {
+      path: '/LogIn',
+      name: '/login',
+      component: login
     }
     
   ]

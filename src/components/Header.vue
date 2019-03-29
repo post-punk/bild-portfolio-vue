@@ -135,14 +135,20 @@
     </svg></span></button>
 
   <!-- Collapsible content, DODAJ KLASU COLLAPSE -->
-  <div class="collapse navbar-collapse nav row" id="navbarSupportedContent1">
-        
-      <nav
-        v-for="(navText, index) in navMain"
-        :key="index"
-        class="">
-        <router-link :to="navText.path">{{navText.name}}</router-link>
-      </nav>
+  <div class="collapse navbar-collapse nav row justify-content-between" id="navbarSupportedContent1">
+      <div>
+        <nav
+          v-for="(navText, index) in navMain"
+          :key="index"
+          class="navMain">
+          <router-link :to="navText.path">{{navText.name}}</router-link>
+        </nav>
+      </div>
+      <div class="auth">
+        <nav><router-link :to="{ name: '/signup' }">SIGN UP</router-link></nav>
+        <nav><router-link :to="{ name: '/login' }">LOG IN</router-link></nav>
+      </div>
+
 
   </div>
   
@@ -186,12 +192,25 @@ export default {
 </script>
 
 <style>
-
+.navMain {
+  display: inline;
+}
+ .auth { 
+display: flex;
+  /* font-size: 14px; */
+  /* color: #737373 */
+}
+.auth nav {
+  margin: 0.5em;
+  cursor: pointer;
+}
+.auth nav:nth-child(2) {
+cursor: default !important;
+} 
 rect {
   fill: #8a8888;
 }
 nav {
-  font-size: 1.3em;
   color: #737373
 }
 .logo {

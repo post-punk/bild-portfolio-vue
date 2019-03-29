@@ -23,7 +23,15 @@ const state = {
         {
             path: '/blog',
             name: 'BLOG'
-        }
+        },
+        // {
+        //     path: '/signup',
+        //     name: 'SIGN UP'
+        // },
+        // {
+        //     path: '/login',
+        //     name: 'LOG IN'
+        // }
         
     ],
     logo: { image: 'https://i.imgur.com/g7ypgKk.png' },

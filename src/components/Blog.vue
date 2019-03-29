@@ -6,6 +6,7 @@
             <h5>{{ article.date }}</h5>
             <img :src="article.image" alt="">
             <p v-html="article.text"></p>
+            <hr>
         </div>
     </div>
 </template>
