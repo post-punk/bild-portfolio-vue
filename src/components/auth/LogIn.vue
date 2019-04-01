@@ -70,5 +70,13 @@ form {
     border-color: #2ecc71;
     margin-top: 1em;
 }
-
+/* warnings */
+.form-control.invalid label {
+  color: LIGHTCORAL;
+}
+.warning {
+  margin-top: -1em;
+  margin-bottom: 2em;
+  color: indianred;
+}
 </style>

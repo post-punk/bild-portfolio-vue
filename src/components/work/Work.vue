@@ -300,7 +300,7 @@ h6 {
 }
 .grid-cell {
   /* height: 250px; */
-  padding: 1em;
+  padding: 0.49em
 }
 .grid-cell img {
 }

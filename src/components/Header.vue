@@ -144,8 +144,8 @@
           <router-link :to="navText.path">{{navText.name}}</router-link>
         </nav>
       </div>
-      <div class="auth">
-        <div v-if="!user">
+      <div >
+        <div class="auth" v-if="!user">
           <nav><router-link :to="{ name: '/signup' }">SIGN UP</router-link></nav>
           <nav><router-link :to="{ name: '/login' }">LOG IN</router-link></nav>
         </div>
@@ -188,15 +188,15 @@ export default {
            if (user) {
                this.$store.dispatch('autoSignIn', user);
            }
-      var user = firebase.auth().currentUser;
-      if (user != null) {
-        user.providerData.forEach(function (profile) {
-          console.log("Sign-in provider: " + profile.providerId);
-          console.log("  Provider-specific UID: " + profile.uid);
-          console.log("  Name: " + profile.displayName);
-          console.log("  Email: " + profile.email);
-          console.log("  Photo URL: " + profile.photoURL);
-        });
+          var user = firebase.auth().currentUser;
+          if (user != null) {
+            user.providerData.forEach(function (profile) {
+              console.log("Sign-in provider: " + profile.providerId);
+              console.log("  Provider-specific UID: " + profile.uid);
+              console.log("  Name: " + profile.displayName);
+              console.log("  Email: " + profile.email);
+              console.log("  Photo URL: " + profile.photoURL);
+            });
 }
        });
   },
@@ -338,7 +338,7 @@ button svg {
   vertical-align: baseline;
 }
 .navbar {
-  padding: 1.1rem 1rem 1.2rem 0rem;
+  padding: 0 !important;
 }
 #navbarSupportedContent1 nav {
 padding: 0;
@@ -351,6 +351,7 @@ padding: 0;
 }
 #navbarSupportedContent1 {
   display: flex;
+  height: 70px;
 }
 
 }

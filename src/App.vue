@@ -94,5 +94,7 @@ nav,
 nav {
   margin-right: 2em;
 }
-
+.container {
+  max-width: 970px
+}
 </style>

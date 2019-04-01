@@ -112,7 +112,7 @@ animation-delay: 0.1s;
   width: 35%;
   position: absolute;
   bottom: -10%;
-  left: 20%;
+  left: 24%;
   z-index: 1;
   /* min-width: 20%;
 max-width: 50%; */
@@ -142,7 +142,7 @@ max-width: 50%; */
   width: 7%;
   position: absolute;
   bottom: -10%;
-  right: 29%;
+  right: 30%;
   z-index: 3;
 }
 
