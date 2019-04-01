@@ -6,18 +6,25 @@
         <div class="work-nav-text col-sm-7 col-12">
           <nav @click="firestoreFilter('all')" :class="{isActive: selectedCategory === 'all'}">ALL</nav>
           <nav class="slash">/</nav>
-          <nav @click="firestoreFilter('print')" :class="{isActive: selectedCategory === 'print'}">PRINT</nav>
+          <nav
+            @click="firestoreFilter('print')"
+            :class="{isActive: selectedCategory === 'print'}">PRINT</nav>
           <nav class="slash">/</nav>
-          <nav @click="firestoreFilter('photo')" :class="{isActive: selectedCategory === 'photo'}">PHOTOGRAPHY</nav>
+          <nav
+            @click="firestoreFilter('photo')"
+            :class="{isActive: selectedCategory === 'photo'}">PHOTOGRAPHY</nav>
           <nav class="slash">/</nav>
           <nav @click="firestoreFilter('web')" :class="{isActive: selectedCategory === 'web'}">WEB</nav>
           <nav class="slash">/</nav>
-          <nav @click="firestoreFilter('app')" :class="{isActive: selectedCategory === 'app'}">APPLICATIONS</nav>
+          <nav
+            @click="firestoreFilter('app')"
+            :class="{isActive: selectedCategory === 'app'}">APPLICATIONS</nav>
         </div>
         <div class="col-sm-1 col-12">
           <div class="work-nav-icons">
             <svg
-              v-on:click="activeView('grid')" :class="{ activeToggle: view == 'grid' }"
+              v-on:click="activeView('grid')"
+              :class="{ activeToggle: view == 'grid' }"
               xmlns="http://www.w3.org/2000/svg"
               width="15"
               height="15"
@@ -30,7 +37,8 @@
                 transform="translate(-1129 -329)"></path>
             </svg>
             <svg
-              v-on:click="activeView('list')"  :class="{ activeToggle: view == 'list' }"
+              v-on:click="activeView('list')"
+              :class="{ activeToggle: view == 'list' }"
               id="list-view"
               data-name="list view"
               xmlns="http://www.w3.org/2000/svg"
@@ -45,11 +53,10 @@
         </div>
       </div>
 
-    <!-- nije bas responsive -->
-      <div class="content-wrapper" >
+      <!-- nije bas responsive -->
+      <div class="content-wrapper">
         <div class="row grid-container">
           <div class="grid-cell" v-for="(project, index) in projectItems" :key="index">
-
             <div class="float-left">
               <img :src="project.url">
             </div>
@@ -58,15 +65,12 @@
               <h4>{{ project.header }}</h4>
               <p>{{ project.text }}</p>
             </div>
-
           </div>
-
         </div>
         <div class="load-button-container">
           <button v-show="!noMoreProjects" class="load-more" @click="loadMore()">Load more</button>
         </div>
       </div>
-      
     </div>
   </div>
 </template>
@@ -75,28 +79,26 @@
 import { mapActions } from "vuex";
 import { mapGetters } from "vuex";
 import CalloutTop from "../CalloutTop.vue";
-import db from '@/firebase/init'
-
+import db from "@/firebase/init";
 
 export default {
-
   name: "Work",
   data() {
     return {
       calloutTitle: "CHECK OUT WHAT I CAN DO",
       selectedCategory: "all",
-      view: 'grid',
-      noMoreProjects: false,
+      view: "grid",
+      noMoreProjects: false
     };
   },
 
   created() {
-    this.$store.dispatch('displayAll');
-    },
+    this.$store.dispatch("displayAll");
+  },
 
   computed: {
     projectItems: function() {
-        return this.$store.getters.allItems;
+      return this.$store.getters.allItems;
     },
     lastVisible() {
       return this.$store.getters.lastVisible;
@@ -111,39 +113,50 @@ export default {
       this.view = val;
     },
     loadMore() {
-        db.collection("work-items").orderBy("name").startAfter(this.lastVisible).limit(3).get().then(snapshot => {
-        var projects = [];
-        var lastVisible = snapshot.docs[snapshot.docs.length-1];
-        snapshot.forEach(doc => {
-           projects.push(doc.data()) 
+      db.collection("work-items")
+        .orderBy("name")
+        .startAfter(this.lastVisible)
+        .limit(3)
+        .get()
+        .then(snapshot => {
+          var projects = [];
+          var lastVisible = snapshot.docs[snapshot.docs.length - 1];
+          snapshot.forEach(doc => {
+            projects.push(doc.data());
+          });
+          if (snapshot.docs.length == 0) {
+            this.noMoreProjects = true;
+          }
+          this.$store.commit("setProjects", projects);
+          this.$store.commit("setLastVisible", lastVisible);
         });
-        if (snapshot.docs.length == 0) {
-          this.noMoreProjects = true;
-        }
-        this.$store.commit('setProjects', projects);
-        this.$store.commit('setLastVisible', lastVisible);
-      });
     },
     firestoreFilter(val) {
       //varijanta za 'all'
-      if (val === 'all') {
-        db.collection("work-items").orderBy("name").get().then(snapshot => {
-        var projects = [];
-        snapshot.forEach(doc => {
-           projects.push(doc.data()) 
-        });
-        this.$store.commit('setProjects', projects);
-        this.selectedCategory = 'all';
-      });
+      if (val === "all") {
+        db.collection("work-items")
+          .orderBy("name")
+          .get()
+          .then(snapshot => {
+            var projects = [];
+            snapshot.forEach(doc => {
+              projects.push(doc.data());
+            });
+            this.$store.commit("setProjects", projects);
+            this.selectedCategory = "all";
+          });
       } else {
-       db.collection("work-items").where("category", "==", val).get().then(snapshot => {
-        var projects = [];
-        snapshot.forEach(doc => {
-           projects.push(doc.data()) 
-        });
-        this.$store.commit('setProjects', projects);
-        this.selectedCategory = val;
-        });
+        db.collection("work-items")
+          .where("category", "==", val)
+          .get()
+          .then(snapshot => {
+            var projects = [];
+            snapshot.forEach(doc => {
+              projects.push(doc.data());
+            });
+            this.$store.commit("setProjects", projects);
+            this.selectedCategory = val;
+          });
       }
     }
   }
@@ -314,7 +327,7 @@ p {
   cursor: pointer;
 }
 .load-more:active {
-   transform: translate(2px, 2px);
+  transform: translate(2px, 2px);
 }
 .load-button-container {
   text-align: center;
@@ -330,8 +343,8 @@ p {
   display: inline-block;
   /* display: inline; */
 }
-.work-text h4, .work-text p {
+.work-text h4,
+.work-text p {
   /* padding-left: 2rem; */
 }
-
 </style>

@@ -35,8 +35,8 @@ export default {
 data() {
     return {
       calloutTitle: "Log in",
-      email: null,
-      password: null
+      email: "vladimir.popovic@bild-studio.net",
+      password: '123456'
     };
   },
   components: {
@@ -44,13 +44,11 @@ data() {
     },
     methods: {
         logIn() {
-            firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ...
+            this.$store.dispatch('logIn', {
+                email: this.email,
+                password: this.password
             });
-           this.$router.push({ path: '/' })
+            this.$router.push({ path: '/' });
 
         }
     }

@@ -7,8 +7,7 @@ import work from './work.js';
 import home from './home.js';
 import contact from './contact';
 import blog from './blog';
-import signup from './signup'
-import login from './login'
+import authentication from './authentication'
 
 // import firebase from 'firebase'
 import db from '@/firebase/init'
@@ -24,7 +23,6 @@ export const store = new Vuex.Store({
         work,
         contact,
         blog,
-        signup,
-        login
+        authentication
     }
 });

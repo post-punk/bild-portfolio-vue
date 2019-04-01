@@ -34,9 +34,9 @@ import 'firebase/auth';
 export default {
 data() {
     return {
-      calloutTitle: "Sign up here",
-      email: null,
-      password: null
+        calloutTitle: "Sign up here",
+        email: null,
+        password: null
     };
   },
   components: {
@@ -44,12 +44,11 @@ data() {
     },
     methods: {
         signUp() {
-            firebase.auth().createUserWithEmailAndPassword(this.email, this.password).catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ...
+            this.$store.dispatch('createUser', {
+                email: this.email,
+                password: this.password
             });
+            this.$router.push({ path: '/' });
         }
     }
 }

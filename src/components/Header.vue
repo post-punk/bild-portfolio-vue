@@ -147,6 +147,7 @@
       <div class="auth">
         <nav><router-link :to="{ name: '/signup' }">SIGN UP</router-link></nav>
         <nav><router-link :to="{ name: '/login' }">LOG IN</router-link></nav>
+        <nav @click="logOut()"><router-link :to="{ path: '/' }">SIGN OUT</router-link></nav>
       </div>
 
 
@@ -165,6 +166,9 @@
 
 <script>
 import Logo from "./Logo.vue";
+import db from '@/firebase/init';
+import firebase from 'firebase';
+import 'firebase/auth';
 
 export default {
   name: "Header",
@@ -187,6 +191,12 @@ export default {
   },
   components: {
     Logo
+  },
+  methods: {
+    logOut() {
+            this.$store.dispatch('userSignOut');
+             this.$router.push({ path: '/' });
+        }
   }
 };
 </script>
