@@ -145,9 +145,11 @@
         </nav>
       </div>
       <div class="auth">
-        <nav><router-link :to="{ name: '/signup' }">SIGN UP</router-link></nav>
-        <nav><router-link :to="{ name: '/login' }">LOG IN</router-link></nav>
-        <nav @click="logOut()"><router-link :to="{ path: '/' }">SIGN OUT</router-link></nav>
+        <div v-if="!user">
+          <nav><router-link :to="{ name: '/signup' }">SIGN UP</router-link></nav>
+          <nav><router-link :to="{ name: '/login' }">LOG IN</router-link></nav>
+        </div>
+        <nav @click="logOut()" v-if="user"><router-link :to="{ path: '/' }">SIGN OUT</router-link></nav>
       </div>
 
 
@@ -181,12 +183,32 @@ export default {
       color: "#dadada"
     };
   },
+  created() {
+      firebase.auth().onAuthStateChanged((user) => {
+           if (user) {
+               this.$store.dispatch('autoSignIn', user);
+           }
+      var user = firebase.auth().currentUser;
+      if (user != null) {
+        user.providerData.forEach(function (profile) {
+          console.log("Sign-in provider: " + profile.providerId);
+          console.log("  Provider-specific UID: " + profile.uid);
+          console.log("  Name: " + profile.displayName);
+          console.log("  Email: " + profile.email);
+          console.log("  Photo URL: " + profile.photoURL);
+        });
+}
+       });
+  },
   computed: {
     navMain() {
       return this.$store.getters.navMain;
     },
     icons() {
       return this.$store.getters.icons;
+    },
+    user() {
+      return this.$store.getters.getUser;
     }
   },
   components: {
@@ -195,7 +217,7 @@ export default {
   methods: {
     logOut() {
             this.$store.dispatch('userSignOut');
-             this.$router.push({ path: '/' });
+            this.$router.push({ path: '/' });
         }
   }
 };

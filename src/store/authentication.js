@@ -4,6 +4,7 @@ import 'firebase/auth';
 
 const state = {
    user: null,
+   newUser: null
 }
 
 const getters = {
@@ -28,7 +29,7 @@ const actions = {
     createUser( {commit}, {email, password} ) {
         firebase.auth().createUserWithEmailAndPassword(email, password).then(user => {
         const newUser = {
-        id: user.user.uid
+        id: user.uid
         };
         commit('setUser', newUser);
         // ...
@@ -38,7 +39,7 @@ const actions = {
     logIn( {commit}, {email, password} ) {
         firebase.auth().signInWithEmailAndPassword(email, password).then(user => {
         const newUser = {
-        id: user.user.uid
+        id: user.uid
         };
         commit('setUser', newUser);
         // ...
@@ -54,6 +55,10 @@ const actions = {
         commit("setUser", null);
         // commit('setIsAuthenticated', false);
         });
+    },
+    autoSignIn({ commit }, payload ) {
+        var user = firebase.auth().currentUser;
+        commit('setUser', { id: payload.uid });
     }
 }
 
