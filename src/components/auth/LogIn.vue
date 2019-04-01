@@ -50,6 +50,8 @@ data() {
             var errorMessage = error.message;
             // ...
             });
+           this.$router.push({ path: '/' })
+
         }
     }
 }
@@ -59,8 +61,8 @@ data() {
 form {
     margin-top: 2em;
     padding: 20px;
-  background: white;
-  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+    background: white;
+    box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
 }
 .col-6 {
     margin: auto;

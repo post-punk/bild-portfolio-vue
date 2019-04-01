@@ -2,10 +2,7 @@ import db from '@/firebase/init'
 
 
 const state = {
-    blog: [
-
-    ]
-   
+    blog: []
 }
 
 const getters = {
@@ -16,23 +13,30 @@ const getters = {
 }
 const mutations = {
     setBlog(state, payload) {
-        state.blog = payload
+        payload.forEach(article => {
+            state.blog.push(article)
+        })
+    },
+    setLastVisible(state, payload) {
+        state.lastVisible = payload
     }
 }
 const actions = {
   
-        displayBlog ({commit}) {
-        //fetch from firestore
-        db.collection("blog").get().then(snapshot => {
-            var blog = [];
-
-            snapshot.forEach(doc => {
-               blog.push(doc.data()) 
-            });
-          commit('setBlog', blog);
-          
-          });
-        }
+    loadMore({ commit }) {
+        db.collection("blog").limit(1).get().then(snapshot => {
+        var blog = [];
+        var lastVisible = snapshot.docs[snapshot.docs.length-1];
+        snapshot.forEach(doc => {
+           blog.push(doc.data()) 
+        });
+        // if (snapshot.docs.length == 0) {
+        //   this.noMoreProjects = true;
+        // }
+       commit('setBlog', blog);
+       commit('setLastVisible', lastVisible);
+      });
+    },
     }
 
 
