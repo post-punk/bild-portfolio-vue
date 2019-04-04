@@ -10,6 +10,8 @@ import Vuelidate from 'vuelidate'
 import Slick from 'vue-slick';
 import { store } from './store/store.js';
 import Vuex from 'vuex'
+import firebase from 'firebase';
+import 'firebase/auth';
 
 Vue.use(Vuelidate)
 Vue.use(BootstrapVue)
@@ -32,6 +34,13 @@ new Vue({
   el: '#app',
   router,
   store,
+  created() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+          store.dispatch('autoSignIn', user);
+    }
+  })
+},
   components: { App },
   template: '<App/>'
 })

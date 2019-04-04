@@ -5,7 +5,7 @@
       <h2>{{ article.header }}</h2>
       <h5>{{ article.date }}</h5>
       <img :src="article.image" alt>
-      <p v-html="article.text"></p>
+      <p v-html="article.text.substring(0,2000)+'...'"></p>
       <hr>
     </div>
     <div class="load-button-container">
@@ -19,47 +19,48 @@ import CalloutTop from "./CalloutTop.vue";
 import db from "@/firebase/init";
 
 export default {
-  data() {
-    return {
-      calloutTitle: "BLOG",
-      noMoreProjects: false
-    };
-  },
-  created() {
-    this.$store.dispatch("loadMore");
-  },
-  computed: {
-    blog: function() {
-      return this.$store.getters.blog;
-    },
-    lastVisible() {
-      return this.$store.getters.lastVisible;
-    }
-  },
-  components: {
-    CalloutTop
-  },
-  methods: {
-    loadMore() {
-      db.collection("blog")
-        .startAfter(this.lastVisible)
-        .limit(1)
-        .get()
-        .then(snapshot => {
-          var blog = [];
-          var lastVisible = snapshot.docs[snapshot.docs.length - 1];
-          snapshot.forEach(doc => {
-            blog.push(doc.data());
-          });
-          if (snapshot.docs.length == 0) {
-            this.noMoreProjects = true;
-          }
-
-          this.$store.commit("setBlog", blog);
-          this.$store.commit("setLastVisible", lastVisible);
-        });
-    }
-  }
+ data() {
+   return {
+     calloutTitle: "BLOG",
+     noMoreProjects: false,
+     blogCount: 4
+   };
+ },
+ created() {
+   this.$store.dispatch("loadMore");
+ },
+ computed: {
+   blog: function() {
+     return this.$store.getters.blog;
+   },
+   lastVisible() {
+     return this.$store.getters.lastVisible;
+   }
+ },
+ components: {
+   CalloutTop
+ },
+ methods: {
+   loadMore() {
+     db.collection("blog")
+       .startAfter(this.lastVisible)
+       .limit(1)
+       .get()
+       .then(snapshot => {
+         var blog = [];
+         var lastVisible = snapshot.docs[snapshot.docs.length - 1];
+         snapshot.forEach(doc => {
+           blog.push(doc.data());
+         });
+         this.blogCount -=1;
+         if (this.blogCount === 1) {
+           this.noMoreProjects = true;
+         }
+         this.$store.commit("setBlog", blog);
+         this.$store.commit("setLastVisible", lastVisible);
+       });
+   }
+ }
 };
 </script>
 

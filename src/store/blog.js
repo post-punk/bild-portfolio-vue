@@ -24,7 +24,10 @@ const mutations = {
 const actions = {
   
     loadMore({ commit }) {
-        db.collection("blog").limit(1).get().then(snapshot => {
+        db.collection("blog")
+        .limit(1)
+        .get()
+        .then(snapshot => {
         var blog = [];
         var lastVisible = snapshot.docs[snapshot.docs.length-1];
         snapshot.forEach(doc => {

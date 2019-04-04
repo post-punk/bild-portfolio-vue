@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-
 import navigation from './navigation.js';
 import about from './about.js';
 import work from './work.js';

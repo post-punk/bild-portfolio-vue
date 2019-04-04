@@ -52,20 +52,20 @@
       </div>
     </div>
 
-   <span class="tab-text container">
-      {{ tabText[currentTab].webDescription }}
+    <span class="tab-text container">
+      {{ tabText[currentTab].description }}
       <ul>
       <li>
-      {{ tabText[currentTab].webDetails1}}
+      {{ tabText[currentTab].details1}}
       </li>
       <li>
-      {{ tabText[currentTab].webDetails2}}
+      {{ tabText[currentTab].details2}}
       </li>
       <li>
-      {{ tabText[currentTab].webDetails3}}
+      {{ tabText[currentTab].details3}}
       </li>
     </ul>
-  </span>
+    </span>
     
   </div>
 </template>
@@ -73,8 +73,6 @@
 <script>
 import { mapActions } from "vuex";
 import { mapGetters } from "vuex";
-import db from '@/firebase/init'
-
 export default {
   name: "Tabs",
   data() {
@@ -83,22 +81,11 @@ export default {
       
     };
   },
-  created() {
-    // fetching
-    db.collection('tab-text').get().then(snapshot => {
-      var tabText = [];
-      snapshot.forEach(doc => {
-          tabText.push(doc.data())
-      });
-      this.$store.commit('setTabText', tabText)
-    })
-  },
   computed: { 
     tabText() {
     return this.$store.getters.tabText;
      }
-  },
-  
+  }
 };
 </script>
 
@@ -113,7 +100,6 @@ export default {
 }
 #tab-background {
     background-color: #ccc;
-
   background-color: #efefef;
   margin-top: 1em;
 }

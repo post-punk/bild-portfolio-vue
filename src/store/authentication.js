@@ -4,7 +4,6 @@ import 'firebase/auth';
 
 const state = {
    user: null,
-   newUser: null
 }
 
 const getters = {
