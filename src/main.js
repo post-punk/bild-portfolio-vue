@@ -27,7 +27,7 @@ Vue.config.productionTip = false
 const options = {
   color: '#bffaf3',
   failedColor: '#874b4b',
-  thickness: '20px',
+  thickness: '55rem',
   transition: {
     speed: '0.2s',
     opacity: '0.6s',

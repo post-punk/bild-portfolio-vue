@@ -125,4 +125,8 @@ nav,
 .container {
   max-width: 970px
 }
+.__cov-progress {
+  height: 15px !important;
+  background-color: #2ecc71 !important;
+}
 </style>
