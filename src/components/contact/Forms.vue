@@ -134,7 +134,7 @@ export default {
     },
     verify() {
       this.recaptchachecked = true;
-    }
+    },
   },
 
   validations: {

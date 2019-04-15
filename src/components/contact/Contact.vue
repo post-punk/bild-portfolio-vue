@@ -23,7 +23,8 @@ export default {
     Map,
     Forms
 
-  }
+  },
+ 
 };
 </script>
 

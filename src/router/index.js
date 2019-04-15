@@ -70,7 +70,8 @@ export const routes = [
           next({path: '/LogIn'})
         }
       }
-    }
+    },
+   
     
   ]
 
