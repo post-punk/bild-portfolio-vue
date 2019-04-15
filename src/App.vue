@@ -126,7 +126,7 @@ nav,
   max-width: 970px
 }
 .__cov-progress {
-  height: 15px !important;
+  height: 5px !important;
   background-color: #2ecc71 !important;
 }
 </style>
