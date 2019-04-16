@@ -1,17 +1,20 @@
-
 import Contact from '../components/contact/Contact.vue'
 import About from '../components/about/About.vue'
 import Work from '../components/work/Work.vue'
 import Home from '../components/home/Home.vue'
 import Blog from '../components/blog/Blog.vue'
 import addNewPost from '../components/blog/addNewPost.vue'
-import signup from '../components/auth/SignUp.vue'
-import login from '../components/auth/LogIn.vue'
+import signup from '@/components/auth/SignUp.vue'
+import login from '@/components/auth/LogIn.vue'
 import editPost from '../components/blog/editPost.vue'
-import { store } from '../store/store.js';
+import firebase from 'firebase';
+import 'firebase/auth'
+import Router from 'vue-router'
 
 
-export const routes = [
+const router = new Router ({
+  mode: 'history',
+  routes: [
     {
       path: '/',
       name: 'Home',
@@ -39,40 +42,43 @@ export const routes = [
     },
     {
       path: '/signup',
-      name: '/signup',
+      name: 'signup',
       component: signup
     },
     {
       path: '/LogIn',
-      name: '/login',
+      name: 'login',
       component: login
     },
     {
       path: '/addNewPost',
       name: 'addNewPost',
       component: addNewPost,
-      beforeEnter (to, from, next) {
-        if (store.getters.getUser) {
-          next()
-        } else {
-          next({path: '/LogIn'})
-        }
+      meta: {
+        requiresAuth: true
       }
     },
     {
       path: '/editPost/:id',
       name: 'editPost',
       component: editPost,
-      beforeEnter (to, from, next) {
-        if (store.getters.getUser) {
-          next()
-        } else {
-          next({path: '/LogIn'})
-        }
+      meta: {
+        requiresAuth: true,
       }
     },
    
     
   ]
+})
+export default router
 
- 
+  router.beforeEach((to, from, next) => {
+    const currentUser = firebase.auth().currentUser;
+    console.log(currentUser)
+    const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  
+    if (requiresAuth && !currentUser) {
+      next({path: '/LogIn'});
+    } else { next();
+  }
+});

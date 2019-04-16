@@ -9,7 +9,9 @@ import router from '../router/index'
 const state = {
    user: null,
    feedback: null,
-   isNewUser: false
+   isNewUser: false,
+   isLoggedIn: false,
+   currentUser: null
 }
 
 const getters = {
@@ -29,6 +31,9 @@ const mutations = {
     },
     setIsNewUser(state, payload) {
         state.isNewUser = payload
+    },
+    setCurrentUser(state, payload) {
+        state.currentUser = payload;
     }
 }
 const actions = {
@@ -72,6 +77,7 @@ const actions = {
         };
         console.log(newUser.id, newUser.email)
         commit('setUser', newUser);
+        console.log(newUser)
         // ...
         }).catch(function(error) {
             // Handle Errors here.
@@ -101,7 +107,7 @@ const actions = {
         });
     },
     autoSignIn({ commit }, payload ) {
-        var user = firebase.auth().currentUser;
+        // var user = firebase.auth().currentUser;
         commit('setUser', { id: payload.uid });
     },
 }

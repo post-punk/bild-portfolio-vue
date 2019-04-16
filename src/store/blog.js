@@ -26,11 +26,11 @@ const getters = {
 
 const mutations = {
     setBlog(state, payload) {
-        state.blog = [];
-        payload.forEach(article => {
-            state.blog.push(article)
-        })
-        // state.blog = payload;
+        // state.blog = [];
+        // payload.forEach(article => {
+            // state.blog.push(article)
+        // })
+        state.blog = payload;
     },
     setLoadMore(state, payload) {
         // state.blog = [];

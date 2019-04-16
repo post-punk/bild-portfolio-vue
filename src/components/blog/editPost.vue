@@ -40,7 +40,7 @@ export default {
             this.image = doc.data().image;
             this.text = doc.data().text;
             this.id = doc.id;
-       }),console.log(this.text)
+       })
    },
     mounted(){
     //    CKEDITOR.replace( 'ckeditor' )

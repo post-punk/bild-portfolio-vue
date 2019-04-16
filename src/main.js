@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import VueRouter from "vue-router";
-import { routes } from "./router/index.js";
+import router from "./router/index";
 import BootstrapVue from 'bootstrap-vue';
 import VModal from 'vue-js-modal'
 import Vuelidate from 'vuelidate'
@@ -38,10 +38,15 @@ const options = {
   inverse: false
 }
 
-const router = new VueRouter({
-  mode: 'history',
-  routes
-});
+// const router = new VueRouter({
+//   mode: 'history',
+//   routes
+// });
+
+router.beforeEach ((to, from, next) => {
+  // console.log('get global bitch');
+  next();
+})
 
 /* eslint-disable no-new */
 new Vue({

@@ -146,8 +146,8 @@
       </div>
       <div >
         <div class="auth" v-if="!user">
-          <nav><router-link :to="{ name: '/signup' }">SIGN UP</router-link></nav>
-          <nav><router-link :to="{ name: '/login' }">LOG IN</router-link></nav>
+          <nav><router-link :to="{ name: 'signup' }">SIGN UP</router-link></nav>
+          <nav><router-link :to="{ name: 'login' }">LOG IN</router-link></nav>
         </div>
         <nav @click="logOut()" v-if="user"><router-link :to="{ path: '/' }">SIGN OUT</router-link></nav>
       </div>
@@ -329,6 +329,10 @@ font-size: 1.5rem;
 }
 .navbar-toggler.toggler-example {
 cursor: pointer;
+    margin-top: 1em;
+    margin-right: 1em;
+    margin-bottom: 1em;
+    outline: none;
 }
 .dark-blue-text {
 color: #0A38F5;
