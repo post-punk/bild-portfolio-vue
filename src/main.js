@@ -11,7 +11,6 @@ import Slick from 'vue-slick';
 import { store } from './store/store.js';
 import Vuex from 'vuex'
 import firebase from 'firebase';
-import 'firebase/auth';
 import VueProgressBar from 'vue-progressbar'
 
 Vue.use(Vuelidate)
@@ -48,21 +47,38 @@ router.beforeEach ((to, from, next) => {
   next();
 })
 
+let app = '';
+
+firebase.auth().onAuthStateChanged(()=> {
+  if(!app) {
+    app = new Vue({
+        el: '#app',
+        render: h => h(App),
+        router,
+        store,
+        components: { App },
+        template: '<App/>'
+      }).$mount('#app')
+  }
+})
+
+
+
 /* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  render: h => h(App),
-  router,
-  store,
-  created() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        // user.sendVerificationEmail()
-          store.dispatch('autoSignIn', user);
-    }
-  })
-},
-  components: { App },
-  template: '<App/>'
-}).$mount('#app')
+// new Vue({
+//   el: '#app',
+//   render: h => h(App),
+//   router,
+//   store,
+//   created() {
+//     firebase.auth().onAuthStateChanged((user) => {
+//       if (user) {
+//         // user.sendVerificationEmail()
+//           store.dispatch('autoSignIn', user);
+//     }
+//   })
+// },
+//   components: { App },
+//   template: '<App/>'
+// }).$mount('#app')
 
