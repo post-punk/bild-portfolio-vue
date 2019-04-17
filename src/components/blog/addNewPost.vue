@@ -4,22 +4,7 @@
         <div class="container">
             <form action="">
                 <input class="form-control" placeholder="Enter title" v-model="header">
-                <!-- //date -->
                 <input class="form-control" type="date" placeholder="Enter date" v-model="date">
-
-                <!-- <div class="container">
-                    <div class="row">
-                        <div class='col-sm-6'>
-                            <input type='text' class="form-control" id='datetimepicker4' />
-                        </div>
-                        <script type="text/javascript">
-                            $(function () {
-                                $('#datetimepicker4').datetimepicker();
-                            });
-                        </script>
-                    </div>
-                </div> -->
-
                 <input class="form-control"  placeholder="Enter image URL" v-model="image">
                 <textarea name="ckeditor" id="ckeditor" cols="90" rows="10" v-model="text" placeholder="Enter title"></textarea>
                 <button type="button" class="btn btn-primary" @click="addNewPost()">Submit</button>
@@ -33,6 +18,7 @@ import CalloutTop from "../CalloutTop.vue";
 import db from '@/firebase/init';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import slugify from 'slugify';
 
 export default {
  data() {
@@ -41,7 +27,8 @@ export default {
         header: null,
         date: null,
         image: null,
-        text: null
+        text: null,
+        slug: null
         }
     },
     mounted(){
@@ -52,11 +39,18 @@ export default {
    },
    methods: {
        addNewPost() {
+        this.slug = slugify(this.header, {
+            replacement: '-',
+            remove: /[$*_=~.()'"!\-:@]/g,
+            lower: true
+        })
+        console.log(this.slug)
            this.$store.dispatch('addNewPost', {
                 header: this.header,
                 date: this.date,
                 image: this.image,
                 text: CKEDITOR.instances.ckeditor.getData(),
+                slug: this.slug 
            });
            this.$router.push({ path: '/blog' })
        }

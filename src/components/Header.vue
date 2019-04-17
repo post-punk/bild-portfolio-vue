@@ -5,40 +5,7 @@
         <router-link to="/">
           <Logo class="Display-logo col-auto" alt="Display logo"/>
         </router-link>
-        <!-- <div v-for="(icon, index) in icons" :key="index" class="icons col-auto">
-          <a :href="icon.link" target="_blank">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              :width="width"
-              :height="height"
-              :viewBox="viewBox"
-            >
-              <defs>
-                <path :id="icon.id" :d="icon.path"></path>
-              </defs>
-              <g>
-                <g :transform="icon.transform">
-                  <use :fill="color" xlink:href="#"></use>
-                </g>
-              </g>
-            </svg>
-          </a> -->
-          
-          <!-- <a v-for="(icon, index) in icons" :href="icon.link" target="_blank" :key="index">
-            <svg version="1.1" :id="icon.id" class="social-icon" :width="width" :height="height">
-              <defs></defs>
-              <g>
-                <path
-                  fill="rgb(218,218,218)"
-                  stroke="none"
-                  paint-order="stroke fill markers"
-                  fill-rule="evenodd"
-                  :d="icon.path"
-                ></path>
-              </g>
-            </svg>
-          </a> -->
+       
           <div class="col-auto">
             <a href="http://www.twitter.com" target="_blank"><svg xmlns="http://www.w3.org/2000/svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink" width="34" height="34" viewBox="0 0 34 34">
@@ -112,7 +79,6 @@
         </div>
       </div>
       <hr>
-      <!-- <div class="container"> -->
 
 <!--Navbar-->
 <nav class="navbar navbar-light light-blue lighten-4">
@@ -224,9 +190,9 @@ export default {
   },
   methods: {
     logOut() {
-            this.$store.dispatch('userSignOut');
-            this.$router.push({ path: '/' });
-        }
+      this.$store.dispatch('userSignOut');
+      this.$router.push({ path: '/' });
+  }
   }
 };
 </script>

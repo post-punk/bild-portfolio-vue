@@ -4,9 +4,10 @@ import db from '@/firebase/init'
 const state = {
     blog: [],
     lastBlogPost: null,
-    blogCount: 6,
+    // blogCount: 6,
     noMoreProjects: false,
-    singlePost: null
+    singlePost: null,
+    slug: null
 }
 
 const getters = {
@@ -21,6 +22,9 @@ const getters = {
     },
     noMoreProjects: state => {
         return state.noMoreProjects;
+    },
+    slug: state => {
+        return state.slug;
     }
 }
 
@@ -84,6 +88,7 @@ const actions = {
 
     loadBlog({ commit }) {
         db.collection("blog")
+            .orderBy("date", "desc")
             .limit(2)
             // .startAfter(state.lastBlogPost)
             .get()
@@ -131,14 +136,14 @@ const actions = {
                     //   blog = blog.filter(item => item.id !== doc.id);
                     //     console.log(blog)
                 });
-                var blogCount = state.blogCount;
-                blogCount-=2;
-                if (blogCount === 2) {
-                    state.noMoreProjects = true;
-                }
+                // var blogCount = state.blogCount;
+                // blogCount-=2;
+                // if (blogCount === 2) {
+                    // state.noMoreProjects = true;
+                // }
                 commit("setLoadMore", blog);
                 commit('setlastBlogPost', lastBlogPost);
-                commit('setBlogCount', blogCount)
+                // commit('setBlogCount', blogCount)
             });
     },
 

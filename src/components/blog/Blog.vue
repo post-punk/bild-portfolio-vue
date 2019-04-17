@@ -47,7 +47,7 @@
 <script>
 import CalloutTop from "../CalloutTop.vue";
 import db from "@/firebase/init";
-
+import slugify from 'slugify';
 export default {
   data() {
     return {

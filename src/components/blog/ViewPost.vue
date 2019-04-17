@@ -21,6 +21,7 @@
 import firebase from 'firebase';
 import db from '@/firebase/init';
 // import CalloutTop from "../CalloutTop.vue";
+import slugify from 'slugify';
 
 export default {
     data() {

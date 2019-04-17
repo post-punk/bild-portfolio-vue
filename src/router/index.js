@@ -11,7 +11,7 @@ import ViewPost from '../components/blog/ViewPost'
 import firebase from 'firebase';
 import 'firebase/auth'
 import Router from 'vue-router'
-
+import slugify from 'slugify';
 
 const router = new Router ({
   mode: 'history',
