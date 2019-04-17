@@ -96,7 +96,7 @@ const actions = {
                     if(lastBlogPost) { 
                         blog.filter(item => item.id !== doc.id);
                     }
-                    //     console.log(doc.id)
+                    // console.log(doc.id)
                 });
                 //filter treba da bude odje za if uslov (if (blog.length !== 0))
                 // console.log(blog)

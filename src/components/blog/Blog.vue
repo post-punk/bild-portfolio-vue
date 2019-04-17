@@ -14,7 +14,7 @@
         <div class="row blog-list" v-for="(article, index) in blog" :key="index">
           <img class="col-4 align-self-center" :src="article.image" alt>
           <div class="col-6">
-            <h2>{{ article.header }}</h2>
+            <router-link :to="{ path: '/ViewPost/' + article.id}"><h2>{{ article.header }}</h2></router-link>
             <time :datetime="article.date">{{ article.date }}</time>
             <p v-html="article.text.substring(0,trimAmount)+'...'"></p>
           </div>
@@ -172,6 +172,9 @@ time {
 }
 h5 {
   padding-bottom: 0.5em;
+}
+h2:hover {
+  color: #737373;
 }
 .load-more {
   margin-top: 2em;

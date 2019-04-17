@@ -149,7 +149,7 @@
           <nav><router-link :to="{ name: 'signup' }">SIGN UP</router-link></nav>
           <nav><router-link :to="{ name: 'login' }">LOG IN</router-link></nav>
         </div>
-        <nav @click="logOut()" v-if="user"><router-link :to="{ path: '/' }">SIGN OUT</router-link></nav>
+        <nav @click="logOut()" v-if="user" class="log-out"><router-link :to="{ path: '/' }">SIGN OUT</router-link></nav>
       </div>
 
 
@@ -237,8 +237,12 @@ export default {
 }
  .auth { 
 display: flex;
+margin-right: 0.5em;
   /* font-size: 14px; */
   /* color: #737373 */
+}
+.log-out {
+  margin-right: 1em;
 }
 .auth nav {
   margin: 0.5em;

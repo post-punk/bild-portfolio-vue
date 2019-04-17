@@ -7,6 +7,7 @@ import addNewPost from '../components/blog/addNewPost.vue'
 import signup from '@/components/auth/SignUp.vue'
 import login from '@/components/auth/LogIn.vue'
 import editPost from '../components/blog/editPost.vue'
+import ViewPost from '../components/blog/ViewPost'
 import firebase from 'firebase';
 import 'firebase/auth'
 import Router from 'vue-router'
@@ -66,7 +67,11 @@ const router = new Router ({
         requiresAuth: true,
       }
     },
-   
+    {
+      path: '/ViewPost/:id',
+      name: 'ViewPost',
+      component: ViewPost
+    },
     
   ]
 })
