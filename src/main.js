@@ -59,9 +59,14 @@ firebase.auth().onAuthStateChanged(()=> {
         components: { App },
         template: '<App/>'
       }).$mount('#app')
-  }
+  };
 })
 
+firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        store.dispatch('autoSignIn', user);
+    }
+  })
 
 
 /* eslint-disable no-new */
@@ -73,7 +78,6 @@ firebase.auth().onAuthStateChanged(()=> {
 //   created() {
 //     firebase.auth().onAuthStateChanged((user) => {
 //       if (user) {
-//         // user.sendVerificationEmail()
 //           store.dispatch('autoSignIn', user);
 //     }
 //   })

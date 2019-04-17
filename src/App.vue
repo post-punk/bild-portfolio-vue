@@ -125,6 +125,7 @@ nav,
 .container {
   max-width: 970px
 }
+/* green progress bar */
 .__cov-progress {
   height: 5px !important;
   background-color: #2ecc71 !important;
