@@ -18,16 +18,12 @@
                     @blur="$v.password.$touch()">
                 </div>
                 <div class="warning-box">
-                    <!-- dodaj dirty sem za alphaNum -->
                         <p class="warning" v-if="$v.password.tooFewChars && $v.password.$dirty">Password should be at least {{ passMinLength }} long</p>
                         <p class="warning" v-if="$v.password.tooManyChars && $v.password.$dirty">Password should be a maximum of {{ passMaxLength }} characters long</p>
                         <p class="warning2" v-if="!$v.password.alphaNum">Password should contain alphanumeric characters only</p>
                     </div>
-
                 <button type="submit" class="btn btn-primary" @click="signUp()" :disabled="$v.password.tooFewChars || $v.password.tooManyChars || !$v.password.alphaNum || $v.email.$invalid">Sign Up</button>
-
                 <span class="warning" v-if="feedback">{{ feedback }}</span>
-
             </form>
             </div>
         </div>
@@ -80,10 +76,12 @@ data() {
     computed: {
         feedback() {
             return this.$store.getters.feedback;
+        },
+        user() {
+            return this.$store.getters.user;
         }
     },
     beforeDestroy() {
-        // this.$store.dispatch('userSignOut');
         this.$store.dispatch('resetFeedback')
     },
     validations: {

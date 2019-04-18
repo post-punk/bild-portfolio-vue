@@ -62,9 +62,11 @@ firebase.auth().onAuthStateChanged(()=> {
   };
 })
 
+
 firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         store.dispatch('autoSignIn', user);
+        console.log(user.uid)
      }
   })
 

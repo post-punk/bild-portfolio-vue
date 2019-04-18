@@ -9,7 +9,7 @@
             </div>
             <h1>{{ header }}</h1>
             <time :datetime="date">{{ date }}</time>
-            <img :src="image" alt="">
+            <img class="blog-image" :src="image" alt="">
             <div class="text-wrapper">
                 <p v-html="text"></p>
             </div>
@@ -89,7 +89,7 @@ time {
     font-weight: bold;
     margin-bottom: 2em;
 }
-img {
+.blog-image {
     margin-top: 2em;
     margin-left: auto;
     margin-right: auto;

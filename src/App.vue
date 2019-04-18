@@ -122,8 +122,9 @@ nav,
 .navMain  {
   margin-right: 2em;
 }
-.container {
-  max-width: 970px
+/* override default bootStrap width */
+.container, .row {
+  max-width: 970px;
 }
 /* green progress bar */
 .__cov-progress {

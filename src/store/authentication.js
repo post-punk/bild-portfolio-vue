@@ -42,9 +42,7 @@ const actions = {
     },
     
     createUser( {commit, dispatch}, {email, password} ) {
-        
         firebase.auth().createUserWithEmailAndPassword(email, password)
-        
         // .then(user => {
         // const newUser = {
         // id: user.uid
@@ -63,7 +61,6 @@ const actions = {
                 // }
                 // ...
                 }).then(() => {
-                    commit("setUser", null);
                     dispatch('isNewUser', true);
                     // commit('setIsAuthenticated', false)
                     })
