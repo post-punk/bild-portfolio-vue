@@ -14,10 +14,14 @@
         <div class="row blog-list" v-for="(article, index) in blog" :key="index">
           <img class="col-4 align-self-center" :src="article.image" alt>
           <div class="col-6">
-            <router-link :to="{ path: '/ViewPost/' + article.id}"><h2>{{ article.header }}</h2></router-link>
+            <router-link :to="{ path: '/ViewPost/' + article.slug }"><h2>{{ article.header }}</h2></router-link>
             <time :datetime="article.date">{{ article.date }}</time>
             <p v-html="article.text.substring(0,trimAmount)+'...'"></p>
+            <router-link :to="{ path: '/ViewPost/' + article.slug }">
+              <p id="read-more">Read more...</p>
+            </router-link>
           </div>
+
           <button
             type="button"
             @click="deleteBlogPost(article.id)"
@@ -31,9 +35,9 @@
             type="button"
             class="edit col-2 align-self-start"
             v-if="user"
-           
             aria-label="Edit">
-            <router-link :to="{ path: '/editPost/' + article.id}">Edit blog post</router-link></button>
+            <router-link :to="{ path: '/editPost/' + article.id}">Edit blog post</router-link>
+          </button>
           
         </div>
         <div class="load-button-container">
@@ -193,5 +197,9 @@ h2:hover {
   padding-bottom: 25px;
   display: block;
   margin: auto;
+}
+#read-more {
+  font-weight: bold;
+  color: firebrick;
 }
 </style>

@@ -36,13 +36,18 @@ export default {
         }
     },
 created(){
-    db.collection("blog").doc(this.$route.params.id)
-    .onSnapshot((doc) => {
-        this.header = doc.data().header;
-        this.date = doc.data().date;
-        this.image = doc.data().image;
-        this.text = doc.data().text;
-        this.id = doc.id;
+    // console.log(this.$route.params.slug)
+    db.collection("blog").where("slug", "==", this.$route.params.slug)
+    .onSnapshot((snapshot) => {
+        snapshot.docs.forEach(doc=>{
+            this.header = doc.data().header;
+            this.date = doc.data().date;
+            this.image = doc.data().image;
+            this.text = doc.data().text;
+            this.slug = doc.data().slug;
+            this.id = doc.id;
+        })
+      
     })
 },
 components: {
@@ -67,7 +72,7 @@ methods: {
         text: this.text 
         });
     this.$router.push({ path: '/blog' })
-    }
+        }
     }
 }
 

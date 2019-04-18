@@ -6,8 +6,6 @@ const state = {
     lastBlogPost: null,
     // blogCount: 6,
     noMoreProjects: false,
-    singlePost: null,
-    slug: null
 }
 
 const getters = {
@@ -77,6 +75,7 @@ const actions = {
             date: payload.date,
             image: payload.image,
             text: payload.text,
+            slug: payload.slug
         }).then(() => {
             // this.$router.push({ path: '/blog' })
         }).catch(err => {
@@ -89,24 +88,24 @@ const actions = {
     loadBlog({ commit }) {
         db.collection("blog")
             .orderBy("date", "desc")
-            .limit(2)
+            .limit(99)
             // .startAfter(state.lastBlogPost)
             .get()
             .then(snapshot => {
                 var blog = [];
-                var lastBlogPost = snapshot.docs[snapshot.docs.length - 1];
+                // var lastBlogPost = snapshot.docs[snapshot.docs.length - 1];
                 snapshot.forEach(doc => {
                     blog.push({ ...doc.data(), id: doc.id });
                     //filter any duplicates, ne radi bas
-                    if(lastBlogPost) { 
-                        blog.filter(item => item.id !== doc.id);
-                    }
+                    // if(lastBlogPost) { 
+                    //     blog.filter(item => item.id !== doc.id);
+                    // }
                     // console.log(doc.id)
                 });
                 //filter treba da bude odje za if uslov (if (blog.length !== 0))
                 // console.log(blog)
                 commit('setBlog', blog);
-                commit('setlastBlogPost', lastBlogPost);
+                // commit('setlastBlogPost', lastBlogPost);
             })
 
             //test test 
@@ -125,7 +124,7 @@ const actions = {
 
     loadMore({ commit }) {
         db.collection("blog")
-            .startAfter(state.lastBlogPost)
+            // .startAfter(state.lastBlogPost)
             .limit(2)
             .get()
             .then(snapshot => {

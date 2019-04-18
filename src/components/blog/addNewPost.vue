@@ -3,6 +3,7 @@
         <callout-top :calloutTitle="calloutTitle"></callout-top>
         <div class="container">
             <form action="">
+                <!-- {{slugifyTitle(header)}} -->
                 <input class="form-control" placeholder="Enter title" v-model="header">
                 <input class="form-control" type="date" placeholder="Enter date" v-model="date">
                 <input class="form-control"  placeholder="Enter image URL" v-model="image">
@@ -41,10 +42,10 @@ export default {
        addNewPost() {
         this.slug = slugify(this.header, {
             replacement: '-',
-            remove: /[$*_=~.()'"!\-:@]/g,
+            remove: /[$*_=~.,()'"!\-:@]/g,
             lower: true
         })
-        console.log(this.slug)
+        // console.log(this.slug)
            this.$store.dispatch('addNewPost', {
                 header: this.header,
                 date: this.date,
@@ -53,8 +54,18 @@ export default {
                 slug: this.slug 
            });
            this.$router.push({ path: '/blog' })
-       }
-   }
+       },
+        // slugifyTitle(val){
+        //    if(val){
+        //        this.slug = slugify(val, {
+        //        replacement: '-',
+        //        remove: /[$*_=~.,()'"!\-:@]/g,
+        //        lower: true
+        //         })
+        //    return this.slug
+        //     }
+        // }
+    }
 }
 </script>
 
