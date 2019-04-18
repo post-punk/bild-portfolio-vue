@@ -58,7 +58,8 @@ export default {
             image: this.image,
             text: this.text 
             });
-        this.$router.push({ path: '/blog' })
+            this.$router.go(-1)
+        // this.$router.push({ path: '/blog' })
        }
    }
 }
