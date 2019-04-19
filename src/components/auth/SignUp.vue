@@ -7,6 +7,10 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
                     <input type="text" name="email" @blur="$v.email.$touch()" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" v-model="email" :class="{invalid: $v.email.$error}">
+
+                    <input type="text" name="" class="form-control" placeholder="Enter first name" v-model="firstName" >
+                    <input type="text" name="" class="form-control" placeholder="Enter last name" v-model="lastName">
+
                     <div class="warning-box">
                         <p class="warning" v-if="!$v.email.email && $v.email.$dirty">Please provide a valid email address.</p>
                         <p class="warning" v-if="!$v.email.required && $v.email.$dirty">This field is required.</p>
@@ -52,6 +56,8 @@ data() {
     return {
         calloutTitle: "Sign up here",
         email: null,
+        firstName: null,
+        lastName: null,
         password: '',
         //da sprijeci firebase registraciju, prebaci kasnije u 8
         passMinLength: 4,
@@ -67,6 +73,8 @@ data() {
             this.$store.dispatch('createUser', {
                 email: this.email,
                 password: this.password,
+                firstName: this.firstName,
+                lastName: this.lastName
             }
             );
             this.$store.dispatch('isNewUser', true);
@@ -99,12 +107,16 @@ data() {
 </script>
 
 <style scoped>
+input {
+    margin-top: 1em;
+}
 form {
-    margin-top: 5em;
+    margin-top: 1em;
+    margin-bottom: 5em;
     padding: 20px;
     background: white;
     box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
-    height: 300px;
+    height: 450px;
 }
 .col-6 {
     margin: auto;

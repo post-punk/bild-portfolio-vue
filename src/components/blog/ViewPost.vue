@@ -4,7 +4,7 @@
         <div class="container">
             <hr class="blog-hr-top">
             <div class="admin-tools d-flex justify-content-end">
-                <button type="button" class="btn btn-light" @click="$router.go(-1)">Return</button>
+                <button type="button" class="btn btn-light" @click="$router.go(-1)">Back</button>
                 <div v-if="user">
                     <router-link :to="{ path: '/editPost/' + id}"><button type="button" class="btn btn-success">Edit</button></router-link>
                     <button type="button" class="btn btn-danger" @click="deleteBlogPost(id)">Delete</button>

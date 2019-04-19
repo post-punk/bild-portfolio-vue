@@ -116,21 +116,17 @@
           <nav><router-link :to="{ name: 'login' }">LOG IN</router-link></nav>
         </div>
         <div class="auth">
-          <nav v-if="user"><router-link :to="{ path: '/ViewProfile' }">PROFILE</router-link></nav>
+          <nav v-if="user"><router-link :to="{ path: '/ViewProfile/' + user.id  }">PROFILE</router-link></nav>
           <nav @click="logOut()" v-if="user" class="log-out"><router-link :to="{ path: '/' }">SIGN OUT</router-link></nav>
         </div>
       </div>
-
-
   </div>
   
   <!-- Collapsible content -->
 
 </nav>
 <!--/.Navbar-->
-
       
-      <!-- </div> -->
     </div>
   </div>
 </template>
@@ -145,11 +141,7 @@ export default {
   name: "Header",
   data() {
     return {
-      //   menu : this.$store.state.navMain
-      width: 35,
-      height: 35,
-      viewBox: "0 0 35 35",
-      color: "#dadada"
+
     };
   },
   created() {
@@ -163,8 +155,9 @@ export default {
               console.log("  Email: " + profile.email);
               // console.log("  Photo URL: " + profile.photoURL);
             });
-}
-      //  });
+        };
+
+  //  });
   },
   computed: {
     navMain() {

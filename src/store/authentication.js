@@ -41,8 +41,8 @@ const actions = {
         commit('setIsNewUser', payload)
     },
     
-    createUser( {commit, dispatch}, {email, password} ) {
-        firebase.auth().createUserWithEmailAndPassword(email, password)
+    createUser( {commit, dispatch}, payload ) {
+        firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
         // .then(user => {
         // const newUser = {
         // id: user.uid
@@ -50,23 +50,30 @@ const actions = {
         // commit('setUser', newUser);
         // ...
         // })
-            .catch(function(error) {
-                // Handle Errors here.
-                // var errorCode = error.code;
-                var errorMessage = error.message;
-                // if (error) {
-                    commit('setFeedback', errorMessage)
-                //    return state.feedback = 'Wrong email and/or password, please try again.'
-                    // return state.feedback;
-                // }
-                // ...
-                }).then(() => {
+            .then(cred => {
                     dispatch('isNewUser', true);
+                    db.collection('users').doc().set({
+                        firstName: payload.firstName,
+                        lastName: payload.lastName,
+                        email: payload.email,
+                        id: cred.user.uid
+                    })
                     // commit('setIsAuthenticated', false)
                     })
+                    .catch(function(error) {
+                        // Handle Errors here.
+                        // var errorCode = error.code;
+                        var errorMessage = error.message;
+                        // if (error) {
+                            commit('setFeedback', errorMessage)
+                        //    return state.feedback = 'Wrong email and/or password, please try again.'
+                            // return state.feedback;
+                        // }
+                        // ...
+                        })
                 ;;
             },
-    logIn( {commit}, {email, password} ) {
+    logIn( {commit}, {email, payload} ) {
         firebase.auth().signInWithEmailAndPassword(email, password).then(user => {
         const newUser = {
         id: firebase.auth().currentUser.uid,
@@ -76,7 +83,11 @@ const actions = {
         commit('setUser', newUser);
         console.log(newUser)
         // ...
-        }).catch(function(error) {
+        })
+        .then(
+
+        )
+        .catch(function(error) {
             // Handle Errors here.
             // var errorCode = error.code;
             var errorMessage = error.message;

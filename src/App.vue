@@ -123,7 +123,7 @@ nav,
   margin-right: 2em;
 }
 /* override default bootStrap width */
-.container, .row {
+.container, {
   max-width: 970px;
 }
 /* green progress bar */
