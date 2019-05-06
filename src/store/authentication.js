@@ -17,7 +17,7 @@ const state = {
 const getters = {
     getUser: state => {
         return state.user;
-  },
+    },
     feedback: state => {
         return state.feedback;
     }
@@ -50,13 +50,13 @@ const actions = {
         // commit('setUser', newUser);
         // ...
         // })
-            .then(cred => {
+            .then(user => {
                     dispatch('isNewUser', true);
                     db.collection('users').doc().set({
                         firstName: payload.firstName,
                         lastName: payload.lastName,
                         email: payload.email,
-                        id: cred.user.uid
+                        id: user.user.uid
                     })
                     // commit('setIsAuthenticated', false)
                     })
@@ -73,12 +73,25 @@ const actions = {
                         })
                 ;;
             },
-    logIn( {commit}, {email, payload} ) {
-        firebase.auth().signInWithEmailAndPassword(email, password).then(user => {
+    logIn( {commit}, {email, password} ) {
+        firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
         const newUser = {
-        id: firebase.auth().currentUser.uid,
-        email: firebase.auth().currentUser.email
+            id: firebase.auth().currentUser.uid,
+            email: firebase.auth().currentUser.email,
+            firstName: "",
+            lastName: "",
         };
+
+        db.collection("users")
+        .where("id", "==", newUser.id)
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(doc => {
+            newUser.firstName = doc.data().firstName;
+            newUser.lastName = doc.data().lastName;
+          });
+        });
+        
         console.log(newUser.id, newUser.email)
         commit('setUser', newUser);
         console.log(newUser)
@@ -115,8 +128,27 @@ const actions = {
         });
     },
     autoSignIn({ commit }, payload ) {
-        // var user = firebase.auth().currentUser;
-        commit('setUser', { id: payload.uid });
+        var currentUser = {
+            id: payload.uid,
+            lastName: "",
+            firstName: ""
+        }
+
+        db.collection("users")
+        .where("id", "==", currentUser.id)
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(doc => {
+            //   var a = doc.data();
+              currentUser.firstName = doc.data().firstName;
+              currentUser.lastName = doc.data().lastName;
+              currentUser.email = doc.data().email;
+              currentUser.id = doc.data().id;
+              currentUser.image = doc.data().image;
+          });
+        });
+
+        commit('setUser', currentUser);
     },
 }
 

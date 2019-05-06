@@ -50,8 +50,8 @@ export default {
 data() {
     return {
       calloutTitle: "Log in",
-      email: "vladimir.popovic@bild-studio.net",
-      password: '12345',
+      email: "divac@gmail.com",
+      password: '123456',
       passMinLength: 8,
       passMaxLength: 50,
       
@@ -68,7 +68,6 @@ data() {
             })
             this.$store.dispatch('isNewUser', false )
             // this.$router.push({ path: '/' });
-
         }
     },
     computed: {

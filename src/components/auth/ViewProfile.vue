@@ -4,15 +4,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-4">
-                    <img :src="image" alt="">
+                    <img :src="user.image" alt="">
                 </div>
                 <div class="col-6">
-                    <h3>Username: {{username}}</h3>
-                    <p>email: {{email}}</p>
+                    <!-- <h3>Username: {{username}}</h3> -->
+                    <p>first name: {{user.firstName}}</p>
+                    <p>last name: {{user.lastName}}</p>
+                    <p>email: {{user.email}}</p>
                     <p>details: {{details}}</p>
                     <!-- dodaj mailto -->
                     <button class="d-flex align-content-center btn btn-info" >
-                        <a v-bind:href="'mailto:' + email">Contact {{username}} </a>
+                        <a v-bind:href="'mailto:' + user.email">Contact {{user.email}} </a>
                     </button>
                 </div>
             </div>
@@ -28,19 +30,24 @@ import CalloutTop from "../CalloutTop.vue";
 export default {
 data() {
     return {
-        username: 'Vlado',
-        email: 'vlado544@yahoo.com',
-        image: 'https://f4.bcbits.com/img/a2642946877_10.jpg',
-        details: 'bla blabadas das jlasj lasdl sadlkjlda sl',
-        calloutTitle: "Your details here",
+        // username: 'Vlado',
+        // email: 'vlado544@yahoo.com',
+        // image: 'https://f4.bcbits.com/img/a2642946877_10.jpg',
+        // details: 'bla blabadas das jlasj lasdl sadlkjlda sl',
+        // calloutTitle: "Your details here",
         }
     },
     components: {
        CalloutTop,
    },
+   computed: {
+       user() {
+           return this.$store.getters.getUser;
+       }
+   },
    created() {
 //            console.log(this.$route.params.id + 'blah')
-
+// alert(uid)
 //        db.collection("users").where("uid", "==", this.$route.params.id)
 //         .onSnapshot((snapshot) => {
 //         snapshot.docs.forEach(doc=>{
@@ -62,22 +69,22 @@ data() {
     margin-top: 2rem;
 }
 img {
-    height: 300px;
-    /* height: 350px; */
+    width: 300px;
+    height: auto;
     float: left;
     border-radius: 12px;
-    z-index: 2;
+    z-index: 0;
+    margin-bottom: 1em;
 }
 .col-6 {
     /* border: 1px solid #aaa; */
     border-radius: 12px;
-    /* height: 280px; */
+    height: 280px;
     padding-top: 1em;
     padding-left: 2em;
     /* margin-left: -0.8em; */
     -webkit-box-shadow: 13px 14px 19px 10px rgba(0,0,0,0.59);
     -moz-box-shadow: 13px 14px 19px 10px rgba(0,0,0,0.59);
     box-shadow: 13px 14px 19px 10px rgba(0,0,0,0.59);
-    z-index: 0;
 }
 </style>
