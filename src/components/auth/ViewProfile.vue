@@ -7,12 +7,11 @@
                     <img :src="user.image" alt="">
                 </div>
                 <div class="col-6">
-                    <!-- <h3>Username: {{username}}</h3> -->
+                    <!-- {{this.$route.params.name}} -->
                     <p>first name: {{user.firstName}}</p>
                     <p>last name: {{user.lastName}}</p>
                     <p>email: {{user.email}}</p>
                     <p>details: {{details}}</p>
-                    <!-- dodaj mailto -->
                     <button class="d-flex align-content-center btn btn-info" >
                         <a v-bind:href="'mailto:' + user.email">Contact {{user.email}} </a>
                     </button>
@@ -35,6 +34,7 @@ data() {
         // image: 'https://f4.bcbits.com/img/a2642946877_10.jpg',
         // details: 'bla blabadas das jlasj lasdl sadlkjlda sl',
         // calloutTitle: "Your details here",
+         calloutTitle: "Your profile page:",
         }
     },
     components: {

@@ -3,9 +3,13 @@
         <callout-top :calloutTitle="calloutTitle"></callout-top>
         <div class="container">
             <form action="">
+                <h6>Title:</h6>
                 <input class="form-control" placeholder="Enter title" v-model="header">
+                <h6>Date:</h6>
                 <input class="form-control" type="date" placeholder="Enter date" v-model="date">
+                <h6>Image URL:</h6>
                 <input class="form-control"  placeholder="Enter image URL" v-model="image">
+                <h6>Text:</h6>
                 <vue-ckeditor v-model="text"></vue-ckeditor>
                 <button type="button" class="btn btn-primary" @click="editPost(id)">Submit</button>
                 <!-- <h1>{{ this.$route.params.id }}</h1> -->

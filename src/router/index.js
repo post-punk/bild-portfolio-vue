@@ -9,6 +9,7 @@ import login from '@/components/auth/LogIn.vue'
 import editPost from '../components/blog/editPost.vue'
 import ViewPost from '../components/blog/ViewPost'
 import ViewProfile from '../components/auth/ViewProfile';
+import NotFoundComponent from '../components/404/NotFoundComponent.vue'
 import firebase from 'firebase';
 import 'firebase/auth'
 import Router from 'vue-router'
@@ -68,15 +69,22 @@ const router = new Router ({
       }
     },
     {
-      path: '/ViewPost/:slug',
+      path: '/blog/:slug',
       name: 'ViewPost',
       component: ViewPost
     },
     {
       //dodaj /:user
-      path: '/ViewProfile/',
+      path: '/ViewProfile/:name',
       name: 'ViewProfile',
-      component: ViewProfile
+      component: ViewProfile,
+      meta: {
+        requiresAuth: true,
+      }
+    },
+    {
+      path: '*',
+      component: NotFoundComponent
     }
     
   ]

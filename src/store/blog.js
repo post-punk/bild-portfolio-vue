@@ -107,7 +107,6 @@ const actions = {
                 commit('setBlog', blog);
                 // commit('setlastBlogPost', lastBlogPost);
             })
-
             //test test 
             // var docRef = db.collection("blog").doc("3dvVnUxozf8ZBYHXAFjK");
             // docRef.get().then(function(doc) {

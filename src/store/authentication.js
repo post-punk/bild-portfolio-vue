@@ -42,6 +42,7 @@ const actions = {
     },
     
     createUser( {commit, dispatch}, payload ) {
+        
         firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
         // .then(user => {
         // const newUser = {

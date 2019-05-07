@@ -14,7 +14,7 @@
         <div class="row blog-list" v-for="(article, index) in blog" :key="index">
           <img class="col-4 align-self-center" :src="article.image" alt>
           <div class="col-6">
-            <router-link :to="{ path: '/ViewPost/' + article.slug }"><h2>{{ article.header }}</h2></router-link>
+            <router-link :to="{ path: '/blog/' + article.slug }"><h2>{{ article.header }}</h2></router-link>
             <time :datetime="article.date">{{ article.date }}</time>
             <p v-html="article.text.substring(0,trimAmount)+'...'"></p>
             <router-link :to="{ path: '/ViewPost/' + article.slug }">
