@@ -5,7 +5,9 @@
             <form action="">
                 <!-- {{slugifyTitle(header)}} -->
                 <input class="form-control" placeholder="Enter title" v-model="header">
-                <input class="form-control" type="date" placeholder="Enter date" v-model="date">
+                <!-- <input class="form-control" type="datetime-local" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}" placeholder="Enter date" v-model="date"> -->
+                <datepicker v-model="date" type="datetime-local"></datepicker>
+
                 <input class="form-control"  placeholder="Enter image URL" v-model="image">
                 <textarea name="ckeditor" id="ckeditor" cols="90" rows="10" v-model="text" placeholder="Enter title"></textarea>
                 <button type="button" class="btn btn-primary" @click="addNewPost()">Submit</button>
@@ -20,13 +22,16 @@ import db from '@/firebase/init';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import slugify from 'slugify';
+import moment from 'moment';
+import Datepicker from 'vuejs-datepicker';
+
 
 export default {
  data() {
     return {
         calloutTitle: "Add new blog post",
         header: null,
-        date: null,
+        date: '',
         image: null,
         text: null,
         slug: null
@@ -37,6 +42,8 @@ export default {
    },
    components: {
        CalloutTop,
+       moment,
+       Datepicker
    },
    methods: {
        addNewPost() {
@@ -48,11 +55,15 @@ export default {
         // console.log(this.slug)
            this.$store.dispatch('addNewPost', {
                 header: this.header,
-                date: this.date,
+                date: moment(this.date)
+                    .utc()
+                    .startOf("day")
+                    .format(),
                 image: this.image,
                 text: CKEDITOR.instances.ckeditor.getData(),
                 slug: this.slug 
            });
+           
            this.$router.push({ path: '/blog' })
        },
         // slugifyTitle(val){
@@ -85,7 +96,7 @@ form {
     margin-bottom: 1em;
 
 }
-input[type="date"]:before {
+input[type="datetime-local"]:before {
     content: attr(placeholder) !important;
     /* color: #aaa; */
     margin-right: 0.5em;

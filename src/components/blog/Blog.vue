@@ -14,8 +14,12 @@
         <div class="row blog-list" v-for="(article, index) in blog" :key="index">
           <img class="col-4 align-self-center" :src="article.image" alt>
           <div class="col-6">
-            <router-link :to="{ path: '/blog/' + article.slug }"><h2>{{ article.header }}</h2></router-link>
+            <router-link :to="{ path: '/blog/' + article.slug }">
+              <h2>{{ article.header }}</h2>
+            </router-link>
             <time :datetime="article.date">{{ article.date }}</time>
+            <span>{{ article.date | formatDate() }}</span>
+
             <p v-html="article.text.substring(0,trimAmount)+'...'"></p>
             <router-link :to="{ path: '/ViewPost/' + article.slug }">
               <p id="read-more">Read more...</p>
@@ -27,18 +31,19 @@
             @click="deleteBlogPost(article.id)"
             class="close col-2 align-self-start"
             v-if="user"
-            aria-label="Close">
+            aria-label="Close"
+          >
             <span aria-hidden="true">&times;</span>
           </button>
 
           <button
             type="button"
             class="edit col-2 align-self-start"
-            v-if="user"
-            aria-label="Edit">
+            @click="editOrRedirect"
+            aria-label="Edit"
+          >
             <router-link :to="{ path: '/editPost/' + article.id}">Edit blog post</router-link>
           </button>
-          
         </div>
         <div class="load-button-container">
           <button v-if="!noMoreProjects" class="load-more" @click="loadMore()">Load more</button>
@@ -51,14 +56,18 @@
 <script>
 import CalloutTop from "../CalloutTop.vue";
 import db from "@/firebase/init";
-import slugify from 'slugify';
+import slugify from "slugify";
+import moment from 'moment';
+import Datepicker from 'vuejs-datepicker';
+
+
 export default {
   data() {
     return {
       calloutTitle: "BLOG",
       // noMoreProjects: false,
       // blogCount: 5,
-      trimAmount: 800
+      trimAmount: 800,
     };
   },
   created() {
@@ -76,18 +85,28 @@ export default {
     },
     noMoreProjects() {
       return this.$store.getters.noMoreProjects;
-    }
+    },
+    user() {
+      return this.$store.getters.getUser;
+       }
     // blogCount() {
     //   return this.$store.getters.blogCount;
     // }
   },
+  filters: {
+  formatDate(date) {
+     return moment(date).format("DD/MM/YYYY");
+   },
+  },
   components: {
-    CalloutTop
+    CalloutTop,
+    moment,
+    Datepicker
     // addNewPost
   },
   methods: {
     loadMore() {
-      this.$store.dispatch('loadMore');
+      this.$store.dispatch("loadMore");
       // db.collection("blog")
       //   .startAfter(this.lastBlogPost)
       //   .limit(1)
@@ -108,13 +127,22 @@ export default {
       this.$store.dispatch("deleteArticle", { uid });
     },
     // editBlogPost(uid) {
-    //   this.$store.dispatch('editArticle', { 
+    //   this.$store.dispatch('editArticle', {
     //     header: article.header,
     //     date: article.date,
     //     image: article.image,
     //     text: article.text
     //    })
     // }
+    editOrRedirect() {
+      if (user) {
+        this.$router.push({ path: "/editPost/" + article.id });
+      } else {
+        this.$router.push({ path: "/login" });
+      
+      }
+    },
+    
   }
 };
 </script>

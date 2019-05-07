@@ -107,6 +107,7 @@ const actions = {
                 commit('setBlog', blog);
                 // commit('setlastBlogPost', lastBlogPost);
             })
+
             //test test 
             // var docRef = db.collection("blog").doc("3dvVnUxozf8ZBYHXAFjK");
             // docRef.get().then(function(doc) {
@@ -147,7 +148,7 @@ const actions = {
 
     deleteArticle({ dispatch, commit }, { uid }) {
         //UNCOMMENT!
-        // db.collection("blog").doc(uid).delete();
+        db.collection("blog").doc(uid).delete();
         state.blog = state.blog.filter(article => {
             return article.id != uid
         })

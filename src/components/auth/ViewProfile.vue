@@ -34,7 +34,7 @@ data() {
         // image: 'https://f4.bcbits.com/img/a2642946877_10.jpg',
         // details: 'bla blabadas das jlasj lasdl sadlkjlda sl',
         // calloutTitle: "Your details here",
-         calloutTitle: "Your profile page:",
+         calloutTitle: "Your profile",
         }
     },
     components: {

@@ -112,7 +112,7 @@ const actions = {
             // }
             // ...
           });
-        // this.$router.push({ path: '/' });
+        // router.push({ path: '/' });
 
     },
     resetFeedback({commit}) {
