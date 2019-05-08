@@ -4,9 +4,9 @@
         <div class="container">
             <form action="">
                 <!-- {{slugifyTitle(header)}} -->
+                <datepicker placeholder="Enter date" class="datepicker" :input-class="{datepicker}" v-model="date" type="datetime-local"></datepicker>
                 <input class="form-control" placeholder="Enter title" v-model="header">
                 <!-- <input class="form-control" type="datetime-local" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}" placeholder="Enter date" v-model="date"> -->
-                <datepicker v-model="date" type="datetime-local"></datepicker>
 
                 <input class="form-control"  placeholder="Enter image URL" v-model="image">
                 <textarea name="ckeditor" id="ckeditor" cols="90" rows="10" v-model="text" placeholder="Enter title"></textarea>
@@ -45,6 +45,9 @@ export default {
        moment,
        Datepicker
    },
+   props: {
+
+},
    methods: {
        addNewPost() {
         this.slug = slugify(this.header, {
@@ -100,5 +103,20 @@ input[type="datetime-local"]:before {
     content: attr(placeholder) !important;
     /* color: #aaa; */
     margin-right: 0.5em;
+  }
+.datepicker {
+    /* display: block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; */
   }
 </style>

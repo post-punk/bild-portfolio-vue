@@ -7,15 +7,15 @@
                     <img :src="user.image" alt="">
                 </div>
                 <div class="col-6">
+                    {{user}}
                     <!-- {{this.$route.params.name}} -->
-                    <p>first name: {{user.firstName}}</p>
-                    <p>last name: {{user.lastName}}</p>
-                    <p>email: {{user.email}}</p>
-                    <p>details: {{details}}</p>
-                    <button class="d-flex align-content-center btn btn-info" >
-                        <a v-bind:href="'mailto:' + user.email">Contact {{user.email}} </a>
+                    <input v-model="firstName">first name
+                    <input v-model="lastName">last name
+                    <!-- <input>details -->
+                    <button @click="editUser(user)" class="d-flex align-content-center btn btn-info" >
+                        submit changes
                     </button>
-                    <button><router-link :to="{ path: '/EditProfile/' }">Edit</router-link></button>
+                    <button @click="$router.go(-1)">go back</button>
                 </div>
             </div>
         </div>
@@ -24,28 +24,58 @@
 
 <script>
 import CalloutTop from "../CalloutTop.vue";
+import db from '@/firebase/init'
+import firebase from 'firebase/app';
+import 'firebase/auth';
 // import firebase from 'firebase';
 // import db from '@/firebase/init';
 
 export default {
 data() {
     return {
-        // username: 'Vlado',
-        // email: 'vlado544@yahoo.com',
-        // image: 'https://f4.bcbits.com/img/a2642946877_10.jpg',
-        // details: 'bla blabadas das jlasj lasdl sadlkjlda sl',
-        // calloutTitle: "Your details here",
+
          calloutTitle: "Your profile",
+         firstName: '',
+         lastName: ''
         }
     },
     components: {
        CalloutTop,
    },
-   computed: {
+    computed: {
        user() {
            return this.$store.getters.getUser;
        }
    },
+   methods: {
+       editUser(user) {
+        console.log(user.id)
+         db.collection("users").doc('lUuSnPLWJ1IUH9ICJ7kw')
+        // .where("id", "==", this.user.uid)
+        .update({
+            firstName: this.firstName,
+            lastName: this.lastName
+        });
+
+       }
+    //     editPost({ dispatch, commit }, payload) {
+    //     db.collection('blog').doc(payload.id).update({
+    //         header: payload.header,
+    //         date: payload.date,
+    //         image: payload.image,
+    //         text: payload.text,
+    //     }).then(() => {
+    //         // this.$router.push({ path: '/blog' })
+    //     }).catch(err => {
+    //         console.log(err)
+    //     })
+    // commit('setBlog');
+    // dispatch('loadBlog');
+    // router.go(-1)
+    // },
+
+   },
+  
    created() {
 //            console.log(this.$route.params.id + 'blah')
 // alert(uid)
@@ -87,6 +117,9 @@ img {
     -webkit-box-shadow: 13px 14px 19px 10px rgba(0,0,0,0.59);
     -moz-box-shadow: 13px 14px 19px 10px rgba(0,0,0,0.59);
     box-shadow: 13px 14px 19px 10px rgba(0,0,0,0.59);
+}
+input {
+    display: block;
 }
 button {
     margin-bottom: 1em;

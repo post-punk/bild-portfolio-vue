@@ -1,5 +1,5 @@
 import db from '@/firebase/init'
-
+import router from '../router/index'
 
 const state = {
     blog: [],
@@ -67,6 +67,7 @@ const actions = {
         })
     commit('setBlog');
     dispatch('loadBlog');
+    router.go(-1)
     },
 
     addNewPost({dispatch, commit}, payload) {

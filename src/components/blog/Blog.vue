@@ -17,10 +17,8 @@
             <router-link :to="{ path: '/blog/' + article.slug }">
               <h2>{{ article.header }}</h2>
             </router-link>
-            <time :datetime="article.date">{{ article.date }}</time>
-            <span>{{ article.date | formatDate() }}</span>
-
-            <p v-html="article.text.substring(0,trimAmount)+'...'"></p>
+            <time :datetime="article.date">{{ article.date | formatDate() }}</time>
+            <p v-html="article.text.substring(0, trimAmount) + '...'"></p>
             <router-link :to="{ path: '/ViewPost/' + article.slug }">
               <p id="read-more">Read more...</p>
             </router-link>
@@ -39,7 +37,8 @@
           <button
             type="button"
             class="edit col-2 align-self-start"
-            @click="editOrRedirect"
+            @click="editBlogPost"
+            v-if="user"
             aria-label="Edit"
           >
             <router-link :to="{ path: '/editPost/' + article.id}">Edit blog post</router-link>
@@ -94,8 +93,8 @@ export default {
     // }
   },
   filters: {
-  formatDate(date) {
-     return moment(date).format("DD/MM/YYYY");
+      formatDate(date) {
+        return moment(date).format("DD/MM/YYYY");
    },
   },
   components: {
@@ -126,22 +125,15 @@ export default {
     deleteBlogPost(uid) {
       this.$store.dispatch("deleteArticle", { uid });
     },
-    // editBlogPost(uid) {
-    //   this.$store.dispatch('editArticle', {
-    //     header: article.header,
-    //     date: article.date,
-    //     image: article.image,
-    //     text: article.text
-    //    })
-    // }
-    editOrRedirect() {
-      if (user) {
-        this.$router.push({ path: "/editPost/" + article.id });
-      } else {
-        this.$router.push({ path: "/login" });
-      
-      }
-    },
+    editBlogPost(uid) {
+      this.$store.dispatch('editArticle', {
+        header: article.header,
+        date: article.date,
+        image: article.image,
+        text: article.text
+       })
+    }
+    
     
   }
 };

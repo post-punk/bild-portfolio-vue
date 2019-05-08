@@ -111,9 +111,27 @@ const actions = {
                 // return state.feedback;
             // }
             // ...
-          });
-        // router.push({ path: '/' });
 
+          });
+          
+        //   beforeRouteEnter (to, from, next) {
+        //     next(vm => {
+        //       if (from.path === 'blog/what-you-should-know-about-javascript-arrays') {
+        //         router.go(-1)
+        //       } else {
+        //         router.push({path: '/'})
+        //       }
+        //       next()
+        //     });
+        //   }
+
+        //   if (router.currentRoute == "blog/what-you-should-know-about-javascript-arrays") {
+        //     router.go(-1)
+        //     } else  {
+        //     router.push({path: '/'})
+        // }
+        
+        router.go(-1);
     },
     resetFeedback({commit}) {
         commit('setFeedback', null)

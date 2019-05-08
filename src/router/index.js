@@ -9,6 +9,7 @@ import login from '@/components/auth/LogIn.vue'
 import editPost from '../components/blog/editPost.vue'
 import ViewPost from '../components/blog/ViewPost'
 import ViewProfile from '../components/auth/ViewProfile';
+import EditProfile from '../components/auth/EditProfile.vue';
 import NotFoundComponent from '../components/404/NotFoundComponent.vue'
 import firebase from 'firebase';
 import 'firebase/auth'
@@ -83,9 +84,18 @@ const router = new Router ({
       }
     },
     {
+      path: '/EditProfile/',
+      name: 'EditProfile',
+      component: EditProfile,
+      meta: {
+        requiresAuth: true,
+      }
+    },
+    {
       path: '*',
       component: NotFoundComponent
-    }
+    },
+    
     
   ]
 })
