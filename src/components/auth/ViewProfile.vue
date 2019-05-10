@@ -7,11 +7,12 @@
                     <img :src="user.image" alt="">
                 </div>
                 <div class="col-6">
+                      {{user.id}}
                     <!-- {{this.$route.params.name}} -->
                     <p>first name: {{user.firstName}}</p>
                     <p>last name: {{user.lastName}}</p>
                     <p>email: {{user.email}}</p>
-                    <p>details: {{details}}</p>
+                    <!-- <p>details: {{details}}</p> -->
                     <button class="d-flex align-content-center btn btn-info" >
                         <a v-bind:href="'mailto:' + user.email">Contact {{user.email}} </a>
                     </button>

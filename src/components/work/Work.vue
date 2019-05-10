@@ -68,7 +68,7 @@
           </div>
         </div>
         <div class="load-button-container">
-          <button v-show="!noMoreProjects" class="load-more" @click="loadMore()">Load more</button>
+          <button v-show="!noMoreProjects" class="load-more" id="loadMore" @click="loadMore()">Load more</button>
         </div>
       </div>
     </div>
@@ -95,6 +95,9 @@ export default {
   created() {
     this.$store.dispatch("displayAll");
   },
+  beforeDestroy() {
+    this.$store.dispatch('emptyProjects', []);
+  },
 
   computed: {
     projectItems: function() {
@@ -109,9 +112,11 @@ export default {
     CalloutTop
   },
   methods: {
+
     activeView(val) {
       this.view = val;
     },
+
     loadMore() {
       db.collection("work-items")
         .orderBy("name")
@@ -124,6 +129,9 @@ export default {
           snapshot.forEach(doc => {
             projects.push(doc.data());
           });
+          // if(lastVisible) { 
+          //               projects.filter(project => project.id !== doc.id);
+          //           }
           if (snapshot.docs.length == 0) {
             this.noMoreProjects = true;
           }
@@ -131,7 +139,9 @@ export default {
           this.$store.commit("setLastVisible", lastVisible);
         });
     },
+
     firestoreFilter(val) {
+      this.$store.dispatch('emptyProjects', []);
       //varijanta za 'all'
       if (val === "all") {
         db.collection("work-items")
@@ -146,6 +156,8 @@ export default {
             this.selectedCategory = "all";
           });
       } else {
+        document.getElementById("loadMore").style.display = "none";
+        this.$store.dispatch('emptyProjects', []);
         db.collection("work-items")
           .where("category", "==", val)
           .get()
@@ -159,6 +171,7 @@ export default {
           });
       }
     }
+    
   }
 };
 </script>

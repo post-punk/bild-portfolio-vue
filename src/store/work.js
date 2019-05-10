@@ -90,7 +90,10 @@ const mutations = {
    },
    setLastVisible(state, payload) {
        state.lastVisible = payload
-   }
+   },
+   setEmptyProjects(state, payload) {
+        state.projects = payload;
+}
 }
 const actions = {
     displayAll ({commit}) {
@@ -105,8 +108,15 @@ const actions = {
       commit('setProjects', projects);
       commit('setLastVisible', lastVisible);
       });
+    },
+    emptyProjects ({commit}, payload) {
+        commit('setEmptyProjects', payload)
     }
+    
+
 }
+
+    
 
 export default {
     // namespaced: true,

@@ -115,10 +115,10 @@ export default {
       //     snapshot.forEach(doc => {
       //       blog.push({ ...doc.data(), id: doc.id });
       //     });
-      //     this.blogCount -= 1;
-      //     if (this.blogCount === 1) {
-      //       this.noMoreProjects = true;
-      //     }
+      //     // this.blogCount -= 1;
+      //     // if (this.blogCount === 1) {
+      //     //   this.noMoreProjects = true;
+      //     // }
       //     this.$store.commit("setBlog", blog);
       //     });
     },

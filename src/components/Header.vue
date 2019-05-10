@@ -116,7 +116,7 @@
           <nav><router-link :to="{ name: 'login' }">LOG IN</router-link></nav>
         </div>
         <div class="auth">
-          <nav v-if="user"><router-link :to="{ path: '/ViewProfile/' + name }">Hello, {{user.firstName}}</router-link></nav>
+          <nav v-if="user"><router-link :to="{ path: '/viewprofile/' + name.toLowerCase() }">Hello, {{user.firstName}}</router-link></nav>
           <nav @click="logOut()" v-if="user" class="log-out"><router-link :to="{ path: '/' }">SIGN OUT</router-link></nav>
         </div>
       </div>

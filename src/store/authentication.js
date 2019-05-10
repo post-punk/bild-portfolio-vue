@@ -154,11 +154,12 @@ const actions = {
         }
 
         db.collection("users")
-        .where("id", "==", currentUser.id)
+        .where("id", "==", payload.uid)
         .get()
         .then(snapshot => {
           snapshot.forEach(doc => {
             //   var a = doc.data();
+            // var currentUser = 
               currentUser.firstName = doc.data().firstName;
               currentUser.lastName = doc.data().lastName;
               currentUser.email = doc.data().email;

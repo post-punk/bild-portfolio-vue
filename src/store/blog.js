@@ -88,25 +88,24 @@ const actions = {
 
     loadBlog({ commit }) {
         db.collection("blog")
-            .orderBy("date", "desc")
-            .limit(99)
+            .limit(1)
             // .startAfter(state.lastBlogPost)
             .get()
             .then(snapshot => {
                 var blog = [];
-                // var lastBlogPost = snapshot.docs[snapshot.docs.length - 1];
+                var lastBlogPost = snapshot.docs[snapshot.docs.length - 1];
                 snapshot.forEach(doc => {
                     blog.push({ ...doc.data(), id: doc.id });
                     //filter any duplicates, ne radi bas
-                    // if(lastBlogPost) { 
-                    //     blog.filter(item => item.id !== doc.id);
-                    // }
-                    // console.log(doc.id)
+                    if(lastBlogPost) { 
+                        blog.filter(item => item.id !== doc.id);
+                    }
+                    //     console.log(doc.id)
                 });
                 //filter treba da bude odje za if uslov (if (blog.length !== 0))
                 // console.log(blog)
                 commit('setBlog', blog);
-                // commit('setlastBlogPost', lastBlogPost);
+                commit('setlastBlogPost', lastBlogPost);
             })
 
             //test test 
@@ -125,8 +124,8 @@ const actions = {
 
     loadMore({ commit }) {
         db.collection("blog")
-            // .startAfter(state.lastBlogPost)
-            .limit(2)
+            .startAfter(state.lastBlogPost)
+            .limit(1)
             .get()
             .then(snapshot => {
                 var blog = [];
@@ -136,14 +135,14 @@ const actions = {
                     //   blog = blog.filter(item => item.id !== doc.id);
                     //     console.log(blog)
                 });
-                // var blogCount = state.blogCount;
-                // blogCount-=2;
-                // if (blogCount === 2) {
-                    // state.noMoreProjects = true;
-                // }
+                var blogCount = state.blogCount;
+                blogCount-=2;
+                if (blogCount === 2) {
+                    state.noMoreProjects = true;
+                }
                 commit("setLoadMore", blog);
                 commit('setlastBlogPost', lastBlogPost);
-                // commit('setBlogCount', blogCount)
+                commit('setBlogCount', blogCount)
             });
     },
 
