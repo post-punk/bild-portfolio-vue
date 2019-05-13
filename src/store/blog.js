@@ -97,10 +97,9 @@ const actions = {
                 snapshot.forEach(doc => {
                     blog.push({ ...doc.data(), id: doc.id });
                     //filter any duplicates, ne radi bas
-                    if(lastBlogPost) { 
-                        blog.filter(item => item.id !== doc.id);
-                    }
-                    //     console.log(doc.id)
+                    // if(lastBlogPost) { 
+                    //     blog.filter(item => item.id !== doc.id);
+                    // }
                 });
                 //filter treba da bude odje za if uslov (if (blog.length !== 0))
                 // console.log(blog)
@@ -108,18 +107,6 @@ const actions = {
                 commit('setlastBlogPost', lastBlogPost);
             })
 
-            //test test 
-            // var docRef = db.collection("blog").doc("3dvVnUxozf8ZBYHXAFjK");
-            // docRef.get().then(function(doc) {
-            // if (doc.exists) {
-            // console.log("Document data:", doc.data());
-            //  } else {
-            // doc.data() will be undefined in this case
-            //  console.log("No such document!");
-                // }
-            // }).catch(function(error) {
-                // console.log("Error getting document:", error);
-            // });
     },
 
     loadMore({ commit }) {
@@ -132,8 +119,7 @@ const actions = {
                 var lastBlogPost = snapshot.docs[snapshot.docs.length - 1];
                 snapshot.forEach(doc => {
                     blog.push({ ...doc.data(), id: doc.id });
-                    //   blog = blog.filter(item => item.id !== doc.id);
-                    //     console.log(blog)
+
                 });
                 var blogCount = state.blogCount;
                 blogCount-=2;

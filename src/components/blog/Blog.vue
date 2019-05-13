@@ -12,14 +12,14 @@
       <br>
       <div class="container">
         <div class="row blog-list" v-for="(article, index) in blog" :key="index">
-          <img class="col-4 align-self-center" :src="article.image" alt>
-          <div class="col-6">
+          <img class="col-md-4 align-self-center" :src="article.image" alt>
+          <div class="col-md-6">
             <router-link :to="{ path: '/blog/' + article.slug }">
-              <h2>{{ article.header }}</h2>
+              <h3>{{ article.header }}</h3>
             </router-link>
             <time :datetime="article.date">{{ article.date | formatDate() }}</time>
             <p v-html="article.text.substring(0, trimAmount) + '...'"></p>
-            <router-link :to="{ path: '/ViewPost/' + article.slug }">
+            <router-link :to="{ path: '/blog/' + article.slug }">
               <p id="read-more">Read more...</p>
             </router-link>
           </div>
@@ -33,6 +33,10 @@
           >
             <span aria-hidden="true">&times;</span>
           </button>
+<!-- za modal -->
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Launch demo modal
+          </button>
 
           <button
             type="button"
@@ -41,6 +45,29 @@
             v-if="user"
             aria-label="Edit"
           >
+          <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
             <router-link :to="{ path: '/editPost/' + article.id}">Edit blog post</router-link>
           </button>
         </div>
@@ -66,7 +93,7 @@ export default {
       calloutTitle: "BLOG",
       // noMoreProjects: false,
       // blogCount: 5,
-      trimAmount: 800,
+      trimAmount: 300,
     };
   },
   created() {

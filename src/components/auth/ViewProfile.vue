@@ -3,15 +3,15 @@
         <callout-top :calloutTitle="calloutTitle"></callout-top>
         <div class="container">
             <div class="row">
-                <div class="col-4">
+                <div class="col-xl-4 ">
                     <img :src="user.image" alt="">
                 </div>
-                <div class="col-6">
-                      {{user.id}}
+                <div class="col-xl-8">
+                      <!-- {{user.id}} -->
                     <!-- {{this.$route.params.name}} -->
-                    <p>first name: {{user.firstName}}</p>
-                    <p>last name: {{user.lastName}}</p>
-                    <p>email: {{user.email}}</p>
+                    First name: <p>{{user.firstName}}</p>
+                    Last name: <p>{{user.lastName}}</p>
+                    email: <p>{{user.email}}</p>
                     <!-- <p>details: {{details}}</p> -->
                     <button class="d-flex align-content-center btn btn-info" >
                         <a v-bind:href="'mailto:' + user.email">Contact {{user.email}} </a>
@@ -48,20 +48,7 @@ data() {
        }
    },
    created() {
-//            console.log(this.$route.params.id + 'blah')
-// alert(uid)
-//        db.collection("users").where("uid", "==", this.$route.params.id)
-//         .onSnapshot((snapshot) => {
-//         snapshot.docs.forEach(doc=>{
-//             this.header = doc.data().header;
-//             this.date = doc.data().date;
-//             this.image = doc.data().image;
-//             this.text = doc.data().text;
-//             this.slug = doc.data().slug;
-//             this.id = doc.id;
-//         })
-      
-//     })
+       
    }
 }
 </script>
@@ -78,19 +65,22 @@ img {
     z-index: 0;
     margin-bottom: 1em;
 }
-.col-6 {
+.col-xl-8 {
     /* border: 1px solid #aaa; */
     border-radius: 12px;
     height: 280px;
     padding-top: 1em;
     padding-left: 2em;
     /* margin-left: -0.8em; */
-    -webkit-box-shadow: 13px 14px 19px 10px rgba(0,0,0,0.59);
-    -moz-box-shadow: 13px 14px 19px 10px rgba(0,0,0,0.59);
-    box-shadow: 13px 14px 19px 10px rgba(0,0,0,0.59);
+    -webkit-box-shadow: 6px 7px 8px 5p rgba(0,0,0,0.59);
+    -moz-box-shadow: 6px 7px 8px 5p rgba(0,0,0,0.59);
+    box-shadow: 6px 7px 8px 5px rgba(0,0,0,0.59);
 }
 button {
     margin-bottom: 1em;
     cursor: pointer
+}
+p {
+    font-weight: bold;
 }
 </style>

@@ -3,14 +3,16 @@
         <callout-top :calloutTitle="calloutTitle"></callout-top>
         <div class="container">
             <div class="row">
-                <div class="col-4">
+                <div class="col-xl-4 ">
                     <img :src="user.image" alt="">
                 </div>
-                <div class="col-6">
-                    {{user.id}}
+                <div class="col-xl-8">
+                    <!-- {{user.id-}} -->
                     <!-- {{this.$route.params.name}} -->
-                    <input v-model="firstName">first name
-                    <input v-model="lastName">last name
+                    <p>First name:</p>
+                    <input v-model="firstName">
+                    <p>Last name:</p>
+                    <input v-model="lastName">
                     <!-- <input>details -->
                     <button @click="editUser(user)" class="d-flex align-content-center btn btn-info" >
                         submit changes
@@ -27,8 +29,6 @@ import CalloutTop from "../CalloutTop.vue";
 import db from '@/firebase/init'
 import firebase from 'firebase/app';
 import 'firebase/auth';
-// import firebase from 'firebase';
-// import db from '@/firebase/init';
 
 export default {
 data() {
@@ -50,49 +50,18 @@ data() {
    methods: {
        editUser(user) {
                    console.log(user)
-
-         db.collection("users").doc()
-        .where("id", "==", this.user.id)
+        
+        db.collection("users").doc(user.docId)
         .update({
             firstName: this.firstName,
             lastName: this.lastName
-        });
-        // this.$router.go(-1);
+        })
+        .then(this.$router.go())
        }
-    //     editPost({ dispatch, commit }, payload) {
-    //     db.collection('blog').doc(payload.id).update({
-    //         header: payload.header,
-    //         date: payload.date,
-    //         image: payload.image,
-    //         text: payload.text,
-    //     }).then(() => {
-    //         // this.$router.push({ path: '/blog' })
-    //     }).catch(err => {
-    //         console.log(err)
-    //     })
-    // commit('setBlog');
-    // dispatch('loadBlog');
-    // router.go(-1)
-    // },
-
    },
   
    created() {
 
-//            console.log(this.$route.params.id + 'blah')
-// alert(uid)
-    //    db.collection("users").where("uid", "==", this.$route.params.id)
-    //     .onSnapshot((snapshot) => {
-    //     snapshot.docs.forEach(doc=>{
-    //         this.header = doc.data().header;
-    //         this.date = doc.data().date;
-    //         this.image = doc.data().image;
-    //         this.text = doc.data().text;
-    //         this.slug = doc.data().slug;
-    //         this.id = doc.id;
-    //     })
-      
-    // })
    }
 }
 </script>
@@ -105,13 +74,13 @@ img {
     width: 300px;
     height: auto;
     float: left;
-    border-radius: 12px;
+    border-radius: 5px;
     z-index: 0;
     margin-bottom: 1em;
 }
-.col-6 {
+.col-xl-6 {
     /* border: 1px solid #aaa; */
-    border-radius: 12px;
+    border-radius: 5px;
     height: 280px;
     padding-top: 1em;
     padding-left: 2em;
@@ -122,9 +91,15 @@ img {
 }
 input {
     display: block;
+    margin-top: 0.3rem !important;
+    margin-bottom: 1rem;
+    width: 50%;
 }
 button {
     margin-bottom: 1em;
     cursor: pointer
+}
+p {
+    /* font-weight: bold; */
 }
 </style>
