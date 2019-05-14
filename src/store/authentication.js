@@ -4,13 +4,12 @@ import 'firebase/auth';
 import router from '../router/index'
 // import * as admin from "firebase-admin";
 
-
 const state = {
     user: null,
     feedback: null,
     isNewUser: false,
     isLoggedIn: false,
-    currentUser: null
+    currentUser: null,
  }
  
  const getters = {
@@ -19,8 +18,12 @@ const state = {
      },
      feedback: state => {
          return state.feedback;
+     },
+     getCurrentUser: state => {
+         return state.currentUser;
      }
  }
+ 
  const mutations = { 
      setUser(state, payload) {
          state.user = payload;
@@ -40,7 +43,6 @@ const actions = {
     isNewUser({commit}, payload) {
         commit('setIsNewUser', payload)
     },
-    
     createUser( {commit, dispatch}, payload ) {
         firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
             .then(user => {
@@ -79,13 +81,13 @@ const actions = {
           });
         });
         commit('setUser', newUser);
+        commit('setCurrentUser', newUser);
         console.log(newUser)
         // ...
         })
         .catch(function(error) {
             // Handle Errors here.
             var errorMessage = error.message;
-            // if (error) {
                 commit('setFeedback', errorMessage)
           });
         router.go(-1);
@@ -113,16 +115,17 @@ const actions = {
         .get()
         .then(snapshot => {
           snapshot.forEach(doc => {
-              currentUser.firstName = doc.data().firstName;
-              currentUser.lastName = doc.data().lastName;
-              currentUser.email = doc.data().email;
-              currentUser.id = doc.data().id;
-              currentUser.image = doc.data().image;
+              const data = doc.data();
+              currentUser.firstName = data.firstName;
+              currentUser.lastName = data.lastName;
+              currentUser.email = data.email;
+              currentUser.id = data.id;
+              currentUser.image = data.image;
               currentUser.docId = doc.id;
           });
         });
-
         commit('setUser', currentUser);
+        commit('setCurrentUser', currentUser);
     },
 }
 

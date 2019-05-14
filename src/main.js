@@ -12,6 +12,7 @@ import { store } from './store/store.js';
 import Vuex from 'vuex'
 import firebase from 'firebase';
 import VueProgressBar from 'vue-progressbar'
+import './store/filters.js'
 
 Vue.use(Vuelidate)
 Vue.use(BootstrapVue)
@@ -49,8 +50,9 @@ router.beforeEach ((to, from, next) => {
 
 let app = '';
 
-firebase.auth().onAuthStateChanged(()=> {
+firebase.auth().onAuthStateChanged((user)=> {
   if(!app) {
+    store.dispatch('autoSignIn', user);
     app = new Vue({
         el: '#app',
         render: h => h(App),
@@ -63,12 +65,12 @@ firebase.auth().onAuthStateChanged(()=> {
 })
 
 
-firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        store.dispatch('autoSignIn', user);
+// firebase.auth().onAuthStateChanged((user) => {
+      // if (user) {
+        
         // console.log(user + 'vaznoca')
-     }
-  })
+    //  }
+  // })
 
 
 /* eslint-disable no-new */

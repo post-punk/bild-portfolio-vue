@@ -88,6 +88,7 @@ const actions = {
 
     loadBlog({ commit }) {
         db.collection("blog")
+            // .orderBy('date')
             .limit(1)
             // .startAfter(state.lastBlogPost)
             .get()
@@ -134,7 +135,7 @@ const actions = {
 
     deleteArticle({ dispatch, commit }, { uid }) {
         //UNCOMMENT!
-        db.collection("blog").doc(uid).delete();
+        // db.collection("blog").doc(uid).delete();
         state.blog = state.blog.filter(article => {
             return article.id != uid
         })

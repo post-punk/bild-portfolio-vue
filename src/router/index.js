@@ -10,7 +10,7 @@ import editPost from '../components/blog/editPost.vue'
 import ViewPost from '../components/blog/ViewPost'
 import ViewProfile from '../components/auth/ViewProfile';
 import EditProfile from '../components/auth/EditProfile.vue';
-import NotFoundComponent from '../components/404/NotFoundComponent.vue'
+import NotFoundComponent from '../components/other/NotFoundComponent.vue'
 import firebase from 'firebase';
 import 'firebase/auth'
 import Router from 'vue-router'

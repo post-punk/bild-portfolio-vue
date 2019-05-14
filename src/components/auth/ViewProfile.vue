@@ -7,7 +7,6 @@
                     <img :src="user.image" alt="">
                 </div>
                 <div class="col-xl-8">
-                      <!-- {{user.id}} -->
                     <!-- {{this.$route.params.name}} -->
                     First name: <p>{{user.firstName}}</p>
                     Last name: <p>{{user.lastName}}</p>
@@ -25,17 +24,10 @@
 
 <script>
 import CalloutTop from "../CalloutTop.vue";
-// import firebase from 'firebase';
-// import db from '@/firebase/init';
 
 export default {
 data() {
     return {
-        // username: 'Vlado',
-        // email: 'vlado544@yahoo.com',
-        // image: 'https://f4.bcbits.com/img/a2642946877_10.jpg',
-        // details: 'bla blabadas das jlasj lasdl sadlkjlda sl',
-        // calloutTitle: "Your details here",
          calloutTitle: "Your profile",
         }
     },

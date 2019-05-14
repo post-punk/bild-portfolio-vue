@@ -78,7 +78,6 @@ data() {
             }
             );
             this.$store.dispatch('isNewUser', true);
-            // this.$router.push({ path: '/LogIn' });
         }
     },
     computed: {
@@ -136,14 +135,12 @@ form {
 }
 .input.invalid .form-control {
   border: 3px solid LIGHTCORAL;
-  /* background-color: rgb(238, 238, 238); */
 }
 .warning {
     margin-top: 10px;
     margin-bottom: 2em;
     color: indianred;
     position: absolute;
-    /* padding-left: 1em; */
 }
 .warning2 {
     margin-top: -12px;
@@ -172,7 +169,6 @@ span.warning {
 }
  .form-control.invalid {
   border: 3px solid LIGHTCORAL;
-  /* background-color: rgb(238, 238, 238); */
 }
 button:disabled {
   background-color: #cccccc !important;

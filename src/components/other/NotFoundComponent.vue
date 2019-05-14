@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!-- ERROR 404 PAGE -->
         <callout-top :calloutTitle="calloutTitle"></callout-top>
         <div class="container">
             <h1>Page not found :(</h1>
