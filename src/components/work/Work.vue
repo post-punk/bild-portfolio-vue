@@ -68,7 +68,7 @@
           </div>
         </div>
         <div class="load-button-container">
-          <button v-show="!noMoreProjects" class="load-more" id="loadMore" @click="loadMore()">Load more</button>
+          <button v-show="!noMoreProjects" class="load-more" id="loadMore" :disabled="disabled" @click="loadMore() + delay()">{{buttonText}}</button>
         </div>
       </div>
     </div>
@@ -88,7 +88,10 @@ export default {
       calloutTitle: "CHECK OUT WHAT I CAN DO",
       selectedCategory: "all",
       view: "grid",
-      noMoreProjects: false
+      noMoreProjects: false,
+      disabled: false,
+      timeout: null,
+      buttonText: 'Load more'
     };
   },
 
@@ -112,11 +115,9 @@ export default {
     CalloutTop
   },
   methods: {
-
     activeView(val) {
       this.view = val;
     },
-
     loadMore() {
       db.collection("work-items")
         .orderBy("name")
@@ -139,7 +140,6 @@ export default {
           this.$store.commit("setLastVisible", lastVisible);
         });
     },
-
     firestoreFilter(val) {
       this.$store.dispatch('emptyProjects', []);
       //varijanta za 'all'
@@ -170,6 +170,16 @@ export default {
             this.selectedCategory = val;
           });
       }
+    },
+    delay() {
+        this.disabled = true;
+        this.buttonText = 'Loading...';
+        // Re-enable after a while..
+        this.timeout = setTimeout(() => {
+          this.disabled = false;
+          this.buttonText = 'Load more';
+        }, 700)
+    
     }
     
   }

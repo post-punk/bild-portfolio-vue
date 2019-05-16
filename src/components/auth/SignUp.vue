@@ -75,7 +75,7 @@ data() {
                 password: this.password,
                 firstName: this.firstName,
                 lastName: this.lastName
-            }
+                }
             );
             this.$store.dispatch('isNewUser', true);
         }

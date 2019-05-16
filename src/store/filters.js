@@ -1,12 +1,11 @@
 
-      import Vue from 'vue';
+import moment from 'moment';
 
-      
-      export default {
-        formatDate(date) {
-            return moment(date).format("DD/MM/YYYY");
-      }
+      // const formatDate = function(date) {
+      //   return moment(date).format("DD/MM/YYYY");
+  // }
+      export default function formatDate(date) {
+        return moment(date).format("DD/MM/YYYY");
     }
 
-//     Vue.filter('dateFilter', formatDate(date) => moment(date).format("DD/MM/YYYY");
-//   });
+    // Vue.filter('formatDate', date => moment(date).format("DD/MM/YYYY"+'asdads'));

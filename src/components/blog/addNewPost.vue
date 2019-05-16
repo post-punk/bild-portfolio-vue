@@ -119,4 +119,16 @@ input[type="datetime-local"]:before {
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; */
   }
+.vdp-datepicker input {
+    box-sizing: border-box;
+    padding: 0.75em 0.5em;
+    font-size: 100%;
+    border: 1px solid #ccc;
+    width: 60%;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+.btn-primary {
+    margin-top: 0;
+}
 </style>

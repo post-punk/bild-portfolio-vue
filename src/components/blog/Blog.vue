@@ -87,7 +87,7 @@
           </button>
         </div>
         <div class="load-button-container">
-          <button v-if="!noMoreProjects" class="load-more" @click="loadMore() + delayButton()" :disabled="disabled">{{buttonText}}</button>
+          <button v-if="!noMoreProjects" class="load-more" @click="loadMore() + delay()" :disabled="disabled">{{buttonText}}</button>
         </div>
       </div>
     </div>
@@ -100,7 +100,7 @@ import db from "@/firebase/init";
 import slugify from "slugify";
 import moment from 'moment';
 import Datepicker from 'vuejs-datepicker';
-// import Filters from '@/filters.js'
+import formatDate from '../../store/filters.js'
 
 export default {
   data() {
@@ -142,9 +142,7 @@ export default {
     // }
   },
   filters: {
-      formatDate(date) {
-            return moment(date).format("DD/MM/YYYY");
-      }
+      formatDate
   },
   components: {
     CalloutTop,
@@ -166,7 +164,7 @@ export default {
         text: article.text
        })
     },
-    delayButton() {
+    delay() {
         this.disabled = true;
         this.buttonText = 'Loading...';
         // Re-enable after a while..
@@ -263,13 +261,6 @@ button:disabled {
   color: gray;
   text-align: center
 }
-.modal {
-  position: absolute;
-   top: -70px;
-   z-index: 10040;
-   overflow: auto;
-   overflow-y: auto;
-}
 button, .btn {
   cursor: pointer;
 }
@@ -281,5 +272,13 @@ button, .btn {
 }
 .btn-danger {
   margin-top: 1rem;
+}
+.btn-primary, .btn-primary:active { 
+  background-color: indianred !important; 
+  outline: none;
+  border: none;
+  }
+.btn-primary:hover {
+  background-color: rgb(121, 54, 54) !important;
 }
 </style>
