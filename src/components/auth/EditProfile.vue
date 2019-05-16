@@ -9,9 +9,9 @@
                 <div class="col-xl-8">
                     <!-- {{this.$route.params.name}} -->
                     <p>First name:</p>
-                    <input  v-model="displayUserName.firstName">
+                    <input :placeholder="user.firstName" v-model="firstName">
                     <p>Last name:</p>
-                    <input v-model="displayUserName.lastName">
+                    <input :placeholder="user.lastName" v-model="lastName">
                     <!-- <input>details -->
                     <button @click="editUser(user)" class="d-flex align-content-center btn btn-info" >
                         submit changes
@@ -33,6 +33,8 @@ export default {
 data() {
     return {
          calloutTitle: "Your profile",
+         firstName: '',
+         lastName: ''
         }
     },
     components: {

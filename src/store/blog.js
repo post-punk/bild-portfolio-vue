@@ -133,7 +133,7 @@ const actions = {
             });
     },
 
-    deleteArticle({ dispatch, commit }, { uid }) {
+    deleteArticle({ dispatch, commit }, uid ) {
         //UNCOMMENT!
         // db.collection("blog").doc(uid).delete();
         state.blog = state.blog.filter(article => {

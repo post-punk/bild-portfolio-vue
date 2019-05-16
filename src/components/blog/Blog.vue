@@ -154,7 +154,7 @@ export default {
       this.$store.dispatch("loadMore");
     },
     deleteBlogPost(uid) {
-      this.$store.dispatch("deleteArticle", { uid });
+      this.$store.dispatch("deleteArticle", uid);
     },
     editBlogPost(uid) {
       this.$store.dispatch('editArticle', {
