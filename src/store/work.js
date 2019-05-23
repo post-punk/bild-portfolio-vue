@@ -67,7 +67,7 @@ const state = {
     //     }
     
     ],
-    lastVisible: null
+    lastVisible: null,
 }
 
 const getters = {
@@ -78,8 +78,7 @@ const getters = {
     },
     lastVisible: state => {
         return state.lastVisible;
-    }
-
+    },
 }
 const mutations = {
    setProjects(state, payload) {
@@ -93,7 +92,8 @@ const mutations = {
    },
    setEmptyProjects(state, payload) {
         state.projects = payload;
-}
+},
+
 }
 const actions = {
     displayAll ({commit}) {
@@ -101,7 +101,7 @@ const actions = {
     db.collection("work-items").orderBy('name').limit(3).get().then(snapshot => {
         var projects = [];
         var lastVisible = snapshot.docs[snapshot.docs.length-1];
-        console.log(lastVisible)
+        // console.log(lastVisible)
         snapshot.forEach(doc => {
            projects.push(doc.data()) 
         });
@@ -111,7 +111,7 @@ const actions = {
     },
     emptyProjects ({commit}, payload) {
         commit('setEmptyProjects', payload)
-    }
+    },
     
 
 }

@@ -11,6 +11,7 @@
       </div>
       <br>
       <div class="container">
+
         <div class="row blog-list" v-for="(article, index) in blog" :key="index">
           <img class="col-md-4 align-self-center" :src="article.image" alt>
           <div class="col-md-6">
@@ -87,7 +88,7 @@
           </button>
         </div>
         <div class="load-button-container">
-          <button v-if="!noMoreProjects" class="load-more" @click="loadMore() + delay()" :disabled="disabled">{{buttonText}}</button>
+          <button v-if="!noMoreProjects" class="load-more" @click="loadMore(); delay()" :disabled="disabled">{{buttonText}}</button>
         </div>
       </div>
     </div>
@@ -101,6 +102,7 @@ import slugify from "slugify";
 import moment from 'moment';
 import Datepicker from 'vuejs-datepicker';
 import formatDate from '../../store/filters.js'
+// import Spinner from '../other/Spinner.vue'
 
 export default {
   data() {
@@ -136,7 +138,7 @@ export default {
     },
     user() {
       return this.$store.getters.getUser;
-       }
+      }
     // blogCount() {
     //   return this.$store.getters.blogCount;
     // }
@@ -147,7 +149,8 @@ export default {
   components: {
     CalloutTop,
     moment,
-    Datepicker
+    Datepicker,
+    // Spinner
   },
   methods: {
     loadMore() {
@@ -281,4 +284,45 @@ button, .btn {
 .btn-primary:hover {
   background-color: rgb(121, 54, 54) !important;
 }
+.half-circle-spinner, .half-circle-spinner * {
+      box-sizing: border-box;
+    }
+
+    .half-circle-spinner {
+      width: 60px;
+      height: 60px;
+      border-radius: 100%;
+      position: relative;
+      margin: auto !important;
+    }
+
+    .half-circle-spinner .circle {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 100%;
+      border: calc(60px / 10) solid transparent;
+    }
+/* spinner */
+    .half-circle-spinner .circle.circle-1 {
+      border-top-color: #ff1d5e;
+      animation: half-circle-spinner-animation 1s infinite;
+    }
+
+    .half-circle-spinner .circle.circle-2 {
+      border-bottom-color: #ff1d5e;
+      animation: half-circle-spinner-animation 1s infinite alternate;
+    }
+
+    @keyframes half-circle-spinner-animation {
+      0% {
+        transform: rotate(0deg);
+
+      }
+      100%{
+        transform: rotate(360deg);
+      }
+    }
+    
 </style>

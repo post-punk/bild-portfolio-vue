@@ -55,7 +55,7 @@ img {
     float: left;
     border-radius: 12px;
     z-index: 0;
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
 }
 .col-xl-8 {
     /* border: 1px solid #aaa; */

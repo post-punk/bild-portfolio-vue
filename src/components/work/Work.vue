@@ -68,7 +68,7 @@
           </div>
         </div>
         <div class="load-button-container">
-          <button v-show="!noMoreProjects" class="load-more" id="loadMore" :disabled="disabled" @click="loadMore() + delay()">{{buttonText}}</button>
+          <button v-if="!noMoreProjects" class="load-more" id="loadMore" :disabled="disabled" @click="loadMore(); delay()">{{buttonText}}</button>
         </div>
       </div>
     </div>
@@ -119,6 +119,7 @@ export default {
       this.view = val;
     },
     loadMore() {
+      this.$store.commit('setLoadingStatus', true);
       db.collection("work-items")
         .orderBy("name")
         .startAfter(this.lastVisible)
@@ -130,17 +131,16 @@ export default {
           snapshot.forEach(doc => {
             projects.push(doc.data());
           });
-          // if(lastVisible) { 
-          //               projects.filter(project => project.id !== doc.id);
-          //           }
-          if (snapshot.docs.length == 0) {
+          if (snapshot.docs.length === 0) {
             this.noMoreProjects = true;
           }
-          this.$store.commit("setProjects", projects);
           this.$store.commit("setLastVisible", lastVisible);
+          this.$store.commit("setProjects", projects);
+          this.$store.commit('setLoadingStatus', false);
         });
     },
     firestoreFilter(val) {
+      this.$store.commit('setLoadingStatus', true);
       this.$store.dispatch('emptyProjects', []);
       //varijanta za 'all'
       if (val === "all") {
@@ -154,9 +154,11 @@ export default {
             });
             this.$store.commit("setProjects", projects);
             this.selectedCategory = "all";
+            this.$store.commit('setLoadingStatus', false);
           });
       } else {
         document.getElementById("loadMore").style.display = "none";
+        this.$store.commit('setLoadingStatus', true);
         this.$store.dispatch('emptyProjects', []);
         db.collection("work-items")
           .where("category", "==", val)
@@ -168,7 +170,9 @@ export default {
             });
             this.$store.commit("setProjects", projects);
             this.selectedCategory = val;
+            this.$store.commit('setLoadingStatus', false);
           });
+
       }
     },
     delay() {

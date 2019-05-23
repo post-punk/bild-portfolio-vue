@@ -3,9 +3,9 @@ import router from '../router/index'
 
 const state = {
     blog: [],
-    lastBlogPost: null,
-    // blogCount: 6,
+    lastBlogPost: '',
     noMoreProjects: false,
+    loadingStatus: false
 }
 
 const getters = {
@@ -23,7 +23,10 @@ const getters = {
     },
     slug: state => {
         return state.slug;
-    }
+    },
+    getLoadingStatus: state => {
+        return state.loadingStatus;
+    },
 }
 
 const mutations = {
@@ -49,7 +52,10 @@ const mutations = {
     // },
     setBlogCount(state, payload) {
         state.blogCount = payload;
-    }
+    },
+    setLoadingStatus(state, payload) {
+        state.loadingStatus = payload
+    },
 }
 
 const actions = {
@@ -86,8 +92,8 @@ const actions = {
     dispatch('loadBlog');
     },
 
-    loadBlog({ commit }) {
-        db.collection("blog")
+    async loadBlog({ commit }) {
+       await db.collection("blog")
             // .orderBy('date')
             .limit(1)
             // .startAfter(state.lastBlogPost)
@@ -110,8 +116,9 @@ const actions = {
 
     },
 
-    loadMore({ commit }) {
-        db.collection("blog")
+    async loadMore({ commit }) {
+        commit('setLoadingStatus', true);
+        await db.collection("blog")
             .startAfter(state.lastBlogPost)
             .limit(1)
             .get()
@@ -129,11 +136,13 @@ const actions = {
                 }
                 commit("setLoadMore", blog);
                 commit('setlastBlogPost', lastBlogPost);
-                commit('setBlogCount', blogCount)
+                commit('setBlogCount', blogCount);
+                commit('setLoadingStatus', false);
+
             });
     },
 
-    deleteArticle({ dispatch, commit }, uid ) {
+    deleteArticle(uid) {
         //UNCOMMENT!
         // db.collection("blog").doc(uid).delete();
         state.blog = state.blog.filter(article => {

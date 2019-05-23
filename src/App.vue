@@ -2,6 +2,9 @@
   <div id="app">
     <app-header/>
         <vue-progress-bar></vue-progress-bar>
+        <spinner
+        v-if="loading">
+        </spinner>
     <router-view/>
     <app-footer/>
   </div>
@@ -9,7 +12,6 @@
 
 <script>
 import "../src/css/fonts.css";
-// import "../src/css/style.css";
 import "../src/css/media-queries.css";
 
 import Header from "./components/header.vue";
@@ -20,6 +22,7 @@ import Slick from 'vue-slick';
 import { store } from './store/store'
 import VueCkeditor from 'vue-ckeditor2';
 import firebase from 'firebase/app';
+import Spinner from './components/other/Spinner.vue';
 
 export default {
   name: "App",
@@ -59,7 +62,13 @@ export default {
     appHeader: Header,
     CalloutTop,
     appFooter: Footer,
+    Spinner
 
+  },
+  computed: {
+    loading() {
+      return this.$store.getters.getLoadingStatus;
+    },
   }
 };
 </script>
@@ -123,12 +132,12 @@ nav,
   margin-right: 2em;
 }
 /* override default bootStrap width */
-.container, {
+.container {
   max-width: 970px;
 }
 /* green progress bar */
 .__cov-progress {
-  height: 5px !important;
+  height: 3px !important;
   background-color: #2ecc71 !important;
 }
 </style>

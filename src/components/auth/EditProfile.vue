@@ -33,8 +33,8 @@ export default {
 data() {
     return {
          calloutTitle: "Your profile",
-         firstName: '',
-         lastName: ''
+         firstName: this.user.firstName,
+         lastName: this.user.lastName
         }
     },
     components: {
@@ -94,5 +94,8 @@ input {
 button {
     margin-bottom: 1em;
     cursor: pointer
+}
+p {
+    margin-bottom: 0.5em;
 }
 </style>

@@ -5,8 +5,8 @@
         <div class="row">
           <button
             class="tablinks active col-3"
-            @click="currentTab = 0"
-            :class="{highlight:currentTab == 0}"
+            @click="index = 0"
+            :class="{highlight:index == 0}"
             id="defaultOpen"
           >
             <div class="tab-links">
@@ -17,8 +17,8 @@
           </button>
           <button
             class="tablinks col-3"
-            @click="currentTab = 1"
-            :class="{highlight:currentTab == 1}"
+            @click="index = 1"
+            :class="{highlight:index == 1}"
           >
             <div class="tab-links">
               <img src="../../assets/photo.svg">
@@ -28,8 +28,8 @@
           </button>
           <button
             class="tablinks col-3"
-            @click="currentTab = 2"
-            :class="{highlight:currentTab == 2}"
+            @click="index = 2"
+            :class="{highlight:index == 2}"
           >
             <div class="tab-links">
               <img src="../../assets/seo.svg">
@@ -39,8 +39,8 @@
           </button>
           <button
             class="tablinks col-3"
-            @click="currentTab = 3"
-            :class="{highlight:currentTab == 3}"
+            @click="index = 3"
+            :class="{highlight:index == 3}"
           >
             <div class="tab-links">
               <img src="../../assets/apps.svg">
@@ -53,17 +53,17 @@
     </div>
 
     <span class="tab-text container">
-      {{ tabText[currentTab].description }}
+      {{ tabText[index].description }}
       <ul>
-      <li>
-      {{ tabText[currentTab].details1}}
-      </li>
-      <li>
-      {{ tabText[currentTab].details2}}
-      </li>
-      <li>
-      {{ tabText[currentTab].details3}}
-      </li>
+        <li>
+        {{ tabText[index].details1}}
+        </li>
+        <li>
+        {{ tabText[index].details2}}
+        </li>
+        <li>
+        {{ tabText[index].details3}}
+        </li>
     </ul>
     </span>
     
@@ -77,7 +77,7 @@ export default {
   name: "Tabs",
   data() {
     return {
-      currentTab: 0,
+      index: 0,
       
     };
   },
@@ -94,12 +94,13 @@ export default {
   height: 200px;
   border: none;
   background-color: #efefef;
+  cursor: pointer;
 }
 .highlight {
   background-color: #ccc;
 }
 #tab-background {
-    background-color: #ccc;
+  background-color: #ccc;
   background-color: #efefef;
   margin-top: 1em;
 }

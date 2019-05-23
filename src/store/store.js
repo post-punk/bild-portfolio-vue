@@ -6,7 +6,7 @@ import work from './work.js';
 import home from './home.js';
 import contact from './contact';
 import blog from './blog';
-import authentication from './authentication'
+import authentication from './authentication';
 // import firebase from 'firebase'
 import db from '@/firebase/init'
 

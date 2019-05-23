@@ -67,7 +67,7 @@ data() {
                 password: this.password
             })
             this.$store.dispatch('isNewUser', false )
-            this.$router.push({ path: '/' });
+            // this.$router.push({ path: '/' });
         }
     },
     computed: {

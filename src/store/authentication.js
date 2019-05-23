@@ -61,16 +61,17 @@ const actions = {
                         })
                 ;;
             },
-    logIn( {commit}, {email, password} ) {
-        firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
-        const newUser = {
-            id: firebase.auth().currentUser.uid,
-            email: firebase.auth().currentUser.email,
-            firstName: "",
-            lastName: "",
-            docId: "",
-        };
-        db.collection("users")
+        async logIn( {commit}, {email, password} ) {
+        await firebase.auth().signInWithEmailAndPassword(email, password).then(
+         async () => {
+            const newUser = {
+                id: firebase.auth().currentUser.uid,
+                email: firebase.auth().currentUser.email,
+                firstName: "",
+                lastName: "",
+                docId: "",
+        }
+        await db.collection("users")
         .where("id", "==", newUser.id)
         .get()
         .then(snapshot => {
@@ -103,14 +104,14 @@ const actions = {
         commit("setUser", null);
         });
     },
-    autoSignIn({ commit }, payload ) {
+   async autoSignIn({ commit }, payload ) {
         var currentUser = {
             id: payload.uid,
             lastName: "",
             firstName: "",
             docId: "",
         }
-        db.collection("users")
+       await db.collection("users")
         .where("id", "==", payload.uid)
         .get()
         .then(snapshot => {
