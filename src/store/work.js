@@ -97,16 +97,17 @@ const mutations = {
 }
 const actions = {
     displayAll ({commit}) {
+    commit('setLoadingStatus', true);
     //fetch from firestore
     db.collection("work-items").orderBy('name').limit(3).get().then(snapshot => {
         var projects = [];
         var lastVisible = snapshot.docs[snapshot.docs.length-1];
-        // console.log(lastVisible)
         snapshot.forEach(doc => {
            projects.push(doc.data()) 
         });
       commit('setProjects', projects);
       commit('setLastVisible', lastVisible);
+      commit('setLoadingStatus', false);
       });
     },
     emptyProjects ({commit}, payload) {

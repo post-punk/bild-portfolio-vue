@@ -35,15 +35,10 @@ const mutations = {
         state.test = payload
     },
     setBlog(state, payload) {
-        // if (payload.id) {
+        console.log(payload)
+        // if (payload.editPost) {
         //     return state.blog = payload;
         // }
-        if (payload.deleteArticle) {
-            state.blog = state.blog.filter(article => {
-                console.log(article.id)
-                return article.id != payload.id
-            })
-        }
         payload.forEach(article => {
             state.blog.push(article)
         })
@@ -80,13 +75,14 @@ const actions = {
     },
 
     editPost({ dispatch, commit }, payload) {
+        console.log(payload)
         db.collection('blog').doc(payload.id).update({
             header: payload.header,
             date: payload.date,
             image: payload.image,
             text: payload.text,
         }).then(() => {
-            // this.$router.push({ path: '/blog' })
+            router.push({ path: '/blog' })
         }).catch(err => {
             console.log(err)
         })
@@ -167,12 +163,12 @@ const actions = {
         //UNCOMMENT!
         // console.log(payload.id + '    asdasdasdasd')
         commit('setTest','123');
-        // db.collection("blog").doc(payload.id).delete();
         // commit('setBlog', payload);
+        // db.collection("blog").doc(payload.id).delete();
+        console.log(article.id + '   ' + payload.id)
         state.blog = state.blog.filter(article => {
             return article.id != payload.id
         })
-
         // I OVO!!!
         // commit('setlastBlogPost', null)
         // dispatch('loadBlog');

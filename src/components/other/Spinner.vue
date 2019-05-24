@@ -59,7 +59,7 @@ export default {
       }
     }
     .spinner-container {
-      background-color: rgba(255,255,255,0.7);
+      background-color: rgba(255,255,255,0.5);
       border-radius: 10px;
       height: 100%;
       left: 50%;

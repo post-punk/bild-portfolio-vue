@@ -36,8 +36,8 @@ export default {
         id: null
         }
     },
-    created(){
-       db.collection("blog").doc(this.$route.params.id)
+    async created(){
+      await db.collection("blog").doc(this.$route.params.id)
        .onSnapshot((doc) => {
             this.header = doc.data().header;
             this.date = doc.data().date;
@@ -60,7 +60,8 @@ export default {
             header: this.header,
             date: this.date,
             image: this.image,
-            text: this.text 
+            text: this.text,
+            editPost: true
             });
            
         // this.$router.push({ path: '/blog' })

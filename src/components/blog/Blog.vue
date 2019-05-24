@@ -90,7 +90,7 @@ export default {
       // search: null
     }
   },
-  created() {
+  beforeCreate() {
     this.$store.dispatch("loadBlog", {
       loadMore: false
     });
@@ -147,7 +147,8 @@ export default {
         header: article.header,
         date: article.date,
         image: article.image,
-        text: article.text
+        text: article.text,
+        editPost: true
        })
     },
     delay() {

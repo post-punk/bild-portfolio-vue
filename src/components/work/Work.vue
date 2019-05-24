@@ -140,25 +140,26 @@ export default {
         });
     },
     firestoreFilter(val) {
-      this.$store.commit('setLoadingStatus', true);
       this.$store.dispatch('emptyProjects', []);
       //varijanta za 'all'
       if (val === "all") {
-        db.collection("work-items")
-          .orderBy("name")
-          .get()
-          .then(snapshot => {
-            var projects = [];
-            snapshot.forEach(doc => {
-              projects.push(doc.data());
-            });
-            this.$store.commit("setProjects", projects);
-            this.selectedCategory = "all";
-            this.$store.commit('setLoadingStatus', false);
-          });
+        this.$store.dispatch("displayAll");
+        this.selectedCategory = "all";
+        document.getElementById("loadMore").style.display = "block";
+        // db.collection("work-items")
+        //   .orderBy("name")
+        //   .get()
+        //   .then(snapshot => {
+        //     var projects = [];
+        //     snapshot.forEach(doc => {
+        //       projects.push(doc.data());
+        //     });
+        //     this.$store.commit("setProjects", projects);
+        //   });
+
       } else {
-        document.getElementById("loadMore").style.display = "none";
         this.$store.commit('setLoadingStatus', true);
+        document.getElementById("loadMore").style.display = "none";
         this.$store.dispatch('emptyProjects', []);
         db.collection("work-items")
           .where("category", "==", val)
@@ -172,7 +173,6 @@ export default {
             this.selectedCategory = val;
             this.$store.commit('setLoadingStatus', false);
           });
-
       }
     },
     delay() {
@@ -182,7 +182,7 @@ export default {
         this.timeout = setTimeout(() => {
           this.disabled = false;
           this.buttonText = 'Load more';
-        }, 700)
+        }, 500)
     
     }
     
@@ -345,7 +345,9 @@ p {
   position: relative;
 }
 .load-more {
-  margin-top: 2em;
+  margin: auto;
+  margin-top: 1rem;
+  display: block;
   border: none;
   background-color: #2ecc71;
   color: white;

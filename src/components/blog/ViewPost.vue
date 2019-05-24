@@ -78,7 +78,8 @@ methods: {
         header: this.header,
         date: this.date,
         image: this.image,
-        text: this.text 
+        text: this.text,
+        editPost: true
         });
     this.$router.push({ path: '/blog' })
         },
