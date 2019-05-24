@@ -12,7 +12,8 @@ import { store } from './store/store.js';
 import Vuex from 'vuex'
 import firebase from 'firebase';
 import VueProgressBar from 'vue-progressbar'
-import './store/filters.js'
+import '../src/filters/formatDate.js'
+import '../src/filters/uppercase.js'
 
 Vue.use(Vuelidate)
 Vue.use(BootstrapVue)

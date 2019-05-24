@@ -3,7 +3,7 @@ import router from '../router/index'
 
 const state = {
     blog: [],
-    lastBlogPost: '',
+    lastBlogPost: null,
     noMoreProjects: false,
     loadingStatus: false
 }
@@ -31,12 +31,14 @@ const getters = {
 
 const mutations = {
     setBlog(state, payload) {
-        // state.blog = [];
-        // payload.forEach(article => {
-            // state.blog.push(article)
-        // })
-        state.blog = payload;
+        if (payload.id) {
+            return state.blog = payload;
+        }
+        payload.forEach(article => {
+            state.blog.push(article)
+        })
     },
+    
     setLoadMore(state, payload) {
         // state.blog = [];
         payload.forEach(article => {
@@ -56,9 +58,16 @@ const mutations = {
     setLoadingStatus(state, payload) {
         state.loadingStatus = payload
     },
+    setEmptyBlog(state, payload) {
+        state.blog = payload
+    }
 }
 
 const actions = {
+
+    emptyBlog({commit}, payload) {
+        commit('setEmptyBlog', payload)
+    },
 
     editPost({ dispatch, commit }, payload) {
         db.collection('blog').doc(payload.id).update({
@@ -92,59 +101,62 @@ const actions = {
     dispatch('loadBlog');
     },
 
-    async loadBlog({ commit }) {
-       await db.collection("blog")
-            // .orderBy('date')
-            .limit(1)
-            // .startAfter(state.lastBlogPost)
-            .get()
-            .then(snapshot => {
-                var blog = [];
-                var lastBlogPost = snapshot.docs[snapshot.docs.length - 1];
-                snapshot.forEach(doc => {
-                    blog.push({ ...doc.data(), id: doc.id });
-                    //filter any duplicates, ne radi bas
-                    // if(lastBlogPost) { 
-                    //     blog.filter(item => item.id !== doc.id);
-                    // }
-                });
-                //filter treba da bude odje za if uslov (if (blog.length !== 0))
-                // console.log(blog)
-                commit('setBlog', blog);
-                commit('setlastBlogPost', lastBlogPost);
-            })
-
-    },
-
-    async loadMore({ commit }) {
+    async loadBlog({ commit }, config) {
         commit('setLoadingStatus', true);
-        await db.collection("blog")
-            .startAfter(state.lastBlogPost)
+       await db.collection("blog");
+            // .orderBy('date')
+            let query = db.collection('blog');
+            if (config && config.loadMore) {
+                query = query.startAfter(state.lastBlogPost)
+            }
+        query
             .limit(1)
             .get()
             .then(snapshot => {
-                var blog = [];
-                var lastBlogPost = snapshot.docs[snapshot.docs.length - 1];
+                let blog = [];
+                let lastBlogPost = snapshot.docs[snapshot.docs.length - 1];
                 snapshot.forEach(doc => {
                     blog.push({ ...doc.data(), id: doc.id });
-
                 });
-                var blogCount = state.blogCount;
-                blogCount-=2;
-                if (blogCount === 2) {
-                    state.noMoreProjects = true;
-                }
-                commit("setLoadMore", blog);
+                // if (config && config.loadMore) {
+                //     commit("setLoadMore", blog);
+                //     }
                 commit('setlastBlogPost', lastBlogPost);
-                commit('setBlogCount', blogCount);
+                commit('setBlog', blog);
                 commit('setLoadingStatus', false);
-
-            });
+            })
     },
+
+    // async loadMore({ commit }) {
+    //     commit('setLoadingStatus', true);
+    //     await db.collection("blog")
+    //         .startAfter(state.lastBlogPost)
+    //         .limit(1)
+    //         .get()
+    //         .then(snapshot => {
+    //             var blog = [];
+    //             var lastBlogPost = snapshot.docs[snapshot.docs.length - 1];
+    //             snapshot.forEach(doc => {
+    //                 blog.push({ ...doc.data(), id: doc.id });
+
+    //             });
+    //             var blogCount = state.blogCount;
+    //             blogCount-=2;
+    //             if (blogCount === 2) {
+    //                 state.noMoreProjects = true;
+    //             }
+    //             commit("setLoadMore", blog);
+    //             commit('setlastBlogPost', lastBlogPost);
+    //             commit('setBlogCount', blogCount);
+    //             commit('setLoadingStatus', false);
+
+    //         });
+    // },
 
     deleteArticle(uid) {
         //UNCOMMENT!
-        // db.collection("blog").doc(uid).delete();
+        db.collection("blog").doc(uid).delete();
+        console.log(uid)
         state.blog = state.blog.filter(article => {
             return article.id != uid
         })

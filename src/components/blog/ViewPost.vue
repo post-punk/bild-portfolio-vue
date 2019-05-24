@@ -28,7 +28,7 @@ import db from '@/firebase/init';
 import slugify from 'slugify';
 import moment from 'moment';
 import Datepicker from 'vuejs-datepicker';
-import formatDate from '../../store/filters.js'
+import formatDate from '../../filters/formatDate.js'
 
 export default {
     data() {

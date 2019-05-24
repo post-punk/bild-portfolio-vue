@@ -3,6 +3,8 @@
     <callout-top :calloutTitle="calloutTitle"></callout-top>
     <div>
       <div class="container">
+                <input type="text" placeholder="Search blogs" v-model="search" id="searchInputField">
+
         <div class="row justify-content-end">
           <button v-if="user" class="btn btn-info col-2">
             <router-link :to="{ path: '/addNewPost' }">Add new blog post</router-link>
@@ -11,7 +13,6 @@
       </div>
       <br>
       <div class="container">
-
         <div class="row blog-list" v-for="(article, index) in blog" :key="index">
           <img class="col-md-4 align-self-center" :src="article.image" alt>
           <div class="col-md-6">
@@ -50,34 +51,6 @@
             </div>
           </div>
 
-              <!-- vuebootstrapmodal -->
-              <!-- <div>
-                <b-button id="show-btn" @click="$bvModal.show('bv-modal-example')">Open Modal</b-button>
-
-                <b-modal id="bv-modal-example" hide-footer>
-                  <template slot="modal-title">
-                    Using <code>$bvModal</code> Methods
-                  </template>
-                  <div class="d-block text-center">
-                    <h3>Hello From This Modal!</h3>
-                  </div>
-                  <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Close Me</b-button>
-                </b-modal>
-              </div> -->
-
-
-          <!-- <button
-            type="button"
-            @click="deleteBlogPost(article.id)"
-            class="close col-2 align-self-start"
-            v-if="user"
-            aria-label="Close"
-          > -->
-            <!-- <span aria-hidden="true">&times;</span> -->
-          <!-- </button> -->
-          
-          <!-- Button trigger modal -->
-
           <button
             type="button"
             class="btn btn-success col-2 align-self-start"
@@ -101,8 +74,8 @@ import db from "@/firebase/init";
 import slugify from "slugify";
 import moment from 'moment';
 import Datepicker from 'vuejs-datepicker';
-import formatDate from '../../store/filters.js'
-// import Spinner from '../other/Spinner.vue'
+import formatDate from '../../filters/formatDate.js'
+import uppercase from '../../filters/uppercase'
 
 export default {
   data() {
@@ -113,15 +86,19 @@ export default {
       trimAmount: 300,
       disabled: false,
       timeout: null,
-      buttonText: 'Load more'
+      buttonText: 'Load more',
+      search: null
     }
   },
   created() {
-    this.$store.dispatch("loadBlog");
+    this.$store.dispatch("loadBlog", {
+      loadMore: false
+    });
   },
   beforeDestroy () {
      // clear the timeout before the component is destroyed
-     clearTimeout(this.timeout)
+     clearTimeout(this.timeout);
+     this.$store.dispatch('emptyBlog', []);
     },
   computed: {
     blog: function() {
@@ -144,20 +121,22 @@ export default {
     // }
   },
   filters: {
-      formatDate
+      formatDate,
+      uppercase
   },
   components: {
     CalloutTop,
     moment,
     Datepicker,
-    // Spinner
   },
   methods: {
     loadMore() {
-      this.$store.dispatch("loadMore");
+      this.$store.dispatch("loadBlog", {
+        loadMore: true
+      });
     },
     deleteBlogPost(uid) {
-      this.$store.dispatch("deleteArticle", uid);
+      this.$store.dispatch("deleteArticle", { uid });
     },
     editBlogPost(uid) {
       this.$store.dispatch('editArticle', {
@@ -174,7 +153,7 @@ export default {
         this.timeout = setTimeout(() => {
           this.disabled = false;
           this.buttonText = 'Load more';
-        }, 700)
+        }, 500)
     
     }
   }
@@ -182,6 +161,12 @@ export default {
 </script>
 
 <style scoped>
+#searchInputField {
+  width: 100%;
+  height: 2.5rem;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
 .edit {
   padding: 0.5rem;
   background-color: #2ecc71;
@@ -232,7 +217,7 @@ time {
 h5 {
   padding-bottom: 0.5em;
 }
-h2:hover {
+h3:hover {
   color: #737373;
 }
 .load-more {
