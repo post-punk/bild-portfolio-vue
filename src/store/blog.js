@@ -5,7 +5,8 @@ const state = {
     blog: [],
     lastBlogPost: null,
     noMoreProjects: false,
-    loadingStatus: false
+    loadingStatus: false,
+    test:''
 }
 
 const getters = {
@@ -30,9 +31,18 @@ const getters = {
 }
 
 const mutations = {
+    setTest(state,payload){
+        state.test = payload
+    },
     setBlog(state, payload) {
-        if (payload.id) {
-            return state.blog = payload;
+        // if (payload.id) {
+        //     return state.blog = payload;
+        // }
+        if (payload.deleteArticle) {
+            state.blog = state.blog.filter(article => {
+                console.log(article.id)
+                return article.id != payload.id
+            })
         }
         payload.forEach(article => {
             state.blog.push(article)
@@ -153,13 +163,16 @@ const actions = {
     //         });
     // },
 
-    deleteArticle(uid) {
+    deleteArticle({commit}, payload) {
         //UNCOMMENT!
-        db.collection("blog").doc(uid).delete();
-        console.log(uid)
+        // console.log(payload.id + '    asdasdasdasd')
+        commit('setTest','123');
+        // db.collection("blog").doc(payload.id).delete();
+        // commit('setBlog', payload);
         state.blog = state.blog.filter(article => {
-            return article.id != uid
+            return article.id != payload.id
         })
+
         // I OVO!!!
         // commit('setlastBlogPost', null)
         // dispatch('loadBlog');

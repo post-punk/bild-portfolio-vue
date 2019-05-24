@@ -3,7 +3,7 @@
     <callout-top :calloutTitle="calloutTitle"></callout-top>
     <div>
       <div class="container">
-                <input type="text" placeholder="Search blogs" v-model="search" id="searchInputField">
+                <!-- <input type="text" placeholder="Search blogs" v-model="search" id="searchInputField"> -->
 
         <div class="row justify-content-end">
           <button v-if="user" class="btn btn-info col-2">
@@ -87,7 +87,7 @@ export default {
       disabled: false,
       timeout: null,
       buttonText: 'Load more',
-      search: null
+      // search: null
     }
   },
   created() {
@@ -136,7 +136,11 @@ export default {
       });
     },
     deleteBlogPost(uid) {
-      this.$store.dispatch("deleteArticle", { uid });
+      console.log(uid)
+      this.$store.dispatch("deleteArticle", { 
+        id: uid,
+        deleteArticle: true
+        });
     },
     editBlogPost(uid) {
       this.$store.dispatch('editArticle', {
