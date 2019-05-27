@@ -111,13 +111,14 @@ const actions = {
     async loadBlog({ commit }, config) {
         commit('setLoadingStatus', true);
        await db.collection("blog")
-       .orderBy('header', 'asc')
 
-            let query = db.collection('blog');
+            let query = db.collection('blog').orderBy('date', 'desc');
             if (config && config.loadMore) {
                 query = query.startAfter(state.lastBlogPost)
             }
         query
+        
+
             .limit(1)
             .get()
             .then(snapshot => {
