@@ -7,8 +7,8 @@
 
         <div class="row justify-content-end">
           <button v-if="user" class="btn btn-info col-2" @click="pushToAddNewPost">Add new blog post</button>
-          <button v-if="user" class="btn btn-info col-2" @click="orderByDate('asc')">newest first</button>
-          <button v-if="user" class="btn btn-info col-2" @click="orderByDate('desc')">oldest first</button>
+          <button v-if="user" class="btn btn-info col-2" @click="orderByDate((orderBy != 'asc') ? 'asc' : 'desc')">newest first</button>
+          <!-- <button v-if="user" class="btn btn-info col-2" @click="orderByDate('desc')">oldest first</button> -->
 
         </div>
       </div>
@@ -92,7 +92,6 @@ export default {
       disabled: false,
       timeout: null,
       buttonText: 'Load more',
-      // dataOrderBy: asc
       // search: null
     }
   },
@@ -121,7 +120,10 @@ export default {
     },
     user() {
       return this.$store.getters.getUser;
-      }
+      },
+    orderBy() {
+      return this.$store.getters.getOrderBy;
+    }
     // blogCount() {
     //   return this.$store.getters.blogCount;
     // }
@@ -145,7 +147,6 @@ export default {
       console.log(uid)
       this.$store.dispatch("deleteArticle", { 
         id: uid,
-        // deleteArticle: true
         });
     },
     editBlogPost(uid) {
@@ -167,9 +168,9 @@ export default {
     
     },
     orderByDate(val) {
+      val != val;
       this.$store.commit('setOrderBy', val);
       this.$store.dispatch("loadBlog");
-      // this.dataOrderBy = asc
     },
     pushToAddNewPost() {
       this.$router.push({ path: 'AddNewPost'})
