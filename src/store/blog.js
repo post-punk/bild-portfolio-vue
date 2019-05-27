@@ -42,6 +42,7 @@ const mutations = {
         payload.forEach(article => {
             state.blog.push(article)
         })
+        // state.blog = payload;
     },
     
     setLoadMore(state, payload) {
@@ -86,7 +87,7 @@ const actions = {
         }).catch(err => {
             console.log(err)
         })
-    commit('setBlog');
+    // commit('setBlog');
     dispatch('loadBlog');
     router.go(-1)
     },
@@ -103,14 +104,15 @@ const actions = {
         }).catch(err => {
             console.log(err)
         })
-    commit('setBlog');
+    // commit('setBlog', payload);
     dispatch('loadBlog');
     },
 
     async loadBlog({ commit }, config) {
         commit('setLoadingStatus', true);
-       await db.collection("blog");
-            // .orderBy('date')
+       await db.collection("blog")
+       .orderBy('header', 'asc')
+
             let query = db.collection('blog');
             if (config && config.loadMore) {
                 query = query.startAfter(state.lastBlogPost)
@@ -165,7 +167,6 @@ const actions = {
         commit('setTest','123');
         // commit('setBlog', payload);
         // db.collection("blog").doc(payload.id).delete();
-        console.log(article.id + '   ' + payload.id)
         state.blog = state.blog.filter(article => {
             return article.id != payload.id
         })

@@ -4,10 +4,9 @@
         <div class="container">
             <form action="">
                 <!-- {{slugifyTitle(header)}} -->
-                <datepicker placeholder="Enter date" class="datepicker" :input-class="{datepicker}" v-model="date" type="datetime-local"></datepicker>
+                <datepicker placeholder="Enter date" class="datepicker" :input-class="{}" v-model="date" type="datetime-local"></datepicker>
                 <input class="form-control" placeholder="Enter title" v-model="header">
                 <!-- <input class="form-control" type="datetime-local" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}" placeholder="Enter date" v-model="date"> -->
-
                 <input class="form-control"  placeholder="Enter image URL" v-model="image">
                 <textarea name="ckeditor" id="ckeditor" cols="90" rows="10" v-model="text" placeholder="Enter title"></textarea>
                 <button type="button" class="btn btn-primary" @click="addNewPost()">Submit</button>
@@ -31,7 +30,7 @@ export default {
     return {
         calloutTitle: "Add new blog post",
         header: null,
-        date: '',
+        date: Date.now(),
         image: null,
         text: null,
         slug: null
@@ -55,19 +54,26 @@ export default {
             remove: /[$*_=~.,()'"!\-:@]/g,
             lower: true
         })
-        // console.log(this.slug)
-           this.$store.dispatch('addNewPost', {
+        var date1 = moment(this.date).utc().startOf('day').format();
+        var date2 = (new Date(date1));
+        const post = {
                 header: this.header,
-                date: moment(this.date)
-                    .utc()
-                    .startOf("day")
-                    .format(),
+                date: date2,
                 image: this.image,
                 text: CKEDITOR.instances.ckeditor.getData(),
                 slug: this.slug 
-           });
+            }
+        // console.log(this.slug)
+        
+           this.$store.dispatch('addNewPost',  post
+                // header: this.header,
+                // date: date2,
+                // image: this.image,
+                // text: CKEDITOR.instances.ckeditor.getData(),
+                // slug: this.slug 
+           );
            
-           this.$router.push({ path: '/blog' })
+           this.$router.push({ path: '/blog' });
        },
         // slugifyTitle(val){
         //    if(val){
@@ -128,7 +134,8 @@ input[type="datetime-local"]:before {
     border: 1px solid #ced4da;
     border-radius: .25rem;
 }
-.btn-primary {
-    margin-top: 0;
-}
+
+.submit {
+      margin-top: 1rem;
+  }
 </style>

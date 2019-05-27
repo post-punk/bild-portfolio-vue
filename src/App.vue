@@ -6,6 +6,8 @@
         v-if="loading">
         </spinner>
     <router-view/>
+            <prompt></prompt>
+
     <app-footer/>
   </div>
 </template>
@@ -23,6 +25,7 @@ import { store } from './store/store'
 import VueCkeditor from 'vue-ckeditor2';
 import firebase from 'firebase/app';
 import Spinner from './components/other/Spinner.vue';
+import Prompt from './components/other/Prompt';
 
 export default {
   name: "App",
@@ -62,7 +65,8 @@ export default {
     appHeader: Header,
     CalloutTop,
     appFooter: Footer,
-    Spinner
+    Spinner,
+    Prompt
 
   },
   computed: {

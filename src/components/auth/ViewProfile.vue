@@ -15,7 +15,7 @@
                     <button class="d-flex align-content-center btn btn-info" >
                         <a v-bind:href="'mailto:' + user.email">Contact {{user.email}} </a>
                     </button>
-                    <button><router-link :to="{ path: '/EditProfile/' }">Edit</router-link></button>
+                    <button @click="pushToEditProfile">Edit</button>
                 </div>
             </div>
         </div>
@@ -33,6 +33,11 @@ data() {
     },
     components: {
        CalloutTop,
+   },
+   methods: {
+       pushToEditProfile() {
+       this.$router.push({ path: '/EditProfile/' })
+       }
    },
    computed: {
        user() {

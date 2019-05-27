@@ -6,8 +6,8 @@
                 <!-- <input type="text" placeholder="Search blogs" v-model="search" id="searchInputField"> -->
 
         <div class="row justify-content-end">
-          <button v-if="user" class="btn btn-info col-2">
-            <router-link :to="{ path: '/addNewPost' }">Add new blog post</router-link>
+          <button v-if="user" class="btn btn-info col-2" @click="pushToAddNewPost">Add new blog post
+            <!-- <router-link :to="{ path: '/addNewPost' }" > </router-link> -->
           </button>
         </div>
       </div>
@@ -19,7 +19,7 @@
             <router-link :to="{ path: '/blog/' + article.slug }">
               <h3>{{ article.header }}</h3>
             </router-link>
-            <time :datetime="article.date">{{ article.date | formatDate }}</time>
+            <time :datetime="article.date">{{ article.date.toDate() | formatDate }}</time>
             <p v-html="article.text.substring(0, trimAmount) + '...'"></p>
             <router-link :to="{ path: '/blog/' + article.slug }">
               <p id="read-more">Read more...</p>
@@ -27,12 +27,12 @@
           </div>
 
           <!-- za delete modal -->
-          <button type="button" class="btn btn-danger main-delete-button" data-toggle="modal" data-target="#exampleModal">
-            Delete post
-          </button>
+          <!-- <button type="button" class="btn btn-danger main-delete-button" data-toggle="modal" data-target="#exampleModal"> -->
+            <!-- Delete post -->
+          <!-- </button> -->
             <!-- Modal itself -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+          <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+            <!-- <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete this blog post?</h5>
@@ -43,21 +43,23 @@
                 <div class="modal-body">
                   <div class="p">This action cannot be undone. There is no God, but Allah. Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn</div>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                  <button type="button" class="btn btn-primary" data-dismiss="modal" @click="deleteBlogPost(article.id)">Yes</button>
-                </div>
+                <div class="modal-footer"> -->
+                  <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button> -->
+                  <div class="container">
+                     <button type="button" class="btn btn-primary" data-dismiss="modal" @click="deleteBlogPost(article.id)">Delete post</button>
+                  </div>
+                <!-- </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
-          <button
+          <button id="edit-post-btn"
             type="button"
             class="btn btn-success col-2 align-self-start"
-            @click="editBlogPost"
             v-if="user"
-            aria-label="Edit">
-            <router-link :to="{ path: '/editPost/' + article.id}">Edit blog post</router-link>
+            aria-label="Edit"
+            @click="pushToEditArticle(article.id)">
+           Edit blog post
           </button>
         </div>
         <div class="load-button-container">
@@ -75,7 +77,8 @@ import slugify from "slugify";
 import moment from 'moment';
 import Datepicker from 'vuejs-datepicker';
 import formatDate from '../../filters/formatDate.js'
-import uppercase from '../../filters/uppercase'
+import uppercase from '../../filters/uppercase';
+import Firebase from 'firebase'
 
 export default {
   data() {
@@ -139,7 +142,7 @@ export default {
       console.log(uid)
       this.$store.dispatch("deleteArticle", { 
         id: uid,
-        deleteArticle: true
+        // deleteArticle: true
         });
     },
     editBlogPost(uid) {
@@ -148,7 +151,6 @@ export default {
         date: article.date,
         image: article.image,
         text: article.text,
-        editPost: true
        })
     },
     delay() {
@@ -160,12 +162,21 @@ export default {
           this.buttonText = 'Load more';
         }, 500)
     
+    },
+    pushToAddNewPost() {
+      this.$router.push({ path: 'AddNewPost'})
+    },
+    pushToEditArticle(article) {
+      this.$router.push({ path: '/editPost/' + article})
     }
   }
 }
 </script>
 
 <style scoped>
+#edit-post-btn {
+  margin-top: 1rem;
+}
 #searchInputField {
   width: 100%;
   height: 2.5rem;
@@ -315,4 +326,8 @@ button, .btn {
       }
     }
     
+    .container .btn-primary {
+      margin-top: 1rem;
+      margin-left: -15px;
+    }
 </style>

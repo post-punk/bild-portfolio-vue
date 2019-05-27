@@ -1,12 +1,12 @@
 <template>
     <div>
         <callout-top :calloutTitle="calloutTitle"></callout-top>
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-4 ">
+        <div class="container" >
+            <div class="row"  v-if="user">
+                <div class="col-xl-4 " >
                     <img :src="user.image" alt="">
                 </div>
-                <div class="col-xl-8">
+                <div class="col-xl-8" >
                     <!-- {{this.$route.params.name}} -->
                     <p>First name:</p>
                     <input :placeholder="user.firstName" v-model="firstName">
@@ -33,8 +33,8 @@ export default {
 data() {
     return {
          calloutTitle: "Your profile",
-         firstName: this.user.firstName,
-         lastName: this.user.lastName
+         firstName: null,
+         lastName: null
         }
     },
     components: {
@@ -49,13 +49,15 @@ data() {
        }
    },
    methods: {
-       editUser(user) {
-        db.collection("users").doc(user.docId)
+       async editUser(user) {
+        await db.collection("users").doc(user.docId)
         .update({
             firstName: this.firstName,
             lastName: this.lastName
-        })
-        .then(this.$router.go())
+        });
+        await this.$store.commit('setUserNames', { 
+            firstName: this.firstName,
+            lastName: this.lastName });
        }
    },
    beforeCreate() {

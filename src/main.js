@@ -51,10 +51,9 @@ router.beforeEach ((to, from, next) => {
 
 let app = '';
 
-firebase.auth().onAuthStateChanged((user)=> {
+ firebase.auth().onAuthStateChanged((user)=> {
   if(!app) {
-    store.dispatch('autoSignIn', user);
-    console.log(user)
+     store.dispatch('autoSignIn', user);
     app = new Vue({
         el: '#app',
         render: h => h(App),

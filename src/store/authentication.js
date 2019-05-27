@@ -36,6 +36,10 @@ const state = {
      },
      setCurrentUser(state, payload) {
          state.currentUser = payload;
+     },
+     setUserNames(state, payload) {
+         state.user.firstName = payload.firstName;
+         state.user.lastName = payload.lastName;
      }
  }
 
@@ -125,8 +129,8 @@ const actions = {
               currentUser.docId = doc.id;
           });
         });
-        commit('setUser', currentUser);
-        commit('setCurrentUser', currentUser);
+        await commit('setUser', currentUser);
+        // await commit('setCurrentUser', currentUser);
     },
 }
 

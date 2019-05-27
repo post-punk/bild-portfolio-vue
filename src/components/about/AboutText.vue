@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="aboutText">
     <div class="row">
       <div class="col- col-md-5">
         <img class="img-fluid float-left" id="dude" :src="aboutText[0].image">
