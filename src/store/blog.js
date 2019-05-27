@@ -6,7 +6,8 @@ const state = {
     lastBlogPost: null,
     noMoreProjects: false,
     loadingStatus: false,
-    test:''
+    test:'',
+    orderBy: ''
 }
 
 const getters = {
@@ -28,6 +29,9 @@ const getters = {
     getLoadingStatus: state => {
         return state.loadingStatus;
     },
+    getOrderBy: state => {
+        return state.orderBy;
+    }
 }
 
 const mutations = {
@@ -66,6 +70,10 @@ const mutations = {
     },
     setEmptyBlog(state, payload) {
         state.blog = payload
+    },
+    setOrderBy(state, payload) {
+        console.log(payload)
+        state.orderBy = payload;
     }
 }
 
@@ -111,15 +119,20 @@ const actions = {
     async loadBlog({ commit }, config) {
         commit('setLoadingStatus', true);
        await db.collection("blog")
-
-            let query = db.collection('blog').orderBy('date', 'desc');
+            let query = db.collection('blog');
+            if (state.orderBy === 'desc') {
+                commit('setEmptyBlog', []);
+                query = db.collection('blog').orderBy('date', 'desc');
+            } else {
+                commit('setEmptyBlog', []);
+                query = db.collection('blog').orderBy('date', 'asc');
+            }
+            
             if (config && config.loadMore) {
                 query = query.startAfter(state.lastBlogPost)
             }
         query
-        
-
-            .limit(1)
+            .limit(3)
             .get()
             .then(snapshot => {
                 let blog = [];
@@ -167,7 +180,7 @@ const actions = {
         // console.log(payload.id + '    asdasdasdasd')
         commit('setTest','123');
         // commit('setBlog', payload);
-        // db.collection("blog").doc(payload.id).delete();
+        db.collection("blog").doc(payload.id).delete();
         state.blog = state.blog.filter(article => {
             return article.id != payload.id
         })

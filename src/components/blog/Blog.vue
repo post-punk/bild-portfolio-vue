@@ -6,9 +6,10 @@
                 <!-- <input type="text" placeholder="Search blogs" v-model="search" id="searchInputField"> -->
 
         <div class="row justify-content-end">
-          <button v-if="user" class="btn btn-info col-2" @click="pushToAddNewPost">Add new blog post
-            <!-- <router-link :to="{ path: '/addNewPost' }" > </router-link> -->
-          </button>
+          <button v-if="user" class="btn btn-info col-2" @click="pushToAddNewPost">Add new blog post</button>
+          <button v-if="user" class="btn btn-info col-2" @click="orderByDate('asc')">newest first</button>
+          <button v-if="user" class="btn btn-info col-2" @click="orderByDate('desc')">oldest first</button>
+
         </div>
       </div>
       <br>
@@ -64,6 +65,7 @@
         </div>
         <div class="load-button-container">
           <button v-if="!noMoreProjects" class="load-more" @click="loadMore(); delay()" :disabled="disabled">{{buttonText}}</button>
+          
         </div>
       </div>
     </div>
@@ -90,6 +92,7 @@ export default {
       disabled: false,
       timeout: null,
       buttonText: 'Load more',
+      // dataOrderBy: asc
       // search: null
     }
   },
@@ -162,6 +165,11 @@ export default {
           this.buttonText = 'Load more';
         }, 500)
     
+    },
+    orderByDate(val) {
+      this.$store.commit('setOrderBy', val);
+      this.$store.dispatch("loadBlog");
+      // this.dataOrderBy = asc
     },
     pushToAddNewPost() {
       this.$router.push({ path: 'AddNewPost'})
