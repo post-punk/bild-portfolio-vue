@@ -72,7 +72,6 @@ const mutations = {
         state.blog = payload
     },
     setOrderBy(state, payload) {
-        console.log(payload)
         state.orderBy = payload;
     }
 }
@@ -120,6 +119,7 @@ const actions = {
         commit('setLoadingStatus', true);
        await db.collection("blog")
             let query = db.collection('blog');
+            // OVO KVARI PAGINACIJU
             if (state.orderBy === 'desc') {
                 commit('setEmptyBlog', []);
                 query = db.collection('blog').orderBy('date', 'desc');

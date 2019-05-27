@@ -7,7 +7,7 @@
 
         <div class="row justify-content-end">
           <button v-if="user" class="btn btn-info col-2" @click="pushToAddNewPost">Add new blog post</button>
-          <button v-if="user" class="btn btn-info col-2" @click="orderByDate((orderBy != 'asc') ? 'asc' : 'desc')">newest first</button>
+          <button v-if="user" class="btn btn-info col-2" id="sort-btn" @click="orderByDate((orderBy != 'asc') ? 'asc' : 'desc')">Sort by date</button>
           <!-- <button v-if="user" class="btn btn-info col-2" @click="orderByDate('desc')">oldest first</button> -->
 
         </div>
@@ -168,7 +168,7 @@ export default {
     
     },
     orderByDate(val) {
-      val != val;
+      console.log(val)
       this.$store.commit('setOrderBy', val);
       this.$store.dispatch("loadBlog");
     },
@@ -338,5 +338,8 @@ button, .btn {
     .container .btn-primary {
       margin-top: 1rem;
       margin-left: -15px;
+    }
+    #sort-btn {
+      margin: 1rem;
     }
 </style>

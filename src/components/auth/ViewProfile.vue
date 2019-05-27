@@ -2,7 +2,7 @@
     <div>
         <callout-top :calloutTitle="calloutTitle"></callout-top>
         <div class="container">
-            <div class="row">
+            <div class="row" v-if="user">
                 <div class="col-xl-4 ">
                     <img :src="user.image" alt="">
                 </div>
@@ -12,10 +12,10 @@
                     Last name: <p>{{user.lastName}}</p>
                     email: <p>{{user.email}}</p>
                     <!-- <p>details: {{details}}</p> -->
-                    <button class="d-flex align-content-center btn btn-info" >
-                        <a v-bind:href="'mailto:' + user.email">Contact {{user.email}} </a>
-                    </button>
-                    <button @click="pushToEditProfile">Edit</button>
+                    <!-- <button class="d-flex align-content-center btn btn-info" > -->
+                        <a id="contact-btn" class="align-content-center btn btn-info" v-bind:href="'mailto:' + user.email">Contact {{user.email}} </a>
+                    <!-- </button> -->
+                    <button id="edit-btn" @click="pushToEditProfile">Edit</button>
                 </div>
             </div>
         </div>
@@ -79,5 +79,13 @@ button {
 }
 p {
     font-weight: bold;
+}
+#contact-btn {
+    width: 40%;
+    display: block;
+}
+#edit-btn {
+        margin-top: 1em;
+
 }
 </style>
