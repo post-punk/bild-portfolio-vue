@@ -39,7 +39,7 @@ const mutations = {
         state.test = payload
     },
     setBlog(state, payload) {
-        console.log(payload)
+        // console.log(payload)
         // if (payload.editPost) {
         //     return state.blog = payload;
         // }
@@ -180,7 +180,7 @@ const actions = {
         // console.log(payload.id + '    asdasdasdasd')
         commit('setTest','123');
         // commit('setBlog', payload);
-        db.collection("blog").doc(payload.id).delete();
+        // db.collection("blog").doc(payload.id).delete();
         state.blog = state.blog.filter(article => {
             return article.id != payload.id
         })

@@ -7,6 +7,7 @@ import home from './home.js';
 import contact from './contact';
 import blog from './blog';
 import authentication from './authentication';
+import prompt from './prompt.js';
 // import firebase from 'firebase'
 import db from '@/firebase/init'
 

@@ -4,14 +4,16 @@
       <div v-if="isOpen">
         <div class="overlay" @click.self="isOpen = false;">
           <div id="modal">
-            <h1>Modal heading</h1>
-            <p>This my first modal using vue.js</p>
+            <h1>{{ title }}</h1>
+            <p>{{ text }}</p>
+            <button type="button" class="btn btn-secondary" @click="isOpen = false">{{ cancel }}</button>
+            <button type="button" class="btn btn-danger" @click="deleteSomething(id); isOpen = false">{{ danger }}</button>
           </div>
         </div>
       </div>
     </transition>
-    <button @click="isOpen = !isOpen;">
-      {{ isOpen ? "Close" : "Open" }} modal
+    <button id="open-modal" @click="isOpen = !isOpen;">
+      {{ buttonInfo }}
     </button>
   </div>
 </template>
@@ -22,7 +24,15 @@ export default {
     return {
       isOpen: false
     };
-  }
+  },
+  methods: {
+    deleteSomething(uid) {
+       this.$store.dispatch("deleteArticle", { 
+        id: uid,
+        });
+    }
+  },
+  props: ['title', 'text', 'cancel', 'danger', 'id', 'buttonInfo']
 };
 </script>
 
@@ -50,12 +60,23 @@ export default {
 .fadeIn-leave-active.modal {
   transform: scale(1.1);
 }
+#open-modal {
+  padding: 7px;
+  margin-top: 10px;
+  /* background-color: green; */
+  color: rgb(255, 255, 255);
+  background-color: rgb(156, 47, 47);
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
 button {
   padding: 7px;
   margin-top: 10px;
-  background-color: green;
-  color: white;
-  font-size: 1.1rem;
+  /* background-color: green; */
+  color: rgb(255, 255, 255);
+  
 }
 
 .overlay {

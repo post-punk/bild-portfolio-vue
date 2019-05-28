@@ -53,7 +53,9 @@ let app = '';
 
  firebase.auth().onAuthStateChanged((user)=> {
   if(!app) {
-     store.dispatch('autoSignIn', user);
+    if (user) {
+      store.dispatch('autoSignIn', user);
+     }
     app = new Vue({
         el: '#app',
         render: h => h(App),

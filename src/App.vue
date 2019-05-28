@@ -6,8 +6,9 @@
         v-if="loading">
         </spinner>
     <router-view/>
-            <prompt></prompt>
-
+        <!-- <prompt
+        v-if="promptIsOpen">
+        </prompt> -->
     <app-footer/>
   </div>
 </template>
@@ -73,6 +74,9 @@ export default {
     loading() {
       return this.$store.getters.getLoadingStatus;
     },
+    // promptIsOpen() {
+    //   return this.$store.getters.getPromptIsOpen;
+    // }
   }
 };
 </script>

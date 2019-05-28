@@ -7,13 +7,14 @@
 
         <div class="row justify-content-end">
           <button v-if="user" class="btn btn-info col-2" @click="pushToAddNewPost">Add new blog post</button>
-          <button v-if="user" class="btn btn-info col-2" id="sort-btn" @click="orderByDate((orderBy != 'asc') ? 'asc' : 'desc')">Sort by date</button>
+          <button v-if="user" class="btn btn-info col-2" id="sort-btn" @click="orderByDate((orderBy != 'desc') ? 'desc' : 'asc')">Sort by date</button>
           <!-- <button v-if="user" class="btn btn-info col-2" @click="orderByDate('desc')">oldest first</button> -->
 
         </div>
       </div>
       <br>
       <div class="container">
+         
         <div class="row blog-list" v-for="(article, index) in blog" :key="index">
           <img class="col-md-4 align-self-center" :src="article.image" alt>
           <div class="col-md-6">
@@ -46,9 +47,11 @@
                 </div>
                 <div class="modal-footer"> -->
                   <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button> -->
-                  <div class="container">
-                     <button type="button" class="btn btn-primary" data-dismiss="modal" @click="deleteBlogPost(article.id)">Delete post</button>
-                  </div>
+                  <!-- <div class="container"> -->
+                    <prompt class="delete-btn" :title="modalHeader" :text="modalText" :cancel="cancelButton" :danger="dangerButton" :id="article.id" :buttonInfo="buttonInfo">
+                    </prompt>
+                    <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" @click="deleteBlogPost(article.id)">Delete post</button> -->
+                  <!-- </div> -->
                 <!-- </div>
               </div>
             </div>
@@ -65,7 +68,6 @@
         </div>
         <div class="load-button-container">
           <button v-if="!noMoreProjects" class="load-more" @click="loadMore(); delay()" :disabled="disabled">{{buttonText}}</button>
-          
         </div>
       </div>
     </div>
@@ -81,6 +83,7 @@ import Datepicker from 'vuejs-datepicker';
 import formatDate from '../../filters/formatDate.js'
 import uppercase from '../../filters/uppercase';
 import Firebase from 'firebase'
+import Prompt from '../other/Prompt';
 
 export default {
   data() {
@@ -92,6 +95,11 @@ export default {
       disabled: false,
       timeout: null,
       buttonText: 'Load more',
+      modalHeader: 'Are you sure?',
+      modalText: 'This action cannot be undone.',
+      cancelButton: 'No',
+      dangerButton: 'Yes',
+      buttonInfo: 'Delete this post'
       // search: null
     }
   },
@@ -136,6 +144,7 @@ export default {
     CalloutTop,
     moment,
     Datepicker,
+    Prompt
   },
   methods: {
     loadMore() {
@@ -342,4 +351,7 @@ button, .btn {
     #sort-btn {
       margin: 1rem;
     }
+  .delete-btn {
+    color: inherit;
+  }
 </style>

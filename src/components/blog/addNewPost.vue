@@ -6,7 +6,6 @@
                 <!-- {{slugifyTitle(header)}} -->
                 <datepicker placeholder="Enter date" class="datepicker" :input-class="{}" v-model="date" type="datetime-local"></datepicker>
                 <input class="form-control" placeholder="Enter title" v-model="header">
-                <!-- <input class="form-control" type="datetime-local" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}" placeholder="Enter date" v-model="date"> -->
                 <input class="form-control"  placeholder="Enter image URL" v-model="image">
                 <textarea name="ckeditor" id="ckeditor" cols="90" rows="10" v-model="text" placeholder="Enter title"></textarea>
                 <button type="button" class="btn btn-primary" @click="addNewPost()">Submit</button>
