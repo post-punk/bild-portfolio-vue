@@ -132,7 +132,7 @@ export default {
       this.$store.dispatch('emptyProjects', []);
       //varijanta za 'all'
       if (val === "all") {
-        this.$store.dispatch("displayAll");
+        this.$store.dispatch("displayProjects");
         this.selectedCategory = "all";
         document.getElementById("loadMore").style.display = "block";
       } else {
@@ -140,7 +140,7 @@ export default {
         document.getElementById("loadMore").style.display = "none";
         this.$store.dispatch('emptyProjects', []);
         // this.$store.dispatch("displayAll", {
-        //   filter: true
+          // filter: val
         // });
         db.collection("work-items")
           .where("category", "==", val)

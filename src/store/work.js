@@ -36,7 +36,6 @@ const actions = {
         commit('setLoadingStatus', true);
        await db.collection("work-items")
        let query = db.collection("work-items").orderBy("name")
-
         if (config && config.loadMore) {
             query = query.startAfter(state.lastVisible)
         }
@@ -55,24 +54,24 @@ const actions = {
           });
     },
 
-    displayAll ({commit}) {
-    commit('setLoadingStatus', true);
-    //fetch from firestore
-    db.collection("work-items")
-    .orderBy('name')
-    .limit(3)
-    .get()
-    .then(snapshot => {
-        var projects = [];
-        var lastVisible = snapshot.docs[snapshot.docs.length-1];
-        snapshot.forEach(doc => {
-           projects.push(doc.data()) 
-        });
-      commit('setProjects', projects);
-      commit('setLastVisible', lastVisible);
-      commit('setLoadingStatus', false);
-      });
-    },
+    // displayAll ({commit}) {
+    // commit('setLoadingStatus', true);
+    // //fetch from firestore
+    // db.collection("work-items")
+    // .orderBy('name')
+    // .limit(3)
+    // .get()
+    // .then(snapshot => {
+    //     var projects = [];
+    //     var lastVisible = snapshot.docs[snapshot.docs.length-1];
+    //     snapshot.forEach(doc => {
+    //        projects.push(doc.data()) 
+    //     });
+    //   commit('setProjects', projects);
+    //   commit('setLastVisible', lastVisible);
+    //   commit('setLoadingStatus', false);
+    //   });
+    // },
     emptyProjects ({commit}, payload) {
         commit('setEmptyProjects', payload)
     },

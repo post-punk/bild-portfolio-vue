@@ -12,7 +12,7 @@
                 </div>
             </div>
             <h1>{{ header }}</h1>
-            <time :datetime="date">{{ date | formatDate() }}</time>
+            <time :datetime="date">{{ date.toDate() | formatDate }}</time>
             <img class="blog-image" :src="image" alt="">
             <div class="text-wrapper">
                 <p v-html="text"></p>
@@ -60,7 +60,8 @@ created(){
 components: {
     //    CalloutTop,
     moment,
-    Datepicker
+    Datepicker,
+    formatDate
    },
 computed: {
     user() {
