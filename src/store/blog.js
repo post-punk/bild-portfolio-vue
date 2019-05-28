@@ -149,32 +149,6 @@ const actions = {
             })
     },
 
-    // async loadMore({ commit }) {
-    //     commit('setLoadingStatus', true);
-    //     await db.collection("blog")
-    //         .startAfter(state.lastBlogPost)
-    //         .limit(1)
-    //         .get()
-    //         .then(snapshot => {
-    //             var blog = [];
-    //             var lastBlogPost = snapshot.docs[snapshot.docs.length - 1];
-    //             snapshot.forEach(doc => {
-    //                 blog.push({ ...doc.data(), id: doc.id });
-
-    //             });
-    //             var blogCount = state.blogCount;
-    //             blogCount-=2;
-    //             if (blogCount === 2) {
-    //                 state.noMoreProjects = true;
-    //             }
-    //             commit("setLoadMore", blog);
-    //             commit('setlastBlogPost', lastBlogPost);
-    //             commit('setBlogCount', blogCount);
-    //             commit('setLoadingStatus', false);
-
-    //         });
-    // },
-
     deleteArticle({commit}, payload) {
         //UNCOMMENT!
         // console.log(payload.id + '    asdasdasdasd')

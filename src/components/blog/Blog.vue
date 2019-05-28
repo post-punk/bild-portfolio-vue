@@ -48,7 +48,7 @@
                 <div class="modal-footer"> -->
                   <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button> -->
                   <!-- <div class="container"> -->
-                    <prompt class="delete-btn" :title="modalHeader" :text="modalText" :cancel="cancelButton" :danger="dangerButton" :id="article.id" :buttonInfo="buttonInfo">
+                    <prompt class="delete-btn" :title="modalHeader" :text="modalText" :cancel="cancelButton" :danger="dangerButton" :arg="article.id" :buttonInfo="buttonInfo">
                     </prompt>
                     <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" @click="deleteBlogPost(article.id)">Delete post</button> -->
                   <!-- </div> -->

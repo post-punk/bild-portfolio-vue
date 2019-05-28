@@ -7,7 +7,7 @@
             <h1>{{ title }}</h1>
             <p>{{ text }}</p>
             <button type="button" class="btn btn-secondary" @click="isOpen = false">{{ cancel }}</button>
-            <button type="button" class="btn btn-danger" @click="deleteSomething(id); isOpen = false">{{ danger }}</button>
+            <button type="button" class="btn btn-danger" @click="deleteSomething(arg); isOpen = false">{{ danger }}</button>
           </div>
         </div>
       </div>
@@ -32,7 +32,7 @@ export default {
         });
     }
   },
-  props: ['title', 'text', 'cancel', 'danger', 'id', 'buttonInfo']
+  props: ['title', 'text', 'cancel', 'danger', 'arg', 'buttonInfo']
 };
 </script>
 

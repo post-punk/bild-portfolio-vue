@@ -95,13 +95,14 @@ export default {
     };
   },
 
-  created() {
-    this.$store.dispatch("displayAll");
+  beforeCreate() {
+    this.$store.dispatch("displayProjects", {
+      loadMore: false
+    });
   },
   beforeDestroy() {
     this.$store.dispatch('emptyProjects', []);
   },
-
   computed: {
     projectItems: function() {
       return this.$store.getters.allItems;
@@ -110,7 +111,6 @@ export default {
       return this.$store.getters.lastVisible;
     }
   },
-
   components: {
     CalloutTop
   },
@@ -118,26 +118,15 @@ export default {
     activeView(val) {
       this.view = val;
     },
+    displayProjects() {
+      this.$store.dispatch('displayProjects', {
+      loadMore: true
+    });
+    },
     loadMore() {
-      this.$store.commit('setLoadingStatus', true);
-      db.collection("work-items")
-        .orderBy("name")
-        .startAfter(this.lastVisible)
-        .limit(3)
-        .get()
-        .then(snapshot => {
-          var projects = [];
-          var lastVisible = snapshot.docs[snapshot.docs.length - 1];
-          snapshot.forEach(doc => {
-            projects.push(doc.data());
-          });
-          if (snapshot.docs.length === 0) {
-            this.noMoreProjects = true;
-          }
-          this.$store.commit("setLastVisible", lastVisible);
-          this.$store.commit("setProjects", projects);
-          this.$store.commit('setLoadingStatus', false);
-        });
+      this.$store.dispatch('displayProjects', {
+      loadMore: true
+    });
     },
     firestoreFilter(val) {
       this.$store.dispatch('emptyProjects', []);
@@ -146,21 +135,13 @@ export default {
         this.$store.dispatch("displayAll");
         this.selectedCategory = "all";
         document.getElementById("loadMore").style.display = "block";
-        // db.collection("work-items")
-        //   .orderBy("name")
-        //   .get()
-        //   .then(snapshot => {
-        //     var projects = [];
-        //     snapshot.forEach(doc => {
-        //       projects.push(doc.data());
-        //     });
-        //     this.$store.commit("setProjects", projects);
-        //   });
-
       } else {
         this.$store.commit('setLoadingStatus', true);
         document.getElementById("loadMore").style.display = "none";
         this.$store.dispatch('emptyProjects', []);
+        // this.$store.dispatch("displayAll", {
+        //   filter: true
+        // });
         db.collection("work-items")
           .where("category", "==", val)
           .get()

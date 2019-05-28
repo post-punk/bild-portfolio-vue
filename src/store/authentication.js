@@ -104,9 +104,9 @@ const actions = {
         firebase.auth().signOut().then(() => {
         commit("setUser", null);
         })
-        .catch(() => {
-        commit("setUser", null);
-        });
+        // .catch(() => {
+        // commit("setUser", null);
+        // });
     },
    async autoSignIn({ commit }, payload ) {
         var currentUser = {
