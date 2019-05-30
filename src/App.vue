@@ -2,13 +2,14 @@
   <div id="app">
     <app-header/>
         <vue-progress-bar></vue-progress-bar>
+        <prompt :title="modalInfo.modalHeader" :text="modalInfo.modalText" :cancel="modalInfo.cancelButton" :danger="modalInfo.dangerButton" :buttonInfo="modalInfo.buttonInfo"
+        v-if="promptIsOpen">
+        </prompt>
         <spinner
         v-if="loading">
         </spinner>
     <router-view/>
-        <!-- <prompt
-        v-if="promptIsOpen">
-        </prompt> -->
+
     <app-footer/>
   </div>
 </template>
@@ -26,7 +27,7 @@ import { store } from './store/store'
 import VueCkeditor from 'vue-ckeditor2';
 import firebase from 'firebase/app';
 import Spinner from './components/other/Spinner.vue';
-import Prompt from './components/other/Prompt';
+import Prompt from './components/other/Prompt.vue';
 
 export default {
   name: "App",
@@ -67,23 +68,25 @@ export default {
     CalloutTop,
     appFooter: Footer,
     Spinner,
-    Prompt
-
+    Prompt,
+   
   },
   computed: {
     loading() {
       return this.$store.getters.getLoadingStatus;
     },
-    // promptIsOpen() {
-    //   return this.$store.getters.getPromptIsOpen;
-    // }
+    promptIsOpen() {
+      return this.$store.getters.getPromptIsOpen;
+    },
+    modalInfo() {
+      return this.$store.getters.getModalInfo;
+    }
   }
 };
 </script>
 
 <style>
 html {
-  /* max-width: 1400px; */
   margin: 0 auto;
   position: relative;
   min-height: 100%;

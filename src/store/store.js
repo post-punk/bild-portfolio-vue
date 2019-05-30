@@ -23,5 +23,6 @@ export const store = new Vuex.Store({
         contact,
         blog,
         authentication,
+        prompt
     }
 });

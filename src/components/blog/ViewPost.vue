@@ -7,13 +7,12 @@
                 <button type="button" class="btn btn-light" @click="$router.go(-1)">Back</button>
                 <router-link :to="{ path: '/editPost/' + id}"><button type="button" class="btn btn-success">Edit</button></router-link>
                 <div v-if="user">
-                    
                     <button type="button" class="btn btn-danger" @click="deleteBlogPost(id)">Delete</button>
                 </div>
             </div>
             <h1>{{ header }}</h1>
-            <time :datetime="date">{{ date.toDate() | formatDate }}</time>
-            <img class="blog-image" :src="image" alt="">
+            <time v-if="date" :datetime="date">{{ date.toDate() | formatDate }}</time>
+            <img class="blog-image container" :src="image" alt="">
             <div class="text-wrapper">
                 <p v-html="text"></p>
             </div>

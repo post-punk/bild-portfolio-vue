@@ -1,20 +1,18 @@
 <template>
   <div>
     <transition name="modal">
-      <div v-if="isOpen">
+      <div v-if="!isOpen">
         <div class="overlay" @click.self="isOpen = false;">
           <div id="modal">
             <h1>{{ title }}</h1>
             <p>{{ text }}</p>
-            <button type="button" class="btn btn-secondary" @click="isOpen = false">{{ cancel }}</button>
-            <button type="button" class="btn btn-danger" @click="deleteSomething(arg); isOpen = false">{{ danger }}</button>
+            <button type="button" class="btn btn-secondary" @click="closePrompt">{{ cancel }}</button>
+            <button type="button" class="btn btn-danger" @click="deleteSomething(arg)"
+            >{{ danger }}</button>
           </div>
         </div>
       </div>
     </transition>
-    <button id="open-modal" @click="isOpen = !isOpen;">
-      {{ buttonInfo }}
-    </button>
   </div>
 </template>
 
@@ -22,7 +20,7 @@
 export default {
   data: function() {
     return {
-      isOpen: false
+      // isOpen: false
     };
   },
   methods: {
@@ -30,9 +28,25 @@ export default {
        this.$store.dispatch("deleteArticle", { 
         id: uid,
         });
+    },
+    closePrompt() {
+      this.$store.dispatch('closePrompt', false)
     }
   },
-  props: ['title', 'text', 'cancel', 'danger', 'arg', 'buttonInfo']
+  computed: {
+    isOpen() {
+      this.$store.getters.getPromptIsOpen;
+    },
+    modalInfo() {
+      this.$store.getters.getModalInfo;
+    }
+  },
+    props: ['title', 'text', 'cancel', 'danger', 'arg', 'buttonInfo'],
+
+  created() {
+    // console.log(this.$store)
+  },
+ 
 };
 </script>
 

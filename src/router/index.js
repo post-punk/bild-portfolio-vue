@@ -84,7 +84,7 @@ const router = new Router ({
       }
     },
     {
-      path: '/EditProfile/',
+      path: '/EditProfile/:firstName',
       name: 'EditProfile',
       component: EditProfile,
       meta: {

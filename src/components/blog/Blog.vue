@@ -8,7 +8,6 @@
         <div class="row justify-content-end">
           <button v-if="user" class="btn btn-info col-2" @click="pushToAddNewPost">Add new blog post</button>
           <button v-if="user" class="btn btn-info col-2" id="sort-btn" @click="orderByDate((orderBy != 'desc') ? 'desc' : 'asc')">Sort by date</button>
-          <!-- <button v-if="user" class="btn btn-info col-2" @click="orderByDate('desc')">oldest first</button> -->
 
         </div>
       </div>
@@ -48,8 +47,10 @@
                 <div class="modal-footer"> -->
                   <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button> -->
                   <!-- <div class="container"> -->
-                    <prompt class="delete-btn" :title="modalHeader" :text="modalText" :cancel="cancelButton" :danger="dangerButton" :arg="article.id" :buttonInfo="buttonInfo">
-                    </prompt>
+
+                    <button class="delete-btn" :title="modalHeader" :text="modalText" :cancel="cancelButton" :danger="dangerButton" :buttonInfo="buttonInfo"
+                    @click="deleteArticle">Delete</button> 
+
                     <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" @click="deleteBlogPost(article.id)">Delete post</button> -->
                   <!-- </div> -->
                 <!-- </div>
@@ -67,7 +68,7 @@
           </button>
         </div>
         <div class="load-button-container">
-          <button v-if="!noMoreProjects" class="load-more" @click="loadMore(); delay()" :disabled="disabled">{{buttonText}}</button>
+          <button v-if="!noMoreArticles" class="load-more" @click="loadMore(); delay()" :disabled="disabled">{{buttonText}}</button>
         </div>
       </div>
     </div>
@@ -89,8 +90,6 @@ export default {
   data() {
     return {
       calloutTitle: "BLOG",
-      // noMoreProjects: false,
-      // blogCount: 5,
       trimAmount: 300,
       disabled: false,
       timeout: null,
@@ -100,7 +99,6 @@ export default {
       cancelButton: 'No',
       dangerButton: 'Yes',
       buttonInfo: 'Delete this post'
-      // search: null
     }
   },
   beforeCreate() {
@@ -108,7 +106,7 @@ export default {
       loadMore: false
     });
   },
-  beforeDestroy () {
+  beforeDestroy() {
      // clear the timeout before the component is destroyed
      clearTimeout(this.timeout);
      this.$store.dispatch('emptyBlog', []);
@@ -123,8 +121,8 @@ export default {
     user() {
       return this.$store.getters.getUser;
     },
-    noMoreProjects() {
-      return this.$store.getters.noMoreProjects;
+    noMoreArticles() {
+      return this.$store.getters.noMoreArticles;
     },
     user() {
       return this.$store.getters.getUser;
@@ -156,7 +154,8 @@ export default {
       console.log(uid)
       this.$store.dispatch("deleteArticle", { 
         id: uid,
-        });
+        })
+      ;
     },
     editBlogPost(uid) {
       this.$store.dispatch('editArticle', {
@@ -177,15 +176,27 @@ export default {
     
     },
     orderByDate(val) {
-      console.log(val)
       this.$store.commit('setOrderBy', val);
       this.$store.dispatch("loadBlog");
+      this.$store.commit('setNoMoreArticles', false);
+
     },
     pushToAddNewPost() {
       this.$router.push({ path: 'AddNewPost'})
     },
     pushToEditArticle(article) {
       this.$router.push({ path: '/editPost/' + article})
+    },
+    deleteArticle() {
+      this.$store.commit('setPromptIsOpen', true);
+      this.$store.dispatch('modalInfo', {
+        buttonText: this.buttonText,
+        modalHeader: this.modalHeader,
+        modalText: this.modalText,
+        cancelButton: this.cancelButton,
+        dangerButton: this.dangerButton,
+        buttonInfo: this.buttonInfo
+      })
     }
   }
 }
@@ -303,46 +314,7 @@ button, .btn {
 .btn-primary:hover {
   background-color: rgb(121, 54, 54) !important;
 }
-.half-circle-spinner, .half-circle-spinner * {
-      box-sizing: border-box;
-    }
 
-    .half-circle-spinner {
-      width: 60px;
-      height: 60px;
-      border-radius: 100%;
-      position: relative;
-      margin: auto !important;
-    }
-
-    .half-circle-spinner .circle {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 100%;
-      border: calc(60px / 10) solid transparent;
-    }
-/* spinner */
-    .half-circle-spinner .circle.circle-1 {
-      border-top-color: #ff1d5e;
-      animation: half-circle-spinner-animation 1s infinite;
-    }
-
-    .half-circle-spinner .circle.circle-2 {
-      border-bottom-color: #ff1d5e;
-      animation: half-circle-spinner-animation 1s infinite alternate;
-    }
-
-    @keyframes half-circle-spinner-animation {
-      0% {
-        transform: rotate(0deg);
-
-      }
-      100%{
-        transform: rotate(360deg);
-      }
-    }
     
     .container .btn-primary {
       margin-top: 1rem;

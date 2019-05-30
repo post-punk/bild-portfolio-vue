@@ -4,7 +4,7 @@ import router from '../router/index'
 const state = {
     blog: [],
     lastBlogPost: null,
-    noMoreProjects: false,
+    noMoreArticles: false,
     loadingStatus: false,
     test:'',
     orderBy: ''
@@ -20,8 +20,8 @@ const getters = {
     lastBlogPost: state => {
         return state.lastBlogPost;
     },
-    noMoreProjects: state => {
-        return state.noMoreProjects;
+    noMoreArticles: state => {
+        return state.noMoreArticles;
     },
     slug: state => {
         return state.slug;
@@ -43,12 +43,11 @@ const mutations = {
         // if (payload.editPost) {
         //     return state.blog = payload;
         // }
-        payload.forEach(article => {
-            state.blog.push(article)
-        })
-        // state.blog = payload;
+        // payload.forEach(article => {
+        //     state.blog.push(article)
+        // })
+        state.blog = payload;
     },
-    
     setLoadMore(state, payload) {
         // state.blog = [];
         payload.forEach(article => {
@@ -59,9 +58,9 @@ const mutations = {
     setlastBlogPost(state, payload) {
         state.lastBlogPost = payload
     },
-    // deleteBlog(state, payload) {
-    //     state.blog.splice(payload, 1)
-    // },
+    setNoMoreArticles(state, payload) {
+        state.noMoreArticles = payload;
+    },
     setBlogCount(state, payload) {
         state.blogCount = payload;
     },
@@ -96,7 +95,7 @@ const actions = {
         })
     // commit('setBlog');
     dispatch('loadBlog');
-    router.go(-1)
+    router.go(-1);
     },
 
     addNewPost({dispatch, commit}, payload) {
@@ -121,28 +120,29 @@ const actions = {
             let query = db.collection('blog');
             // OVO KVARI PAGINACIJU
             if (state.orderBy === 'desc') {
-                commit('setEmptyBlog', []);
                 query = db.collection('blog').orderBy('date', 'desc');
             } else {
-                commit('setEmptyBlog', []);
                 query = db.collection('blog').orderBy('date', 'asc');
             }
-            
             if (config && config.loadMore) {
                 query = query.startAfter(state.lastBlogPost)
             }
         query
-            .limit(3)
+            .limit(2)
             .get()
             .then(snapshot => {
                 let blog = [];
                 let lastBlogPost = snapshot.docs[snapshot.docs.length - 1];
+                
+                if (config && config.loadMore) {
+                    blog = state.blog;
+                }
                 snapshot.forEach(doc => {
                     blog.push({ ...doc.data(), id: doc.id });
                 });
-                // if (config && config.loadMore) {
-                //     commit("setLoadMore", blog);
-                //     }
+                if(snapshot.docs.length === 0) {
+                    commit('setNoMoreArticles', true)
+                }
                 commit('setlastBlogPost', lastBlogPost);
                 commit('setBlog', blog);
                 commit('setLoadingStatus', false);

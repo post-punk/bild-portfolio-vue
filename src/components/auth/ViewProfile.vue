@@ -36,7 +36,7 @@ data() {
    },
    methods: {
        pushToEditProfile() {
-       this.$router.push({ path: '/EditProfile/' })
+       this.$router.push({ path: '/EditProfile/' + this.user.firstName })
        }
    },
    computed: {
@@ -85,7 +85,6 @@ p {
     display: block;
 }
 #edit-btn {
-        margin-top: 1em;
-
+    margin-top: 1em;
 }
 </style>

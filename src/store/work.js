@@ -4,6 +4,7 @@ const state = {
     projects: [],
     loadingStatus: false,
     lastVisible: '',
+    noMoreProjects: false
 }
 
 const getters = {
@@ -15,6 +16,9 @@ const getters = {
     lastVisible: state => {
         return state.lastVisible;
     },
+    noMoreProjects: state => {
+        return state.noMoreProjects;
+    }
 }
 const mutations = {
    setProjects(state, payload) {
@@ -28,7 +32,10 @@ const mutations = {
    },
    setEmptyProjects(state, payload) {
         state.projects = payload;
-},
+    },
+    setNoMoreProjects(state, payload) {
+        state.noMoreProjects = payload;
+    }
 
 }
 const actions = {
@@ -48,6 +55,9 @@ const actions = {
             snapshot.forEach(doc => {
               projects.push(doc.data());
             });
+            if (snapshot.docs.length === 0) {
+                commit('setNoMoreProjects', true);
+              }
             commit("setLastVisible", lastVisible);
             commit("setProjects", projects);
             commit('setLoadingStatus', false);

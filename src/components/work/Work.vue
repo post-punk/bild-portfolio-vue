@@ -68,7 +68,7 @@
           </div>
         </div>
         <div class="load-button-container">
-          <button v-if="!noMoreProjects" class="load-more" id="loadMore" :disabled="disabled" @click="loadMore(); delay()">{{buttonText}}</button>
+          <button v-show="!noMoreProjects" class="load-more" id="loadMore" :disabled="disabled" @click="loadMore(); delay()">{{buttonText}}</button>
         </div>
       </div>
     </div>
@@ -88,7 +88,6 @@ export default {
       calloutTitle: "CHECK OUT WHAT I CAN DO",
       selectedCategory: "all",
       view: "grid",
-      noMoreProjects: false,
       disabled: false,
       timeout: null,
       buttonText: 'Load more'
@@ -109,6 +108,9 @@ export default {
     },
     lastVisible() {
       return this.$store.getters.lastVisible;
+    },
+    noMoreProjects() {
+      return this.$store.getters.noMoreProjects
     }
   },
   components: {
@@ -134,14 +136,11 @@ export default {
       if (val === "all") {
         this.$store.dispatch("displayProjects");
         this.selectedCategory = "all";
-        document.getElementById("loadMore").style.display = "block";
+        this.$store.commit('setNoMoreProjects', false);
       } else {
         this.$store.commit('setLoadingStatus', true);
-        document.getElementById("loadMore").style.display = "none";
         this.$store.dispatch('emptyProjects', []);
-        // this.$store.dispatch("displayAll", {
-          // filter: val
-        // });
+        this.$store.commit('setNoMoreProjects', true);
         db.collection("work-items")
           .where("category", "==", val)
           .get()
@@ -150,6 +149,7 @@ export default {
             snapshot.forEach(doc => {
               projects.push(doc.data());
             });
+            
             this.$store.commit("setProjects", projects);
             this.selectedCategory = val;
             this.$store.commit('setLoadingStatus', false);
