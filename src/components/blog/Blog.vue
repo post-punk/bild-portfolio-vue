@@ -48,8 +48,8 @@
                   <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button> -->
                   <!-- <div class="container"> -->
 
-                    <button class="delete-btn" :title="modalHeader" :text="modalText" :cancel="cancelButton" :danger="dangerButton" :buttonInfo="buttonInfo"
-                    @click="deleteArticle">Delete</button> 
+                    <button class="delete-btn" 
+                    @click="deleteArticle(article.id)">Delete</button> 
 
                     <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" @click="deleteBlogPost(article.id)">Delete post</button> -->
                   <!-- </div> -->
@@ -64,7 +64,7 @@
             v-if="user"
             aria-label="Edit"
             @click="pushToEditArticle(article.id)">
-           Edit blog post
+            Edit blog post
           </button>
         </div>
         <div class="load-button-container">
@@ -135,8 +135,8 @@ export default {
     // }
   },
   filters: {
-      formatDate,
-      uppercase
+    formatDate,
+    uppercase
   },
   components: {
     CalloutTop,
@@ -150,10 +150,10 @@ export default {
         loadMore: true
       });
     },
-    deleteBlogPost(uid) {
-      console.log(uid)
+    deleteBlogPost(articleForDeletion) {
+      console.log(articleForDeletion)
       this.$store.dispatch("deleteArticle", { 
-        id: uid,
+        id: articleForDeletion,
         })
       ;
     },
@@ -187,15 +187,20 @@ export default {
     pushToEditArticle(article) {
       this.$router.push({ path: '/editPost/' + article})
     },
-    deleteArticle() {
-      this.$store.commit('setPromptIsOpen', true);
+    deleteArticle(uid) {
       this.$store.dispatch('modalInfo', {
         buttonText: this.buttonText,
         modalHeader: this.modalHeader,
         modalText: this.modalText,
         cancelButton: this.cancelButton,
         dangerButton: this.dangerButton,
-        buttonInfo: this.buttonInfo
+        buttonInfo: this.buttonInfo,
+        onSubmit: () => {
+          // console.log(arg)
+          this.$store.dispatch("deleteArticle", { 
+        id: uid,
+        })
+        }
       })
     }
   }
@@ -324,6 +329,11 @@ button, .btn {
       margin: 1rem;
     }
   .delete-btn {
-    color: inherit;
+    height: 2em;
+    background-color: rgb(155, 0, 0);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 1em;;
   }
 </style>

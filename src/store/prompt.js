@@ -1,6 +1,7 @@
 const state = {
    promptIsOpen: false,
-   modalInfo: {}
+   modalInfo: {},
+   method: null
 }
 
 const getters = {
@@ -18,8 +19,11 @@ const mutations = {
     },
     setModalInfo(state, payload) {
         state.modalInfo = payload;
-        console.log(payload)
-    }
+        // console.log(payload)
+    },
+    // setMethod(state, payload) {
+    //     state.method = payload.onSubmit;
+    // }
     
 }
 const actions = {
@@ -27,7 +31,11 @@ const actions = {
         commit('setPromptIsOpen', payload)
     },
     modalInfo({commit}, payload) {
-        commit('setModalInfo', payload)
+        const defaultOptions = {
+            
+        };
+        commit('setPromptIsOpen', true);
+        commit('setModalInfo', payload);
     }
 }
 

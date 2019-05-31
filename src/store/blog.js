@@ -128,19 +128,18 @@ const actions = {
                 query = query.startAfter(state.lastBlogPost)
             }
         query
-            .limit(2)
+            .limit(1)
             .get()
             .then(snapshot => {
                 let blog = [];
                 let lastBlogPost = snapshot.docs[snapshot.docs.length - 1];
-                
                 if (config && config.loadMore) {
                     blog = state.blog;
                 }
                 snapshot.forEach(doc => {
                     blog.push({ ...doc.data(), id: doc.id });
                 });
-                if(snapshot.docs.length === 0) {
+                if (snapshot.docs.length === 0) {
                     commit('setNoMoreArticles', true)
                 }
                 commit('setlastBlogPost', lastBlogPost);
@@ -154,7 +153,7 @@ const actions = {
         // console.log(payload.id + '    asdasdasdasd')
         commit('setTest','123');
         // commit('setBlog', payload);
-        // db.collection("blog").doc(payload.id).delete();
+        db.collection("blog").doc(payload.id).delete();
         state.blog = state.blog.filter(article => {
             return article.id != payload.id
         })

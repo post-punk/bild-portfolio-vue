@@ -2,13 +2,12 @@
   <div>
     <transition name="modal">
       <div v-if="!isOpen">
-        <div class="overlay" @click.self="isOpen = false;">
+        <div class="overlay" @click.self="closePrompt">
           <div id="modal">
             <h1>{{ title }}</h1>
             <p>{{ text }}</p>
             <button type="button" class="btn btn-secondary" @click="closePrompt">{{ cancel }}</button>
-            <button type="button" class="btn btn-danger" @click="deleteSomething(arg)"
-            >{{ danger }}</button>
+            <button type="button" class="btn btn-danger" @click="onSubmit(val); closePrompt()">{{ danger }}</button>
           </div>
         </div>
       </div>
@@ -24,14 +23,14 @@ export default {
     };
   },
   methods: {
-    deleteSomething(uid) {
-       this.$store.dispatch("deleteArticle", { 
-        id: uid,
-        });
+    
+    deleteSomething(arg) {
+      
     },
     closePrompt() {
       this.$store.dispatch('closePrompt', false)
-    }
+    },
+    
   },
   computed: {
     isOpen() {
@@ -41,7 +40,16 @@ export default {
       this.$store.getters.getModalInfo;
     }
   },
-    props: ['title', 'text', 'cancel', 'danger', 'arg', 'buttonInfo'],
+    // props: ['title', 'text', 'cancel', 'danger', 'arg', 'buttonInfo', 'function'],
+    props: {
+      title: String,
+      text: String,
+      cancel: String,
+      danger: String,
+      arg: String,
+      buttonInfo: String,
+      onSubmit: Function,
+    },
 
   created() {
     // console.log(this.$store)

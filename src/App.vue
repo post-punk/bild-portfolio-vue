@@ -2,14 +2,19 @@
   <div id="app">
     <app-header/>
         <vue-progress-bar></vue-progress-bar>
-        <prompt :title="modalInfo.modalHeader" :text="modalInfo.modalText" :cancel="modalInfo.cancelButton" :danger="modalInfo.dangerButton" :buttonInfo="modalInfo.buttonInfo"
-        v-if="promptIsOpen">
+        <prompt 
+          :title="modalInfo.modalHeader" 
+          :text="modalInfo.modalText" 
+          :cancel="modalInfo.cancelButton" 
+          :danger="modalInfo.dangerButton" 
+          :buttonInfo="modalInfo.buttonInfo" 
+          :onSubmit="modalInfo.onSubmit"
+          v-if="promptIsOpen">
         </prompt>
         <spinner
-        v-if="loading">
+          v-if="loading">
         </spinner>
     <router-view/>
-
     <app-footer/>
   </div>
 </template>
@@ -30,7 +35,7 @@ import Spinner from './components/other/Spinner.vue';
 import Prompt from './components/other/Prompt.vue';
 
 export default {
-  name: "App",
+name: "App",
  mounted () {
     //  [App.vue specific] When App.vue is finish loading finish the progress bar
     this.$Progress.finish()
@@ -63,13 +68,11 @@ export default {
     };
   },
   components: {
-    
     appHeader: Header,
     CalloutTop,
     appFooter: Footer,
     Spinner,
     Prompt,
-   
   },
   computed: {
     loading() {
@@ -133,7 +136,6 @@ nav,
   background-color: transparent;
   box-shadow: 0 0 0 0;
 }
-
 /* higher selectivity override */
 .router-link-exact-active.router-link-exact-active {
     color: #2ecc71;
