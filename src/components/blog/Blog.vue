@@ -150,13 +150,13 @@ export default {
         loadMore: true
       });
     },
-    deleteBlogPost(articleForDeletion) {
-      console.log(articleForDeletion)
-      this.$store.dispatch("deleteArticle", { 
-        id: articleForDeletion,
-        })
-      ;
-    },
+    // deleteBlogPost(articleForDeletion) {
+    //   console.log(articleForDeletion)
+    //   this.$store.dispatch("deleteArticle", { 
+    //     id: articleForDeletion,
+    //     })
+    //   ;
+    // },
     editBlogPost(uid) {
       this.$store.dispatch('editArticle', {
         header: article.header,
@@ -196,7 +196,6 @@ export default {
         dangerButton: this.dangerButton,
         buttonInfo: this.buttonInfo,
         onSubmit: () => {
-          // console.log(arg)
           this.$store.dispatch("deleteArticle", { 
         id: uid,
         })

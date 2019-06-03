@@ -45,7 +45,12 @@ export default {
    },
    props: {
 
-},
+    },
+    computed: {
+        user() {
+            return this.$store.getters.getUser;
+        }
+    },
    methods: {
        addNewPost() {
         this.slug = slugify(this.header, {
@@ -55,12 +60,14 @@ export default {
         })
         var date1 = moment(this.date).utc().startOf('day').format();
         var date2 = (new Date(date1));
+        console.log(this.user.id)
         const post = {
                 header: this.header,
                 date: date2,
                 image: this.image,
                 text: CKEDITOR.instances.ckeditor.getData(),
-                slug: this.slug 
+                slug: this.slug ,
+                submittedBy: this.user.id
             }
         // console.log(this.slug)
         
@@ -109,21 +116,8 @@ input[type="datetime-local"]:before {
     /* color: #aaa; */
     margin-right: 0.5em;
   }
-.datepicker {
-    /* display: block;
-    width: 100%;
-    height: calc(2.25rem + 2px);
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: .25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; */
-  }
+
+  /* datepicker input field */
 .vdp-datepicker input {
     box-sizing: border-box;
     padding: 0.75em 0.5em;

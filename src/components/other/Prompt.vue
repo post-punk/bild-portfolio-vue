@@ -7,7 +7,7 @@
             <h1>{{ title }}</h1>
             <p>{{ text }}</p>
             <button type="button" class="btn btn-secondary" @click="closePrompt">{{ cancel }}</button>
-            <button type="button" class="btn btn-danger" @click="onSubmit(val); closePrompt()">{{ danger }}</button>
+            <button type="button" class="btn btn-danger" @click="onSubmit(); closePrompt()">{{ danger }}</button>
           </div>
         </div>
       </div>

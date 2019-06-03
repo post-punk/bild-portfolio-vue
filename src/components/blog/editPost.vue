@@ -7,7 +7,7 @@
                 <h6>Title:</h6>
                 <input class="form-control" placeholder="Enter title" v-model="header">
                 <h6>Date:</h6>
-                <input class="form-control" type="date" placeholder="Enter date" v-model="date">
+                <datepicker placeholder="Enter date" class="datepicker"  v-model="date" type="datetime-local"></datepicker>
                 <h6>Image URL:</h6>
                 <input class="form-control"  placeholder="Enter image URL" v-model="image">
                 <h6>Text:</h6>
@@ -25,13 +25,15 @@ import db from '@/firebase/init';
 import firebase from 'firebase';
 import 'firebase/auth';
 import VueCkeditor from 'vue-ckeditor2';
+import Datepicker from 'vuejs-datepicker';
+// import moment from 'moment';
 
 export default {
  data() {
     return {
         calloutTitle: "Edit post",
         header: null,
-        date: null,
+        date: Date.now(),
         image: null,
         text: null,
         id: null
@@ -47,23 +49,28 @@ export default {
             this.id = doc.id;
        })
    },
-    mounted(){
-    //    CKEDITOR.replace( 'ckeditor' )
+    created(){
+     this.date = this.article.date.toDate();
    },
    components: {
        CalloutTop,
-       VueCkeditor
+       VueCkeditor,
+       Datepicker,
+    //    moment
    },
    methods: {
        editPost() {
-        this.$store.dispatch('editPost', { 
+        var date1 = moment(this.date).utc().startOf('day').format();
+        var date2 = (new Date(date1));
+           const post = { 
             id: this.id,
             header: this.header,
-            date: this.date,
+            date: date2,
             image: this.image,
             text: this.text,
             editPost: true
-            });
+            }
+        this.$store.dispatch('editPost', post);
            
         // this.$router.push({ path: '/blog' })
        }
@@ -94,4 +101,14 @@ input[type="date"]:before {
   .submit {
       margin-top: 1rem;
   }
+    /* datepicker input field */
+  .vdp-datepicker input {
+    box-sizing: border-box;
+    padding: 0.75em 0.5em;
+    font-size: 100%;
+    border: 1px solid #ccc;
+    width: 60%;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
 </style>

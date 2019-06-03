@@ -1,4 +1,6 @@
 import db from '@/firebase/init'
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import router from '../router/index'
 
 const state = {
@@ -31,7 +33,9 @@ const getters = {
     },
     getOrderBy: state => {
         return state.orderBy;
-    }
+    },
+ 
+   
 }
 
 const mutations = {
@@ -104,7 +108,8 @@ const actions = {
             date: payload.date,
             image: payload.image,
             text: payload.text,
-            slug: payload.slug
+            slug: payload.slug,
+            submittedBy: payload.submittedBy
         }).then(() => {
             // this.$router.push({ path: '/blog' })
         }).catch(err => {
@@ -114,7 +119,9 @@ const actions = {
     dispatch('loadBlog');
     },
 
-    async loadBlog({ commit }, config) {
+    async loadBlog({ commit, rootState  }, config) {
+        // await firebase.auth().signInWithEmailAndPassword(email, password).then(
+        const blogUser = firebase.auth().currentUser.uid;
         commit('setLoadingStatus', true);
        await db.collection("blog")
             let query = db.collection('blog');
@@ -127,8 +134,11 @@ const actions = {
             if (config && config.loadMore) {
                 query = query.startAfter(state.lastBlogPost)
             }
+            if (config && config.filteredByUser) {
+                query = db.collection('blog').where('submittedBy', '==', blogUser)
+            }
         query
-            .limit(1)
+            .limit(2)
             .get()
             .then(snapshot => {
                 let blog = [];
@@ -152,8 +162,9 @@ const actions = {
         //UNCOMMENT!
         // console.log(payload.id + '    asdasdasdasd')
         commit('setTest','123');
+        console.log(payload)
         // commit('setBlog', payload);
-        db.collection("blog").doc(payload.id).delete();
+        // db.collection("blog").doc(payload.id).delete();
         state.blog = state.blog.filter(article => {
             return article.id != payload.id
         })

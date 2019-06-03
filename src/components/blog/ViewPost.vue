@@ -3,6 +3,7 @@
         <!-- <callout-top :calloutTitle="calloutTitle"></callout-top> -->
         <div class="container">
             <hr class="blog-hr-top">
+            <!-- {{this.$route.params.slug}} -->
             <div class="admin-tools d-flex justify-content-end">
                 <button type="button" class="btn btn-light" @click="$router.go(-1)">Back</button>
                 <router-link :to="{ path: '/editPost/' + id}"><button type="button" class="btn btn-success">Edit</button></router-link>
