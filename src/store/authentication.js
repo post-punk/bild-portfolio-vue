@@ -96,7 +96,7 @@ const actions = {
             commit('setFeedback', errorMessage)
         })
     if (!state.feedback) {
-      router.go(-1)
+      router.go(-1);
     }
 },
     resetFeedback({commit}) {
@@ -106,9 +106,6 @@ const actions = {
         firebase.auth().signOut().then(() => {
         commit("setUser", null);
         })
-        // .catch(() => {
-        // commit("setUser", null);
-        // });
     },
 async autoSignIn({ commit }, payload ) {
     var currentUser = {

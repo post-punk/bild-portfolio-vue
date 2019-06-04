@@ -81,7 +81,7 @@ data() {
             user.updatePassword(newPassword).then(function() {
             alert('You have changed your password successfully!')
             }).catch(function(error) {
-            alert(error)
+            alert(error);
             });
            } ;
        }

@@ -102,13 +102,12 @@ img {
     float: left;
     border-radius: 12px;
     z-index: 0;
-    margin-bottom: 1em;
     cursor: pointer;
 }
 .col-xl-8 {
     /* border: 1px solid #aaa; */
     border-radius: 12px;
-    height: 280px;
+    height: auto;
     padding-top: 1em;
     padding-left: 2em;
     /* margin-left: -0.8em; */
