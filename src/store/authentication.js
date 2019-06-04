@@ -94,8 +94,10 @@ const actions = {
         // Handle Errors here.
         var errorMessage = error.message;
             commit('setFeedback', errorMessage)
-        });
-    router.go(-1);
+        })
+    if (!state.feedback) {
+      router.go(-1)
+    }
 },
     resetFeedback({commit}) {
         commit('setFeedback', null)

@@ -13,7 +13,9 @@
                     <p>Last name:</p>
                     <input :placeholder="user.lastName" v-model="lastName">
                     <!-- <input>details -->
-                    <button @click="editUser(user)" class="d-flex align-content-center btn btn-info" >
+                    <p>Change password:</p>
+                    <input placeholder="New password" v-model="newPassword">
+                    <button @click="editUser(user); changePassword()" class="d-flex align-content-center btn btn-info" >
                         submit changes
                     </button>
                     <button @click="$router.go(-1)">go back</button>
@@ -34,7 +36,8 @@ data() {
     return {
          calloutTitle: "Your profile",
          firstName: null,
-         lastName: null
+         lastName: null,
+         newPassword: null
         }
     },
     components: {
@@ -58,6 +61,29 @@ data() {
         await this.$store.commit('setUserNames', { 
             firstName: this.firstName,
             lastName: this.lastName });
+
+        //     if (this.newPassword) {
+        //    var user = firebase.auth().currentUser;
+        //     var newPassword = this.newPassword;
+
+        //     user.updatePassword(newPassword).then(function() {
+        //     alert('You have changed your password successfully!')
+        //     }).catch(function(error) {
+        //     alert(error)
+        //     });
+        //    }
+       },
+       changePassword() {
+           if (this.newPassword) {
+           var user = firebase.auth().currentUser;
+            var newPassword = this.newPassword;
+
+            user.updatePassword(newPassword).then(function() {
+            alert('You have changed your password successfully!')
+            }).catch(function(error) {
+            alert(error)
+            });
+           } ;
        }
    },
    beforeCreate() {

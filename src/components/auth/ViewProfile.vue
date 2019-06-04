@@ -36,6 +36,8 @@
 
 <script>
 import CalloutTop from "../CalloutTop.vue";
+import Prompt from '../other/Prompt';
+
 
 export default {
 data() {
@@ -46,6 +48,7 @@ data() {
     },
     components: {
        CalloutTop,
+       Prompt
    },
    methods: {
        pushToEditProfile() {

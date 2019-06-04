@@ -3,12 +3,13 @@
     <div>
         <callout-top :calloutTitle="calloutTitle"></callout-top>
         <div class="container">
-            <p>Select logo:</p>
-            <select id="project-category" v-model.lazy="logo" class="form-control">
-                    <option v-for="(category, index) in categories" :key="index">{{ category }}</option>
-            </select>
-            <input type="text" placeholder="Enter new logo URL:" v-model.lazy="logo" autocomplete="on">
+            <p>Change logo:</p>
+            <input id="project-category"  v-model.lazy="logo" list="links" name="browser" autocomplete="off" >
+            <datalist id="links">
+                <option v-for="(category, index) in categories" :key="index" :value="category"></option>
+            </datalist>
             <button @click="changeLogo">Submit changes</button>
+            <hr>
         </div>
     </div>
 </template>
@@ -37,7 +38,8 @@ export default {
         changeLogo() {
             db.collection('CMS').doc('m7PpJ2hBgJvPTmn2K96m').update({
             logo: this.logo
-        })
+        });
+        this.logo = '';
     },
 
 
@@ -48,15 +50,13 @@ export default {
 <style scoped>
 input {
 width: 30%;
-height: 2.5rem;
+height: 2rem;
 border-radius: 4px;
-margin-top: 2rem;
 }
 #project-category {
 width: 30%;
 height: 2.5rem;
-border-radius: 4px;
-margin-top: 2rem;
+border-radius: 5px;
 }
 button {
     display: block;
@@ -65,5 +65,13 @@ button {
 p {
     margin-top: 2em;
     font-weight: bold
+}
+button {
+    display: inline;
+    margin-left: 1em;
+
+}
+hr {
+    margin-top: 1rem
 }
 </style>

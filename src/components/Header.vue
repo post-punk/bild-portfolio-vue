@@ -109,7 +109,7 @@
           class="navMain">
           <router-link :to="navText.path">{{navText.name}}</router-link>
         </nav>
-        <nav><div v-if="user" @click="pushToAdmin" id="admin">ADMIN</div></nav>
+        <nav v-if="user" @click="pushToAdmin" id="admin" class="col-2">ADMIN</nav>
       </div>
       <div >
         <div class="auth" v-if="!user">
@@ -123,8 +123,6 @@
       </div>
   </div>
   
-  <!-- Collapsible content -->
-
 </nav>
 <!--/.Navbar-->
       
@@ -341,7 +339,7 @@ padding: 0;
   margin-top: 1em;
   color: indianred;
   cursor: pointer;
-  display: block
+  display: block;
 
 }
 </style>
