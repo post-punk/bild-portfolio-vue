@@ -5,16 +5,7 @@
         <router-link to="/">
           <Logo class="Display-logo col-auto" alt="Display logo"/>
         </router-link>
-       <div class="btn-group">
-  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Logo:
-  </button>
-  <div class="dropdown-menu logo-cms">
-    https://i.imgur.com/v3CJNBo.jpg
-    https://i.imgur.com/ijKlZQ0.jpg
-    https://i.imgur.com/3N6mnK4.png
-  </div>
-</div>
+       
           <div class="col-auto">
             <a href="http://www.twitter.com" target="_blank"><svg xmlns="http://www.w3.org/2000/svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink" width="34" height="34" viewBox="0 0 34 34">
@@ -118,6 +109,7 @@
           class="navMain">
           <router-link :to="navText.path">{{navText.name}}</router-link>
         </nav>
+        <nav><div v-if="user" @click="pushToAdmin" id="admin">ADMIN</div></nav>
       </div>
       <div >
         <div class="auth" v-if="!user">
@@ -150,23 +142,13 @@ export default {
   name: "Header",
   data() {
     return {
-
+      image: null
     };
   },
   created() {
-          var user = firebase.auth().currentUser;
-          // var uid = user.uid
-          if (user != null) {
-            user.providerData.forEach(function (profile) {
-              // console.log("Sign-in provider: " + profile.providerId);
-              console.log("  Provider-specific UID: " + profile.uid);
-              // console.log("  Name: " + profile.displayName);
-              console.log("  Email: " + profile.email);
-              // console.log("  Photo URL: " + profile.photoURL);
-            });
-        };
-
-  //  });
+    
+     
+  
   },
   computed: {
     cmsElements() {
@@ -202,6 +184,9 @@ export default {
     logOut() {
       this.$store.dispatch('userSignOut');
       this.$router.push({ path: '/' });
+  },
+  pushToAdmin() {
+    this.$router.push({ path: '/admin/'})
   }
   }
 };
@@ -350,5 +335,13 @@ padding: 0;
 .logo-cms {
   position: relative;
   left: 0;
+}
+
+#admin {
+  margin-top: 1em;
+  color: indianred;
+  cursor: pointer;
+  display: block
+
 }
 </style>

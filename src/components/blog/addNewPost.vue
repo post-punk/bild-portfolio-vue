@@ -67,17 +67,12 @@ export default {
                 image: this.image,
                 text: CKEDITOR.instances.ckeditor.getData(),
                 slug: this.slug ,
-                submittedBy: this.user.id
+                submittedBy: this.user.id,
+                submittedByUsername: this.user.firstName
             }
         // console.log(this.slug)
         
-           this.$store.dispatch('addNewPost',  post
-                // header: this.header,
-                // date: date2,
-                // image: this.image,
-                // text: CKEDITOR.instances.ckeditor.getData(),
-                // slug: this.slug 
-           );
+           this.$store.dispatch('addNewPost', post);
            
            this.$router.push({ path: '/blog' });
        },

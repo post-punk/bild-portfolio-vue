@@ -11,6 +11,7 @@ import ViewPost from '../components/blog/ViewPost'
 import ViewProfile from '../components/auth/ViewProfile';
 import EditProfile from '../components/auth/EditProfile.vue';
 import NotFoundComponent from '../components/other/NotFoundComponent.vue'
+import Admin from  '../components/other/Admin.vue'
 import firebase from 'firebase';
 import 'firebase/auth'
 import Router from 'vue-router'
@@ -87,9 +88,16 @@ const router = new Router ({
       path: '/EditProfile/:firstName',
       name: 'EditProfile',
       component: EditProfile,
+      
+    },
+    {
+      path: '/admin/',
+      name: 'admin',
+      component: Admin,
       meta: {
         requiresAuth: true,
       }
+
     },
     {
       path: '*',

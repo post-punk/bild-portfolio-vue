@@ -24,6 +24,7 @@ const state = {
             path: '/blog',
             name: 'BLOG'
         },
+        
         // {
         //     path: '/signup',
         //     name: 'SIGN UP'
@@ -93,6 +94,9 @@ const getters = {
     },
     footerText: state => {
         return state.footerText
+    },
+    cmsElements: state => {
+        return state.cmsElements;
     }
 
 }

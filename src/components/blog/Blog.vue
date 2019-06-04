@@ -4,8 +4,11 @@
     <div>
       <div class="container">
                 <!-- <input type="text" placeholder="Search blogs" v-model="search" id="searchInputField"> -->
+                <input class="form-control" id="blog-search" placeholder="Search blogs" >
 
         <div class="row justify-content-end">
+
+
           <button v-if="user" class="btn btn-info col-2" @click="pushToAddNewPost">Add new blog post</button>
           <button v-if="user" class="btn btn-info col-2" id="sort-btn" @click="orderByDate((orderBy != 'desc') ? 'desc' : 'asc')">Sort by date</button>
 
@@ -13,18 +16,18 @@
       </div>
       <br>
       <div class="container">
-         
         <div class="row blog-list" v-for="(article, index) in blog" :key="index">
           <img class="col-md-4 align-self-center" :src="article.image" alt>
           <div class="col-md-6">
             <router-link :to="{ path: '/blog/' + article.slug }">
               <h3>{{ article.header }}</h3>
             </router-link>
-            <time :datetime="article.date">{{ article.date.toDate() | formatDate }}</time>
+            <p>Published on: <time :datetime="article.date">{{ article.date.toDate() | formatDate }}</time></p>
             <p v-html="article.text.substring(0, trimAmount) + '...'"></p>
             <router-link :to="{ path: '/blog/' + article.slug }">
               <p id="read-more">Read more...</p>
             </router-link>
+           Submitted by: <p id='blog-username'>{{article.submittedByUsername}}</p>
           </div>
 
           <!-- za delete modal -->
@@ -66,6 +69,7 @@
             @click="pushToEditArticle(article.id)">
             Edit blog post
           </button>
+          <!-- {{article.submittedBy}} -->
         </div>
         <div class="load-button-container">
           <button v-if="!noMoreArticles" class="load-more" @click="loadMore(); delay()" :disabled="disabled">{{buttonText}}</button>
@@ -94,11 +98,6 @@ export default {
       disabled: false,
       timeout: null,
       buttonText: 'Load more',
-      modalHeader: 'Are you sure?',
-      modalText: 'This action cannot be undone.',
-      cancelButton: 'No',
-      dangerButton: 'Yes',
-      buttonInfo: 'Delete this post'
     }
   },
   beforeCreate() {
@@ -190,11 +189,11 @@ export default {
     deleteArticle(uid) {
       this.$store.dispatch('modalInfo', {
         buttonText: this.buttonText,
-        modalHeader: this.modalHeader,
-        modalText: this.modalText,
-        cancelButton: this.cancelButton,
-        dangerButton: this.dangerButton,
-        buttonInfo: this.buttonInfo,
+        modalHeader: 'Are you sure?',
+        modalText: 'This action cannot be undone.',
+        cancelButton: 'No',
+        dangerButton: 'Yes',
+        buttonInfo: 'Delete this post',
         onSubmit: () => {
           this.$store.dispatch("deleteArticle", { 
         id: uid,
@@ -334,5 +333,13 @@ button, .btn {
     border: none;
     border-radius: 5px;
     margin-top: 1em;;
+  }
+  #blog-username {
+    font-weight: bold;
+    display: inline
+  }
+  #blog-search {
+    margin-top: 20px;
+    width: 100%
   }
 </style>

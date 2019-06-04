@@ -109,7 +109,8 @@ const actions = {
             image: payload.image,
             text: payload.text,
             slug: payload.slug,
-            submittedBy: payload.submittedBy
+            submittedBy: payload.submittedBy,
+            submittedByUsername: payload.submittedByUsername
         }).then(() => {
             // this.$router.push({ path: '/blog' })
         }).catch(err => {
@@ -120,12 +121,11 @@ const actions = {
     },
 
     async loadBlog({ commit, rootState  }, config) {
-        // await firebase.auth().signInWithEmailAndPassword(email, password).then(
         const blogUser = firebase.auth().currentUser.uid;
         commit('setLoadingStatus', true);
        await db.collection("blog")
             let query = db.collection('blog');
-            // OVO KVARI PAGINACIJU
+            // OVO ne KVARI vise PAGINACIJU
             if (state.orderBy === 'desc') {
                 query = db.collection('blog').orderBy('date', 'desc');
             } else {
@@ -135,7 +135,7 @@ const actions = {
                 query = query.startAfter(state.lastBlogPost)
             }
             if (config && config.filteredByUser) {
-                query = db.collection('blog').where('submittedBy', '==', blogUser)
+                query = db.collection('blog').where('submittedBy', '==', blogUser);
             }
         query
             .limit(2)
