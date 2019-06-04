@@ -53,7 +53,7 @@ data() {
    },
    methods: {
        async editUser(user) {
-           if (this.firstName && this.lastName) {
+           if (this.firstName) {
         await db.collection("users").doc(user.docId)
         .update({
             firstName: this.firstName,
@@ -63,6 +63,7 @@ data() {
             firstName: this.firstName,
             lastName: this.lastName });
            }
+           alert('Please enter a valid first name.')
         //     if (this.newPassword) {
         //    var user = firebase.auth().currentUser;
         //     var newPassword = this.newPassword;

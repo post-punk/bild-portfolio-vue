@@ -83,6 +83,7 @@ const actions = {
         newUser.firstName = doc.data().firstName;
         newUser.lastName = doc.data().lastName;
         newUser.docId = doc.id;
+        newUser.image = doc.data().image;
         });
     });
     commit('setUser', newUser);
