@@ -6,8 +6,8 @@
                 <!-- {{this.$route.params.id}} -->
                 <h6>Title:</h6>
                 <input class="form-control" placeholder="Enter title" v-model="header">
-                <h6>Date:</h6>
-                <datepicker placeholder="Enter date" class="datepicker"  v-model="date" type="datetime-local"></datepicker>
+                <!-- <h6>Date:</h6> -->
+                <!-- <datepicker placeholder="Enter date" class="datepicker"  v-model="date" type="datetime-local"></datepicker> -->
                 <h6>Image URL:</h6>
                 <input class="form-control"  placeholder="Enter image URL" v-model="image">
                 <h6>Text:</h6>
@@ -33,7 +33,7 @@ export default {
     return {
         calloutTitle: "Edit post",
         header: null,
-        date: Date.now(),
+        date: null,
         image: null,
         text: null,
         id: null
@@ -49,9 +49,7 @@ export default {
             this.id = doc.id;
        })
    },
-    created(){
-     this.date = this.article.date.toDate();
-   },
+    
    components: {
        CalloutTop,
        VueCkeditor,
@@ -60,12 +58,12 @@ export default {
    },
    methods: {
        editPost() {
-        var date1 = moment(this.date).utc().startOf('day').format();
-        var date2 = (new Date(date1));
+        // var date1 = moment(this.date).utc().startOf('day').format();
+        // var date2 = (new Date(date1));
            const post = { 
             id: this.id,
             header: this.header,
-            date: date2,
+            date: this.date,
             image: this.image,
             text: this.text,
             editPost: true
