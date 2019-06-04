@@ -15,7 +15,7 @@
                     <!-- <button class="d-flex align-content-center btn btn-info" > -->
                         <a id="contact-btn" class="align-content-center btn btn-info" v-bind:href="'mailto:' + user.email">Contact {{user.email}} </a>
                     <!-- </button> -->
-                    <button id="edit-btn" @click="pushToEditProfile">Edit</button>
+                    <button id="edit-btn" @click="pushToEditProfile">Edit profile</button>
                 </div>
             </div>
                   <h3>Posts by this user:</h3>

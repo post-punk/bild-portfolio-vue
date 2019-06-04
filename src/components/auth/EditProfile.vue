@@ -100,7 +100,7 @@ img {
     width: 300px;
     height: auto;
     float: left;
-    border-radius: 5px;
+    border-radius: 12px;
     z-index: 0;
     margin-bottom: 1em;
 }
