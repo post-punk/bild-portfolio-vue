@@ -9,7 +9,8 @@ const state = {
     noMoreArticles: false,
     loadingStatus: false,
     test:'',
-    orderBy: ''
+    orderBy: '',
+    noLimit: false
 }
 
 const getters = {
@@ -76,6 +77,9 @@ const mutations = {
     },
     setOrderBy(state, payload) {
         state.orderBy = payload;
+    },
+    setNoLimit(state, payload ) {
+        state.noLimit = payload;
     }
 }
 
@@ -138,7 +142,13 @@ const actions = {
                 query = db.collection('blog').where('submittedBy', '==', blogUser);
             }
         query
-            .limit(2)
+            if (state.noLimit) {
+                query = query.limit(99)
+            } else {
+                query = query.limit(2)
+            }
+        query
+            // .limit(2)
             .get()
             .then(snapshot => {
                 let blog = [];
@@ -172,6 +182,9 @@ const actions = {
         // commit('setlastBlogPost', null)
         // dispatch('loadBlog');
     },
+    noLimit({commit}, payload) {
+        commit('setNoLimit', payload)
+    }
 
     // ilija remove from remote location REMEMBER TO UNCOMMENT LATER!
     // db.collection("blog").doc(uid).delete();

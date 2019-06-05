@@ -3,24 +3,19 @@
     <callout-top :calloutTitle="calloutTitle"></callout-top>
     <div>
       <div class="container">
-                <!-- <input type="text" placeholder="Search blogs" v-model="search" id="searchInputField"> -->
-                <input class="form-control" id="blog-search" placeholder="Search blogs" >
-
+          <input class="form-control" id="blog-search" @keyup="noLimit" placeholder="Search blogs" v-model="search" >
         <div class="row justify-content-end">
-
-
           <button v-if="user" class="btn btn-info col-2" @click="pushToAddNewPost">Add new blog post</button>
           <button v-if="user" class="btn btn-info col-2" id="sort-btn" @click="orderByDate((orderBy != 'desc') ? 'desc' : 'asc')">Sort by date</button>
-
         </div>
       </div>
       <br>
       <div class="container">
-        <div class="row blog-list" v-for="(article, index) in blog" :key="index">
+        <div class="row blog-list" v-for="(article, index) in filteredBlogs" :key="index">
           <img class="col-md-4 align-self-center" :src="article.image" alt>
           <div class="col-md-6">
             <router-link :to="{ path: '/blog/' + article.slug }">
-              <h3>{{ article.header }}</h3>
+              <h3>{{ article.header | uppercase }}</h3>
             </router-link>
             <p>Published on: <time :datetime="article.date">{{ article.date.toDate() | formatDate }}</time></p>
             <p v-html="article.text.substring(0, trimAmount) + '...'"></p>
@@ -29,38 +24,8 @@
             </router-link>
            Submitted by: <p id='blog-username'>{{article.submittedByUsername}}</p>
           </div>
-
-          <!-- za delete modal -->
-          <!-- <button type="button" class="btn btn-danger main-delete-button" data-toggle="modal" data-target="#exampleModal"> -->
-            <!-- Delete post -->
-          <!-- </button> -->
-            <!-- Modal itself -->
-          <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
-            <!-- <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete this blog post?</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="p">This action cannot be undone. There is no God, but Allah. Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn</div>
-                </div>
-                <div class="modal-footer"> -->
-                  <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button> -->
-                  <!-- <div class="container"> -->
-
-                    <button class="delete-btn" 
-                    @click="deleteArticle(article.id)">Delete</button> 
-
-                    <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" @click="deleteBlogPost(article.id)">Delete post</button> -->
-                  <!-- </div> -->
-                <!-- </div>
-              </div>
-            </div>
-          </div> -->
-
+            <button class="delete-btn" 
+            @click="deleteArticle(article.id)">Delete</button> 
           <button id="edit-post-btn"
             type="button"
             class="btn btn-success col-2 align-self-start"
@@ -98,6 +63,7 @@ export default {
       disabled: false,
       timeout: null,
       buttonText: 'Load more',
+      search: ''
     }
   },
   beforeCreate() {
@@ -128,14 +94,20 @@ export default {
       },
     orderBy() {
       return this.$store.getters.getOrderBy;
-    }
+    },
+    filteredBlogs: function() {
+        return this.blog.filter(article => {
+          return article.header.toLowerCase().includes(this.search.toLowerCase());
+        });
+      }
     // blogCount() {
     //   return this.$store.getters.blogCount;
     // }
   },
   filters: {
     formatDate,
-    uppercase
+    uppercase,
+    
   },
   components: {
     CalloutTop,
@@ -148,6 +120,15 @@ export default {
       this.$store.dispatch("loadBlog", {
         loadMore: true
       });
+    },
+    noLimit() {
+        if (this.search.length > 0) {
+      this.$store.dispatch("noLimit", true);
+      this.$store.dispatch("loadBlog");
+        } else {
+      this.$store.dispatch("noLimit", false);
+      this.$store.dispatch("loadBlog");
+        }
     },
     // deleteBlogPost(articleForDeletion) {
     //   console.log(articleForDeletion)
@@ -188,7 +169,6 @@ export default {
     },
     deleteArticle(uid) {
       this.$store.dispatch('modalInfo', {
-        buttonText: this.buttonText,
         modalHeader: 'Are you sure?',
         modalText: 'This action cannot be undone.',
         cancelButton: 'No',

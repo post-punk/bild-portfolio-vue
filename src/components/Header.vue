@@ -339,7 +339,8 @@ padding: 0;
   margin-top: 1em;
   color: indianred;
   cursor: pointer;
-  display: block;
+  display: inline;
+  font-size: 18px
 
 }
 </style>

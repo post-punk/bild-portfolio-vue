@@ -29,7 +29,7 @@
                 <img class="col-md-4 align-self-center" :src="article.image" alt>
             </router-link>
             <p v-html="article.text.substring(0, trimAmount) + '...'"></p>
-            <!-- {{article.submittedBy}} -->
+            {{article.submittedBy}}
         </div>
     </div>
 </template>
@@ -81,7 +81,9 @@ data() {
 <style scoped>
 h3 {
     margin-top: 2rem;
-    
+}
+h4 {
+    margin-bottom: 1em;
 }
 h4:hover {
     color: #322f2f;

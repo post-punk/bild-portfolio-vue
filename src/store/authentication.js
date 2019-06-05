@@ -130,8 +130,7 @@ async autoSignIn({ commit }, payload ) {
         });
     });
     await commit('setUser', currentUser);
-    // await commit('setCurrentUser', currentUser);
-},
+    },
 }
 
 export default {

@@ -19,12 +19,7 @@ const mutations = {
     },
     setModalInfo(state, payload) {
         state.modalInfo = payload;
-        // console.log(payload)
     },
-    // setMethod(state, payload) {
-    //     state.method = payload.onSubmit;
-    // }
-    
 }
 const actions = {
     closePrompt({commit}, payload) {
