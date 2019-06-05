@@ -3,7 +3,7 @@
     <callout-top :calloutTitle="calloutTitle"></callout-top>
     <div>
       <div class="container">
-          <input class="form-control" id="blog-search" @keyup="noLimit" placeholder="Search blogs" v-model="search" >
+          <input class="form-control" id="blog-search" @keyup="searchFilter" placeholder="Search blogs" v-model="search" >
         <div class="row justify-content-end">
           <button v-if="user" class="btn btn-info col-2" @click="pushToAddNewPost">Add new blog post</button>
           <button v-if="user" class="btn btn-info col-2" id="sort-btn" @click="orderByDate((orderBy != 'desc') ? 'desc' : 'asc')">Sort by date</button>
@@ -75,6 +75,7 @@ export default {
      // clear the timeout before the component is destroyed
      clearTimeout(this.timeout);
      this.$store.dispatch('emptyBlog', []);
+     this.$store.dispatch("noLimit", false);
     },
   computed: {
     blog: function() {
@@ -121,7 +122,7 @@ export default {
         loadMore: true
       });
     },
-    noLimit() {
+    searchFilter() {
         if (this.search.length > 0) {
       this.$store.dispatch("noLimit", true);
       this.$store.dispatch("loadBlog");
