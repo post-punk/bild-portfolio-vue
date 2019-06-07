@@ -1,6 +1,6 @@
 <template>
-  <div class="container" v-if="aboutText">
-    <div class="row">
+  <div class="container" >
+    <div class="row" v-if="aboutText">
       <div class="col- col-md-5">
         <img class="img-fluid float-left" id="dude" :src="aboutText[0].image">
       </div>
@@ -47,7 +47,7 @@ export default {
       return this.$store.getters.aboutText;
     }
   },
-  created() {
+  beforeCreate() {
     //fetch data from firestore
     db.collection("about-text")
       .get()

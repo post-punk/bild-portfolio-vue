@@ -33,7 +33,6 @@ const state = {
     ],
 }
 
-//namjerno kombinujem
 const getters = {
     tabText: state => {
         return state.tabText;

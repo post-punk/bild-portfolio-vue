@@ -11,13 +11,16 @@
                 </datalist>
             <button @click="changeLogo">Submit changes</button>
             <hr>
-            <p>Change callout section color:</p><a href="https://htmlcolorcodes.com/" id="color-codes"><i>https://htmlcolorcodes.com/</i></a>
-            <input type="text" list="colors" placeholder="Enter HTML color codes" v-model.lazy="bgColor"
+            <div class="row">
+                <p>Change callout section color:</p><a href="https://htmlcolorcodes.com/" id="color-codes" target="blank"><i>https://htmlcolorcodes.com/</i></a>
+            </div>
+            <input type="text" list="colors" placeholder="Enter HTML color code" v-model.lazy="bgColor"
              @submit.prevent="changeBgColor">
                 <datalist id="colors">
                     <option v-for="(color, index) in colors" :key="index" :value="color"></option>
                 </datalist>
-            <button @click="changeBgColor">Submit changes</button>
+            <button @click="changeBackgroundColor">Submit changes</button>
+            <hr>
         </div>
     </div>
 </template>
@@ -37,15 +40,15 @@ export default {
                 "https://i.imgur.com/3N6mnK4.png",
                 "https://i.imgur.com/v3CJNBo.jpg",
         ],
+            bgColor: null,
             colors: [
                 'indianred',
                 'teal',
-                'fuchsia',
+                'deepskyblue',
                 'lightslategray',
                 'mediumorchid'
 
             ],
-            bgColor: null
         }
     },
     components: {
@@ -58,7 +61,7 @@ export default {
         });
         this.logo = '';
     },
-    changeBgColor() {
+    changeBackgroundColor() {
             db.collection('CMS').doc('m7PpJ2hBgJvPTmn2K96m').update({
             bgColor: this.bgColor
         });
@@ -75,16 +78,17 @@ input {
 width: 30%;
 height: 33px;
 border-radius: 5px;
-
+/* display: block; */
 }
 
 button {
-    /* margin-top: 0.5em; */
+    margin-top: 0.5em;
     display: inline;
+
     margin-left: 1em;
 }
 p {
-    margin-top: 2em;
+    margin-top: 1em;
     font-weight: bold
 }
 
@@ -94,8 +98,14 @@ hr {
 }
 
 #color-codes {
-    display: block;
+    /* display: block; */
+    
+    margin-top: 1em;
     color: #42B983;
+    margin-left: 2em;
     margin-bottom: 0.5em;
+}
+.row {
+    margin-left: 0
 }
 </style>
