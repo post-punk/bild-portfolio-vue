@@ -36,6 +36,7 @@ const state = {
         
     ],
     logo: { image: 'https://i.imgur.com/g7ypgKk.png' },
+    bgColor: null,
     footerText: { 
         callout: 'ARE YOU READY TO BE BLOWN AWAY?',
         footerButton: 'CLICK HERE TO FIND OUT' ,
@@ -86,6 +87,9 @@ const getters = {
     logo: state => {
         return state.logo;
     },
+    getBgColor: state => {
+        return state.bgColor;
+    },
     navMain(state) {
         return state.navMain
     },
@@ -101,7 +105,9 @@ const getters = {
 
 }
 const mutations = {
-
+    setBgColor(state, payload) {
+        state.bgColor = payload
+    }
 }
 const actions = {
 

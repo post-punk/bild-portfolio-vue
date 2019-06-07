@@ -116,7 +116,7 @@ const actions = {
             submittedBy: payload.submittedBy,
             submittedByUsername: payload.submittedByUsername
         }).then(() => {
-            // this.$router.push({ path: '/blog' })
+            // router.push({ path: '/blog' })
         }).catch(err => {
             console.log(err)
         })
@@ -125,8 +125,8 @@ const actions = {
     },
 
     async loadBlog({ commit, rootState  }, config) {
-        const blogUser = firebase.auth().currentUser.uid;
         commit('setLoadingStatus', true);
+        const blogUser = firebase.auth().currentUser.uid;
        await db.collection("blog")
             let query = db.collection('blog');
             // OVO ne KVARI vise PAGINACIJU
@@ -186,7 +186,7 @@ const actions = {
         commit('setNoLimit', payload)
     }
 
-    // ilija remove from remote location REMEMBER TO UNCOMMENT LATER!
+    // ilija remove from remote location 
     // db.collection("blog").doc(uid).delete();
 
     // remove locally

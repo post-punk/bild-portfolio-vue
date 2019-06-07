@@ -24,16 +24,18 @@
             </router-link>
            Submitted by: <p id='blog-username'>{{article.submittedByUsername}}</p>
           </div>
+          <div class="col-md-2">
             <button class="delete-btn" 
             @click="deleteArticle(article.id)">Delete</button> 
-          <button id="edit-post-btn"
+             <button id="edit-post-btn"
             type="button"
-            class="btn btn-success col-2 align-self-start"
+            class="btn btn-success"
             v-if="user"
             aria-label="Edit"
             @click="pushToEditArticle(article.id)">
-            Edit blog post
+            Edit
           </button>
+         </div>
           <!-- {{article.submittedBy}} -->
         </div>
         <div class="load-button-container">
@@ -70,6 +72,7 @@ export default {
     this.$store.dispatch("loadBlog", {
       loadMore: false
     });
+    this.$store.commit('setNoMoreArticles', false);
   },
   beforeDestroy() {
      // clear the timeout before the component is destroyed
@@ -98,12 +101,10 @@ export default {
     },
     filteredBlogs: function() {
         return this.blog.filter(article => {
+          // true (prolazi filter, propusta se kroz filteredBlogs) ili false
           return article.header.toLowerCase().includes(this.search.toLowerCase());
         });
       }
-    // blogCount() {
-    //   return this.$store.getters.blogCount;
-    // }
   },
   filters: {
     formatDate,
@@ -126,9 +127,11 @@ export default {
         if (this.search.length > 0) {
       this.$store.dispatch("noLimit", true);
       this.$store.dispatch("loadBlog");
+      this.$store.commit('setNoMoreArticles', true);
         } else {
       this.$store.dispatch("noLimit", false);
       this.$store.dispatch("loadBlog");
+      this.$store.commit('setNoMoreArticles', false);
         }
     },
     // deleteBlogPost(articleForDeletion) {
@@ -168,16 +171,12 @@ export default {
     pushToEditArticle(article) {
       this.$router.push({ path: '/editPost/' + article})
     },
-    deleteArticle(uid) {
+    deleteArticle(article) {
       this.$store.dispatch('modalInfo', {
-        modalHeader: 'Are you sure?',
-        modalText: 'This action cannot be undone.',
-        cancelButton: 'No',
-        dangerButton: 'Yes',
-        buttonInfo: 'Delete this post',
+        deleteModal: true,
         onSubmit: () => {
           this.$store.dispatch("deleteArticle", { 
-        id: uid,
+        id: article,
         })
         }
       })
@@ -189,6 +188,7 @@ export default {
 <style scoped>
 #edit-post-btn {
   margin-top: 1rem;
+  display: block
 }
 #searchInputField {
   width: 100%;

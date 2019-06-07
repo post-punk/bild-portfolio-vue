@@ -4,12 +4,20 @@
         <callout-top :calloutTitle="calloutTitle"></callout-top>
         <div class="container">
             <p>Change logo:</p>
-            <input id="project-category"  v-model.lazy="logo" list="links" name="browser" autocomplete="off" >
-            <datalist id="links">
-                <option v-for="(category, index) in categories" :key="index" :value="category"></option>
-            </datalist>
+            <input id="project-category"  v-model.lazy="logo" list="logos" autocomplete="off" placeholder="Pick logo, or enter a new image URL"
+            @submit.prevent="changeLogo">
+                <datalist id="logos">
+                    <option v-for="(logo, index) in logos" :key="index" :value="logo"></option>
+                </datalist>
             <button @click="changeLogo">Submit changes</button>
             <hr>
+            <p>Change callout section color:</p><a href="https://htmlcolorcodes.com/" id="color-codes"><i>https://htmlcolorcodes.com/</i></a>
+            <input type="text" list="colors" placeholder="Enter HTML color codes" v-model.lazy="bgColor"
+             @submit.prevent="changeBgColor">
+                <datalist id="colors">
+                    <option v-for="(color, index) in colors" :key="index" :value="color"></option>
+                </datalist>
+            <button @click="changeBgColor">Submit changes</button>
         </div>
     </div>
 </template>
@@ -22,13 +30,22 @@ import db from "@/firebase/init";
 export default {
     data() {
         return {
-            calloutTitle: "Admin page",
+            calloutTitle: "Admin tools",
             logo: null,
-            categories: [
-            "https://i.imgur.com/ijKlZQ0.jpg",
-            "https://i.imgur.com/3N6mnK4.png",
-            "https://i.imgur.com/v3CJNBo.jpg",
-        ]
+            logos: [
+                "https://i.imgur.com/ijKlZQ0.jpg",
+                "https://i.imgur.com/3N6mnK4.png",
+                "https://i.imgur.com/v3CJNBo.jpg",
+        ],
+            colors: [
+                'indianred',
+                'teal',
+                'fuchsia',
+                'lightslategray',
+                'mediumorchid'
+
+            ],
+            bgColor: null
         }
     },
     components: {
@@ -41,6 +58,12 @@ export default {
         });
         this.logo = '';
     },
+    changeBgColor() {
+            db.collection('CMS').doc('m7PpJ2hBgJvPTmn2K96m').update({
+            bgColor: this.bgColor
+        });
+        this.bgColor = '';
+    },
 
 
     }
@@ -50,28 +73,29 @@ export default {
 <style scoped>
 input {
 width: 30%;
-height: 2rem;
-border-radius: 4px;
-}
-#project-category {
-width: 30%;
-height: 2.5rem;
+height: 33px;
 border-radius: 5px;
+
 }
+
 button {
-    display: block;
-    margin-top: 0.5em;
+    /* margin-top: 0.5em; */
+    display: inline;
+    margin-left: 1em;
 }
 p {
     margin-top: 2em;
     font-weight: bold
 }
-button {
-    display: inline;
-    margin-left: 1em;
 
-}
 hr {
-    margin-top: 1rem
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+#color-codes {
+    display: block;
+    color: #42B983;
+    margin-bottom: 0.5em;
 }
 </style>

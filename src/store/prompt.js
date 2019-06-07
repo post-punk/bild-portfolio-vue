@@ -26,11 +26,29 @@ const actions = {
         commit('setPromptIsOpen', payload)
     },
     modalInfo({commit}, payload) {
-        const defaultOptions = {
+        if (payload && payload.deleteModal) {
+            commit('setModalInfo', {
+                modalHeader: 'Are you sure?',
+                modalText: 'This action cannot be undone.',
+                cancelButton: 'No',
+                dangerButton: 'Yes',
+                onSubmit: payload.onSubmit
+            })
+        } else {
+            commit('setModalInfo', {
+                modalHeader: payload.modalHeader,
+                modalText: payload.modalText,
+                cancelButton: payload.cancelButton,
+                dangerButton: payload.dangerButton,
+                buttonInfo: payload.buttonInfo,
+                onSubmit: payload.onSubmit
+            })
+        }
+        // const defaultOptions = {
             
-        };
+        // };
         commit('setPromptIsOpen', true);
-        commit('setModalInfo', payload);
+        // commit('setModalInfo', payload);
     }
 }
 
